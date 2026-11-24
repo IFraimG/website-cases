@@ -1,0 +1,43 @@
+---
+import { languageOf, localizedPath } from "../i18n/locale";
+const path = Astro.url.pathname;
+const language = languageOf(path);
+---
+
+<div
+  class="languages"
+  role="group"
+  aria-label={language === "ru" ? "Язык сайта" : "Site language"}
+>
+  {
+    (["en", "ru"] as const).map((lang) => (
+      <a
+        href={localizedPath(path, lang)}
+        lang={lang}
+        hreflang={lang}
+        aria-label={lang === "en" ? "English" : "Русский"}
+        aria-current={lang === language ? "page" : undefined}
+      >
+        {lang.toUpperCase()}
+      </a>
+    ))
+  }
+</div>
+<script>
+  // Use the form's localized prompt even when the browser UI uses another language.
+  for (const field of document.querySelectorAll<HTMLSelectElement>(
+    "select[required]",
+  )) {
+    const validate = () =>
+      field.setCustomValidity(field.value ? "" : field.options[0].text);
+    field.addEventListener("invalid", validate);
+    field.addEventListener("change", validate);
+  }
+  for (const link of document.querySelectorAll<HTMLAnchorElement>(
+    ".languages a",
+  )) {
+    link.addEventListener("click", () => {
+      link.hash = location.hash;
+    });
+  }
+</script>

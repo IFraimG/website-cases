@@ -1,0 +1,83 @@
+---
+import { languageOf, localizedPath } from "../i18n/locale";
+import type { SiteExpansion } from "../data/site-schema";
+import { pageCountFor } from "../data/sites";
+import "../styles/site-pages.css";
+
+interface Props {
+  site: SiteExpansion;
+}
+
+const { site } = Astro.props;
+const lang = languageOf(Astro.url.pathname);
+const ru = lang === "ru";
+const href = (sub = "") =>
+  localizedPath(`/${site.slug}/${sub ? sub + "/" : ""}`, lang);
+
+const styleVars = [
+  `--sp-paper:${site.theme.paper}`,
+  `--sp-ink:${site.theme.ink}`,
+  `--sp-accent:${site.theme.accent}`,
+  `--sp-surface:${site.theme.surface}`,
+  `--sp-edge:${site.theme.edge}`,
+  `--sp-display:${site.theme.displayFont === "serif" ? '"PT Serif", Georgia, serif' : '"Inter Variable", Arial, sans-serif'}`,
+].join(";");
+---
+
+<footer class="site-footer" style={styleVars}>
+  <div class="sp-wrap">
+    <div class="site-footer-grid">
+      <div class="site-footer-col">
+        <a class="site-brand" href={href("")}>
+          <span class="site-brand-dot" aria-hidden="true"></span>
+          <span>{site.brand[lang]}</span>
+        </a>
+        <p style="opacity:0.8;max-width:34ch;margin-top:0.35rem;">
+          {site.tagline[lang]}
+        </p>
+        <p class="sp-card-meta" style="margin-top:0.5rem;">
+          {site.contact.phone} · {site.contact.email}
+        </p>
+      </div>
+
+      <div class="site-footer-col">
+        <h4>{ru ? "Разделы" : "Explore"}</h4>
+        <a href={href("")}>{site.nav.home[lang]}</a>
+        <a href={href("catalog")}>{site.nav.catalog[lang]}</a>
+        <a href={href("projects")}>{site.nav.projects[lang]}</a>
+        <a href={href("journal")}>{site.nav.journal[lang]}</a>
+      </div>
+
+      <div class="site-footer-col">
+        <h4>{ru ? "Программы и действия" : "Programs"}</h4>
+        <a href={href("partners")}>{site.nav.partners[lang]}</a>
+        <a href={href("request")}>{site.nav.request[lang]}</a>
+        <a href={href("program")}>{site.nav.program[lang]}</a>
+        <a href={href("catalog/" + site.catalog.items[0].id)}>
+          {site.catalog.items[0].title[lang]}
+        </a>
+      </div>
+
+      <div class="site-footer-col">
+        <h4>{ru ? "Компания" : "Company"}</h4>
+        <a href={href("about")}>{site.nav.about[lang]}</a>
+        <a href={href("team")}>{site.nav.team[lang]}</a>
+        <a href={href("careers")}>{site.nav.careers[lang]}</a>
+        <a href={href("contact")}>{site.nav.contact[lang]}</a>
+      </div>
+    </div>
+
+    <div class="site-footer-bottom">
+      <span>
+        <strong>{site.brand[lang]}</strong> · {site.sector[lang]} · {
+          ru
+            ? `${pageCountFor(site)} страниц`
+            : `${pageCountFor(site)} pages`
+        }
+      </span>
+      <a class="site-folio-back" href={localizedPath("/", lang)}>
+        {ru ? "Все концепты портфолио" : "All portfolio concepts"}
+      </a>
+    </div>
+  </div>
+</footer>

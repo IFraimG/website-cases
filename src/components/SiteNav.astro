@@ -1,0 +1,140 @@
+---
+import Language from "./Language.astro";
+import { languageOf, localizedPath } from "../i18n/locale";
+import type { SiteExpansion } from "../data/site-schema";
+import "../styles/site-pages.css";
+
+interface Props {
+  site: SiteExpansion;
+  active?: string;
+  overlay?: boolean;
+}
+
+const { site, active = "home", overlay = false } = Astro.props;
+const lang = languageOf(Astro.url.pathname);
+const ru = lang === "ru";
+const href = (sub = "") =>
+  localizedPath(`/${site.slug}/${sub ? sub + "/" : ""}`, lang);
+
+const styleVars = [
+  `--sp-paper:${site.theme.paper}`,
+  `--sp-ink:${site.theme.ink}`,
+  `--sp-accent:${site.theme.accent}`,
+  `--sp-surface:${site.theme.surface}`,
+  `--sp-edge:${site.theme.edge}`,
+  `--sp-btn-bg:${site.theme.btnBg}`,
+  `--sp-btn-fg:${site.theme.btnFg}`,
+  `--sp-radius:${site.theme.radius}`,
+  `--sp-display:${site.theme.displayFont === "serif" ? '"PT Serif", Georgia, serif' : '"Inter Variable", Arial, sans-serif'}`,
+].join(";");
+
+const primary = [
+  { key: "catalog", sub: "catalog", label: site.nav.catalog[lang] },
+  { key: "projects", sub: "projects", label: site.nav.projects[lang] },
+  { key: "partners", sub: "partners", label: site.nav.partners[lang] },
+  { key: "request", sub: "request", label: site.nav.request[lang] },
+  { key: "about", sub: "about", label: site.nav.about[lang] },
+  { key: "contact", sub: "contact", label: site.nav.contact[lang] },
+];
+
+const secondary = [
+  { key: "team", sub: "team", label: site.nav.team[lang] },
+  { key: "journal", sub: "journal", label: site.nav.journal[lang] },
+  { key: "program", sub: "program", label: site.nav.program[lang] },
+  { key: "careers", sub: "careers", label: site.nav.careers[lang] },
+];
+
+const allLinks = [
+  { key: "home", sub: "", label: site.nav.home[lang] },
+  ...primary,
+  ...secondary,
+];
+---
+
+<header
+  class:list={["site-topbar", overlay && "site-topbar--overlay"]}
+  style={styleVars}
+  data-site-nav
+>
+  <div class="sp-wrap site-topbar-inner">
+    <a class="site-brand" href={href("")}>
+      <span class="site-brand-dot" aria-hidden="true"></span>
+      <span>{site.brand[lang]}</span>
+    </a>
+
+    <nav class="site-nav-desktop" aria-label={ru ? "Разделы сайта" : "Site sections"}>
+      {
+        primary.map((item) => (
+          <a
+            href={href(item.sub)}
+            aria-current={active === item.key ? "page" : undefined}
+          >
+            {item.label}
+          </a>
+        ))
+      }
+      <details class="site-nav-more">
+        <summary>{ru ? "Ещё ▾" : "More ▾"}</summary>
+        <div class="site-nav-dropdown">
+          {
+            secondary.map((item) => (
+              <a
+                href={href(item.sub)}
+                aria-current={active === item.key ? "page" : undefined}
+              >
+                <span>{item.label}</span>
+                <span aria-hidden="true">→</span>
+              </a>
+            ))
+          }
+        </div>
+      </details>
+    </nav>
+
+    <div class="site-topbar-actions">
+      <Language />
+      <button
+        type="button"
+        class="site-menu-toggle"
+        data-menu-btn
+        aria-expanded="false"
+        aria-controls="site-mobile-menu"
+      >
+        {ru ? "Меню" : "Menu"}
+      </button>
+    </div>
+  </div>
+
+  <div id="site-mobile-menu" class="site-mobile-drawer" hidden>
+    <div class="sp-wrap">
+      <div class="site-mobile-grid">
+        {
+          allLinks.map((item) => (
+            <a
+              href={href(item.sub)}
+              aria-current={active === item.key ? "page" : undefined}
+            >
+              {item.label}
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</header>
+
+<script>
+  for (const header of document.querySelectorAll<HTMLElement>("[data-site-nav]")) {
+    const btn = header.querySelector<HTMLButtonElement>("[data-menu-btn]");
+    const drawer = header.querySelector<HTMLElement>("#site-mobile-menu");
+    btn?.addEventListener("click", () => {
+      const open = btn.getAttribute("aria-expanded") === "true";
+      btn.setAttribute("aria-expanded", String(!open));
+      if (drawer) drawer.hidden = open;
+    });
+    const more = header.querySelector<HTMLDetailsElement>(".site-nav-more");
+    document.addEventListener("click", (e) => {
+      if (more?.open && !more.contains(e.target as Node)) more.open = false;
+    });
+  }
+</script>

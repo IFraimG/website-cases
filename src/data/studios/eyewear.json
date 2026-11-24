@@ -1,0 +1,162 @@
+{
+  "slug": "eyewear",
+  "layout": "showcase",
+  "palette": {
+    "paper": "#e9e3d9",
+    "ink": "#28201d",
+    "accent": "#793d2f"
+  },
+  "brand": {
+    "en": "Index Optical",
+    "ru": "Индекс Оптика"
+  },
+  "sector": {
+    "en": "Independent eyewear",
+    "ru": "Дизайнерская оптика"
+  },
+  "headline": {
+    "en": "Find your frame of reference.",
+    "ru": "Найдите свою оправу."
+  },
+  "intro": {
+    "en": "A compact acetate collection in three widths. Compare dimensions with a pair you already wear.",
+    "ru": "Коллекция ацетатных оправ в трёх ширинах. Сравните размеры с очками, которые уже носите."
+  },
+  "action": {
+    "en": "Compare frame sizes",
+    "ru": "Сравнить размеры"
+  },
+  "heroAlt": {
+    "en": "Amber acetate eyeglass frame",
+    "ru": "Очковая оправа из янтарного ацетата"
+  },
+  "storyTitle": {
+    "en": "Inside the hinge",
+    "ru": "Внутри шарнира"
+  },
+  "story": {
+    "en": "The hinge sits inside a polished acetate temple. We leave room for an optician to adjust the angle and check how the frame rests behind the ear.",
+    "ru": "Шарнир утоплен в полированную дужку из ацетата. Оптик может настроить угол и проверить посадку за ухом."
+  },
+  "detailAlt": {
+    "en": "Close-up of the metal hinge",
+    "ru": "Металлический шарнир крупным планом"
+  },
+  "facts": [
+    {
+      "label": {
+        "en": "Material",
+        "ru": "Материал"
+      },
+      "value": {
+        "en": "Acetate",
+        "ru": "Ацетат"
+      }
+    },
+    {
+      "label": {
+        "en": "Hinge",
+        "ru": "Шарнир"
+      },
+      "value": {
+        "en": "5 barrels",
+        "ru": "5 звеньев"
+      }
+    },
+    {
+      "label": {
+        "en": "Collection",
+        "ru": "Коллекция"
+      },
+      "value": {
+        "en": "3 widths",
+        "ru": "3 ширины"
+      }
+    }
+  ],
+  "widget": {
+    "type": "explore",
+    "title": {
+      "en": "The fit desk",
+      "ru": "Подбор посадки"
+    },
+    "hint": {
+      "en": "Read the numbers as lens width, bridge and temple length in millimetres.",
+      "ru": "Цифры обозначают ширину линзы, мост и длину дужки в миллиметрах."
+    },
+    "label": {
+      "en": "Frame width",
+      "ru": "Ширина оправы"
+    },
+    "options": [
+      {
+        "name": {
+          "en": "Narrow",
+          "ru": "Узкая"
+        },
+        "metric": {
+          "en": "46 □ 19 — 140",
+          "ru": "46 □ 19 — 140"
+        },
+        "text": {
+          "en": "Overall width 128 mm. The compact lens sits close to the bridge.",
+          "ru": "Общая ширина 128 мм. Компактная линза расположена близко к мосту."
+        }
+      },
+      {
+        "name": {
+          "en": "Regular",
+          "ru": "Средняя"
+        },
+        "metric": {
+          "en": "49 □ 20 — 145",
+          "ru": "49 □ 20 — 145"
+        },
+        "text": {
+          "en": "Overall width 136 mm. A balanced frame with a slightly longer temple.",
+          "ru": "Общая ширина 136 мм. Сбалансированная оправа с удлинённой дужкой."
+        }
+      },
+      {
+        "name": {
+          "en": "Wide",
+          "ru": "Широкая"
+        },
+        "metric": {
+          "en": "52 □ 21 — 150",
+          "ru": "52 □ 21 — 150"
+        },
+        "text": {
+          "en": "Overall width 144 mm. A larger lens opening and a generous temple span.",
+          "ru": "Общая ширина 144 мм. Расширенный световой проём и увеличенное расстояние между дужками."
+        }
+      }
+    ]
+  },
+  "guideTitle": {
+    "en": "At the fitting mirror",
+    "ru": "Перед примеркой"
+  },
+  "guide": [
+    {
+      "q": {
+        "en": "Where are my current measurements?",
+        "ru": "Где посмотреть свои размеры?"
+      },
+      "a": {
+        "en": "Look along the inside of a temple for three small numbers, then compare the overall width as well.",
+        "ru": "Найдите три числа на внутренней стороне дужки и дополнительно сравните общую ширину оправ."
+      }
+    },
+    {
+      "q": {
+        "en": "Does width determine fit?",
+        "ru": "Ширина определяет посадку?"
+      },
+      "a": {
+        "en": "Bridge shape and temple angle also matter. An in-person fitting checks all three together.",
+        "ru": "Важны форма моста и угол дужек. При очной примерке их проверяют вместе."
+      }
+    }
+  ]
+}

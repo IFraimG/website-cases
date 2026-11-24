@@ -1,0 +1,162 @@
+{
+  "slug": "acoustics",
+  "layout": "instrument",
+  "palette": {
+    "paper": "#202127",
+    "ink": "#f8eee7",
+    "accent": "#e6b6ff"
+  },
+  "brand": {
+    "en": "Phase Room",
+    "ru": "Фаза"
+  },
+  "sector": {
+    "en": "Recording rooms",
+    "ru": "Студия звукозаписи"
+  },
+  "headline": {
+    "en": "Give the take some space.",
+    "ru": "Оставьте место звуку."
+  },
+  "intro": {
+    "en": "A live room, a vocal booth and a mix suite with different responses. Match the room to the session.",
+    "ru": "Тон-зал, вокальная кабина и аппаратная отличаются акустикой. Подберите комнату под задачу."
+  },
+  "action": {
+    "en": "Compare rooms",
+    "ru": "Сравнить комнаты"
+  },
+  "heroAlt": {
+    "en": "Recording space and studio equipment",
+    "ru": "Помещение и оборудование звукозаписи"
+  },
+  "storyTitle": {
+    "en": "Listen from the chair",
+    "ru": "Сначала послушайте из кресла"
+  },
+  "story": {
+    "en": "We set monitor positions with the listening seat marked on the floor. Move the baffles in the live room to change the balance between direct sound and reflections.",
+    "ru": "Положение мониторов выставляем относительно отметки кресла на полу. В тон-зале можно передвинуть щиты, чтобы изменить баланс прямого звука и отражений."
+  },
+  "detailAlt": {
+    "en": "Vocal microphone set up in the recording booth",
+    "ru": "Вокальный микрофон в студийной кабине"
+  },
+  "facts": [
+    {
+      "label": {
+        "en": "Recording",
+        "ru": "Запись"
+      },
+      "value": {
+        "en": "24 bit",
+        "ru": "24 бит"
+      }
+    },
+    {
+      "label": {
+        "en": "Session rate",
+        "ru": "Частота"
+      },
+      "value": {
+        "en": "48 kHz",
+        "ru": "48 кГц"
+      }
+    },
+    {
+      "label": {
+        "en": "Patch bays",
+        "ru": "Патч-панели"
+      },
+      "value": {
+        "en": "2 × 48",
+        "ru": "2 × 48"
+      }
+    }
+  ],
+  "widget": {
+    "type": "explore",
+    "title": {
+      "en": "Room selector",
+      "ru": "Подбор комнаты"
+    },
+    "hint": {
+      "en": "Choose your session to see the floor area and signal path.",
+      "ru": "Выберите сессию и посмотрите площадь и тракт записи."
+    },
+    "label": {
+      "en": "Session",
+      "ru": "Сессия"
+    },
+    "options": [
+      {
+        "name": {
+          "en": "Voice",
+          "ru": "Голос"
+        },
+        "metric": {
+          "en": "Booth A · 6 m²",
+          "ru": "Кабина A · 6 м²"
+        },
+        "text": {
+          "en": "A dry booth with a pop filter, talkback and an independent headphone mix.",
+          "ru": "Заглушённая кабина с поп-фильтром, связью с режиссёром и отдельным миксом в наушниках."
+        }
+      },
+      {
+        "name": {
+          "en": "Live trio",
+          "ru": "Трио"
+        },
+        "metric": {
+          "en": "Live room · 36 m²",
+          "ru": "Тон-зал · 36 м²"
+        },
+        "text": {
+          "en": "Three headphone feeds and movable screens let players keep eye contact.",
+          "ru": "Три линии наушников и мобильные щиты позволяют музыкантам видеть друг друга."
+        }
+      },
+      {
+        "name": {
+          "en": "Mixdown",
+          "ru": "Сведение"
+        },
+        "metric": {
+          "en": "Control room · 18 m²",
+          "ru": "Аппаратная · 18 м²"
+        },
+        "text": {
+          "en": "Nearfield monitors, a second reference pair and a desk for the producer.",
+          "ru": "Мониторы ближнего поля, вторая контрольная пара и рабочее место продюсера."
+        }
+      }
+    ]
+  },
+  "guideTitle": {
+    "en": "Session preparation",
+    "ru": "Подготовка к сессии"
+  },
+  "guide": [
+    {
+      "q": {
+        "en": "Which files should I bring?",
+        "ru": "Какие файлы принести?"
+      },
+      "a": {
+        "en": "Export WAV stems from the same start point and include a reference bounce.",
+        "ru": "Экспортируйте дорожки WAV с общей точки старта и добавьте референсный микс."
+      }
+    },
+    {
+      "q": {
+        "en": "How do I take the session home?",
+        "ru": "Как забрать запись?"
+      },
+      "a": {
+        "en": "At wrap, the engineer exports your takes and a rough mix to your own drive.",
+        "ru": "По окончании звукорежиссёр перенесёт дубли и черновой микс на ваш накопитель."
+      }
+    }
+  ]
+}

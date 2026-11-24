@@ -1,0 +1,179 @@
+{
+  "slug": "ceramics",
+  "layout": "journal",
+  "palette": {
+    "paper": "#f3e8df",
+    "ink": "#4b2820",
+    "accent": "#a1412b"
+  },
+  "brand": {
+    "en": "Slip Season",
+    "ru": "Слип Сизон"
+  },
+  "sector": {
+    "en": "Studio pottery",
+    "ru": "Гончарная мастерская"
+  },
+  "headline": {
+    "en": "Thrown for the everyday.",
+    "ru": "Посуда на каждый день."
+  },
+  "intro": {
+    "en": "Sets of wheel-thrown stoneware, made to stack on an open shelf and share a table.",
+    "ru": "Наборы из каменной керамики, выточенные на круге. Их удобно хранить на открытой полке и ставить на общий стол."
+  },
+  "action": {
+    "en": "Compose a table set",
+    "ru": "Собрать сервиз"
+  },
+  "heroAlt": {
+    "en": "Handmade ceramic tableware",
+    "ru": "Посуда ручной работы"
+  },
+  "storyTitle": {
+    "en": "From wet clay to a clean foot",
+    "ru": "От комка глины до гладкого дна"
+  },
+  "story": {
+    "en": "Each piece rests overnight before trimming. After the second firing we check the base by hand so the bowl sits still on a wooden table.",
+    "ru": "Заготовки подсыхают ночь до обточки. После второго обжига проверяем основание вручную, чтобы чаши устойчиво стояли на деревянном столе."
+  },
+  "detailAlt": {
+    "en": "Surface and shape of handmade ceramics",
+    "ru": "Форма и фактура ручной керамики"
+  },
+  "facts": [
+    {
+      "label": {
+        "en": "Kiln cycle",
+        "ru": "Цикл обжига"
+      },
+      "value": {
+        "en": "24 hours",
+        "ru": "24 часа"
+      }
+    },
+    {
+      "label": {
+        "en": "Firing",
+        "ru": "Обжиг"
+      },
+      "value": {
+        "en": "1,240 °C",
+        "ru": "1 240 °C"
+      }
+    },
+    {
+      "label": {
+        "en": "Batch size",
+        "ru": "Размер серии"
+      },
+      "value": {
+        "en": "24 pieces",
+        "ru": "24 предмета"
+      }
+    }
+  ],
+  "widget": {
+    "type": "calculator",
+    "title": {
+      "en": "Set the table",
+      "ru": "Накройте на стол"
+    },
+    "hint": {
+      "en": "Choose the pieces for one place setting and the number of guests.",
+      "ru": "Выберите состав одного места и число гостей."
+    },
+    "label": {
+      "en": "Place setting",
+      "ru": "Состав набора"
+    },
+    "quantity": {
+      "en": "Guests",
+      "ru": "Гости"
+    },
+    "unit": {
+      "en": "₽",
+      "ru": "₽"
+    },
+    "min": 1,
+    "max": 12,
+    "initial": 4,
+    "options": [
+      {
+        "name": {
+          "en": "Morning",
+          "ru": "Утро"
+        },
+        "metric": {
+          "en": "Cup + saucer",
+          "ru": "Чашка и блюдце"
+        },
+        "text": {
+          "en": "A small handleless cup paired with a shallow saucer for the first coffee.",
+          "ru": "Небольшая чашка без ручки и плоское блюдце для первого кофе."
+        },
+        "rate": 2400.0,
+        "base": 0.0
+      },
+      {
+        "name": {
+          "en": "Lunch",
+          "ru": "Обед"
+        },
+        "metric": {
+          "en": "Plate + bowl",
+          "ru": "Тарелка и миска"
+        },
+        "text": {
+          "en": "A dinner plate and a deep bowl share a softly curved rim.",
+          "ru": "Большая тарелка и глубокая миска с мягким изгибом бортика."
+        },
+        "rate": 3700.0,
+        "base": 0.0
+      },
+      {
+        "name": {
+          "en": "Full table",
+          "ru": "Полный стол"
+        },
+        "metric": {
+          "en": "Four pieces",
+          "ru": "Четыре предмета"
+        },
+        "text": {
+          "en": "Cup, saucer, bowl and plate in the same glaze batch.",
+          "ru": "Чашка, блюдце, миска и тарелка покрыты глазурью из одной партии."
+        },
+        "rate": 5800.0,
+        "base": 0.0
+      }
+    ]
+  },
+  "guideTitle": {
+    "en": "Care and replacements",
+    "ru": "Уход и замена"
+  },
+  "guide": [
+    {
+      "q": {
+        "en": "Will every bowl match?",
+        "ru": "Все миски одинаковые?"
+      },
+      "a": {
+        "en": "The rims stack together; the throwing lines and glaze pools vary from one piece to the next.",
+        "ru": "Бортики складываются в стопку. Следы круга и растекание глазури отличаются у каждого предмета."
+      }
+    },
+    {
+      "q": {
+        "en": "Can I replace one plate?",
+        "ru": "Можно заказать одну тарелку?"
+      },
+      "a": {
+        "en": "Yes. Keep the batch mark from the foot and we can suggest the closest current glaze.",
+        "ru": "Да. По метке партии на дне подберём ближайшую глазурь из текущего обжига."
+      }
+    }
+  ]
+}

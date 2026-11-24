@@ -1,0 +1,131 @@
+---
+import { languageOf, localizedPath } from "../i18n/locale";
+import type { SiteExpansion } from "../data/site-schema";
+import { pageCountFor } from "../data/sites";
+import "../styles/site-pages.css";
+
+interface Props {
+  site: SiteExpansion;
+}
+
+const { site } = Astro.props;
+const lang = languageOf(Astro.url.pathname);
+const ru = lang === "ru";
+const href = (sub: string) => localizedPath(`/${site.slug}/${sub}/`, lang);
+
+const styleVars = [
+  `--sp-paper:${site.theme.paper}`,
+  `--sp-ink:${site.theme.ink}`,
+  `--sp-accent:${site.theme.accent}`,
+  `--sp-surface:${site.theme.surface}`,
+  `--sp-edge:${site.theme.edge}`,
+  `--sp-radius:${site.theme.radius}`,
+  `--sp-display:${site.theme.displayFont === "serif" ? '"PT Serif", Georgia, serif' : '"Inter Variable", Arial, sans-serif'}`,
+].join(";");
+
+const tiles = [
+  {
+    num: "02",
+    sub: "catalog",
+    title: site.nav.catalog[lang],
+    note: ru ? "Фильтры, поиск и цены" : "Filters, search & specs",
+  },
+  {
+    num: "03",
+    sub: "catalog/" + site.catalog.items[0].id,
+    title: site.catalog.items[0].title[lang],
+    note: ru ? "Детальная карточка и заявка" : "Detail gallery & inquiry",
+  },
+  {
+    num: "04",
+    sub: "projects",
+    title: site.nav.projects[lang],
+    note: ru ? "Кейсы и детализация" : "Cases & deliverables",
+  },
+  {
+    num: "05",
+    sub: "projects/" + site.projects.items[0].id,
+    title: site.projects.items[0].title[lang],
+    note: ru ? "План этапов и сроки" : "Milestones & schedule",
+  },
+  {
+    num: "06",
+    sub: "partners",
+    title: site.nav.partners[lang],
+    note: ru ? "Условия и возможности" : "Programs & value",
+  },
+  {
+    num: "07",
+    sub: "request",
+    title: site.nav.request[lang],
+    note: ru ? "Интерактивная форма" : "Interactive submission",
+  },
+  {
+    num: "08",
+    sub: "about",
+    title: site.nav.about[lang],
+    note: ru ? "Цифры, миссия и ценности" : "Stats, mission & values",
+  },
+  {
+    num: "09",
+    sub: "team",
+    title: site.nav.team[lang],
+    note: ru ? "Специалисты и контакты" : "Specialists & leadership",
+  },
+  {
+    num: "10",
+    sub: "journal",
+    title: site.nav.journal[lang],
+    note: ru ? "Статьи и руководства" : "Articles & guides",
+  },
+  {
+    num: "11–13",
+    sub: "program",
+    title: site.nav.program[lang],
+    note: ru ? "Спецпрограмма, контакты, карьера" : "Program, contact & careers",
+  },
+];
+---
+
+<section
+  class="site-explore-strip"
+  style={styleVars}
+  aria-label={ru ? "Полная структура сайта" : "Explore the full website"}
+>
+  <div class="sp-wrap">
+    <div class="sp-section-head" style="margin-bottom:0.5rem;">
+      <div>
+        <span class="sp-eyebrow">
+          {
+            ru
+              ? `Многостраничный сайт · ${pageCountFor(site)} страниц`
+              : `Multi-page site · ${pageCountFor(site)} pages`
+          }
+        </span>
+        <h2 style="margin-top:0.45rem;">
+          {ru ? "Все разделы и сервисы" : "Explore every section"}
+        </h2>
+      </div>
+      <div style="display:flex;gap:0.65rem;flex-wrap:wrap;">
+        <a class="sp-btn sp-btn--outline" href={href("contact")}>
+          {site.nav.contact[lang]}
+        </a>
+        <a class="sp-btn sp-btn--outline" href={href("careers")}>
+          {site.nav.careers[lang]}
+        </a>
+      </div>
+    </div>
+
+    <div class="site-explore-grid">
+      {
+        tiles.map((t) => (
+          <a class="site-explore-tile" href={href(t.sub)}>
+            <span class="site-explore-num">{t.num}</span>
+            <strong>{t.title}</strong>
+            <span>{t.note}</span>
+          </a>
+        ))
+      }
+    </div>
+  </div>
+</section>

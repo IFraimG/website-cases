@@ -1,0 +1,179 @@
+{
+  "slug": "ev-charge",
+  "layout": "instrument",
+  "palette": {
+    "paper": "#101e29",
+    "ink": "#e2fbf4",
+    "accent": "#80efd9"
+  },
+  "brand": {
+    "en": "Relay Bay",
+    "ru": "Релей"
+  },
+  "sector": {
+    "en": "EV charging",
+    "ru": "Зарядные станции"
+  },
+  "headline": {
+    "en": "Time your next charge.",
+    "ru": "Рассчитайте зарядку."
+  },
+  "intro": {
+    "en": "A charging forecourt for city stops and longer visits. Estimate plug-in time from the energy you need.",
+    "ru": "Городская площадка для коротких и долгих остановок. Оцените время подключения по нужному запасу энергии."
+  },
+  "action": {
+    "en": "Estimate charge time",
+    "ru": "Рассчитать время"
+  },
+  "heroAlt": {
+    "en": "Electric car connected to a charger",
+    "ru": "Электромобиль подключён к станции"
+  },
+  "storyTitle": {
+    "en": "From bay to socket",
+    "ru": "От места до разъёма"
+  },
+  "story": {
+    "en": "Every bay has its connector and maximum output marked at the pedestal. Check your car’s inlet and accepted power before choosing a unit.",
+    "ru": "На каждой стойке указаны разъём и предельная мощность. До выбора станции проверьте порт и допустимую мощность автомобиля."
+  },
+  "detailAlt": {
+    "en": "Outdoor charging pedestal and cables",
+    "ru": "Зарядная стойка с кабелями"
+  },
+  "facts": [
+    {
+      "label": {
+        "en": "Access",
+        "ru": "Доступ"
+      },
+      "value": {
+        "en": "24 / 7",
+        "ru": "24 / 7"
+      }
+    },
+    {
+      "label": {
+        "en": "AC connector",
+        "ru": "Разъём AC"
+      },
+      "value": {
+        "en": "Type 2",
+        "ru": "Type 2"
+      }
+    },
+    {
+      "label": {
+        "en": "DC connector",
+        "ru": "Разъём DC"
+      },
+      "value": {
+        "en": "CCS2",
+        "ru": "CCS2"
+      }
+    }
+  ],
+  "widget": {
+    "type": "calculator",
+    "title": {
+      "en": "Plug-in time",
+      "ru": "Время подключения"
+    },
+    "hint": {
+      "en": "Select a rated output and energy target. This ideal estimate excludes losses and battery taper.",
+      "ru": "Выберите номинальную мощность и запас энергии. Идеальная оценка не учитывает потери и снижение мощности к концу зарядки."
+    },
+    "label": {
+      "en": "Power output",
+      "ru": "Мощность"
+    },
+    "quantity": {
+      "en": "Energy to add, kWh",
+      "ru": "Добавить энергии, кВт·ч"
+    },
+    "unit": {
+      "en": "min",
+      "ru": "мин"
+    },
+    "min": 1,
+    "max": 80,
+    "initial": 30,
+    "options": [
+      {
+        "name": {
+          "en": "AC 7.5 kW",
+          "ru": "AC 7,5 кВт"
+        },
+        "metric": {
+          "en": "Type 2",
+          "ru": "Type 2"
+        },
+        "text": {
+          "en": "A slow bay for longer stops. At full output each kilowatt-hour takes eight minutes.",
+          "ru": "Для долгой стоянки. При полной мощности один киловатт-час добавляется за восемь минут."
+        },
+        "rate": 8.0,
+        "base": 0.0
+      },
+      {
+        "name": {
+          "en": "DC 30 kW",
+          "ru": "DC 30 кВт"
+        },
+        "metric": {
+          "en": "CCS2",
+          "ru": "CCS2"
+        },
+        "text": {
+          "en": "A mid-power top-up. Actual speed depends on the car and battery temperature.",
+          "ru": "Средняя мощность для пополнения запаса. Скорость зависит от автомобиля и температуры батареи."
+        },
+        "rate": 2.0,
+        "base": 0.0
+      },
+      {
+        "name": {
+          "en": "DC 60 kW",
+          "ru": "DC 60 кВт"
+        },
+        "metric": {
+          "en": "CCS2",
+          "ru": "CCS2"
+        },
+        "text": {
+          "en": "At the rated output, one minute adds one kilowatt-hour. Check the car’s charging curve.",
+          "ru": "При номинале за минуту добавляется один киловатт-час. Сверьтесь с зарядной кривой автомобиля."
+        },
+        "rate": 1.0,
+        "base": 0.0
+      }
+    ]
+  },
+  "guideTitle": {
+    "en": "On the forecourt",
+    "ru": "На площадке"
+  },
+  "guide": [
+    {
+      "q": {
+        "en": "Which cable do I need?",
+        "ru": "Какой кабель нужен?"
+      },
+      "a": {
+        "en": "Bring a compatible Type 2 lead for AC. The DC units have tethered CCS2 cables.",
+        "ru": "Для AC возьмите совместимый кабель Type 2. На стойках DC закреплены кабели CCS2."
+      }
+    },
+    {
+      "q": {
+        "en": "What does the estimate assume?",
+        "ru": "Что заложено в расчёт?"
+      },
+      "a": {
+        "en": "Constant output at the selected power. The station display shows your actual session progress.",
+        "ru": "Постоянная выбранная мощность. Реальный ход сессии отображается на экране станции."
+      }
+    }
+  ]
+}

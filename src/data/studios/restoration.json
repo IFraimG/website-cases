@@ -1,0 +1,162 @@
+{
+  "slug": "restoration",
+  "layout": "journal",
+  "palette": {
+    "paper": "#ece5d4",
+    "ink": "#353628",
+    "accent": "#6c472d"
+  },
+  "brand": {
+    "en": "Motor Archive",
+    "ru": "Моторный архив"
+  },
+  "sector": {
+    "en": "Classic car restoration",
+    "ru": "Реставрация классических авто"
+  },
+  "headline": {
+    "en": "Keep its history on the road.",
+    "ru": "Сохранить историю на ходу."
+  },
+  "intro": {
+    "en": "Documented restorations for older cars. Follow a project from the first inspection to the road test.",
+    "ru": "Документируем реставрацию классических машин от первого осмотра до дорожного испытания."
+  },
+  "action": {
+    "en": "Open the workshop record",
+    "ru": "Открыть журнал работ"
+  },
+  "heroAlt": {
+    "en": "Mechanic working under a classic car bonnet",
+    "ru": "Механик под капотом классического автомобиля"
+  },
+  "storyTitle": {
+    "en": "A record for the next owner",
+    "ru": "Досье для следующего владельца"
+  },
+  "story": {
+    "en": "Every removed part gets a tag. Photos, finish samples and measurements stay with the vehicle file so a future repair can follow the same decisions.",
+    "ru": "Маркируем каждую снятую деталь. Фото, образцы отделки и замеры остаются в досье машины, чтобы при будущем ремонте можно было восстановить решения."
+  },
+  "detailAlt": {
+    "en": "Classic body shell in the workshop",
+    "ru": "Кузов классического автомобиля в мастерской"
+  },
+  "facts": [
+    {
+      "label": {
+        "en": "Workshop",
+        "ru": "Мастерская"
+      },
+      "value": {
+        "en": "2 bays",
+        "ru": "2 поста"
+      }
+    },
+    {
+      "label": {
+        "en": "Records",
+        "ru": "Документация"
+      },
+      "value": {
+        "en": "Per vehicle",
+        "ru": "На каждую машину"
+      }
+    },
+    {
+      "label": {
+        "en": "Review",
+        "ru": "Согласование"
+      },
+      "value": {
+        "en": "Each stage",
+        "ru": "По этапам"
+      }
+    }
+  ],
+  "widget": {
+    "type": "explore",
+    "title": {
+      "en": "A restoration in three entries",
+      "ru": "Реставрация в трёх записях"
+    },
+    "hint": {
+      "en": "Open a stage from the sample vehicle dossier.",
+      "ru": "Откройте этап из демонстрационного досье автомобиля."
+    },
+    "label": {
+      "en": "Record",
+      "ru": "Запись"
+    },
+    "options": [
+      {
+        "name": {
+          "en": "Survey",
+          "ru": "Приёмка"
+        },
+        "metric": {
+          "en": "Condition sheet",
+          "ru": "Карта состояния"
+        },
+        "text": {
+          "en": "We photograph seams, identify earlier repairs and note which finishes can be preserved.",
+          "ru": "Снимаем швы, определяем прежние ремонты и отмечаем отделку, которую удастся сохранить."
+        }
+      },
+      {
+        "name": {
+          "en": "Bodywork",
+          "ru": "Кузов"
+        },
+        "metric": {
+          "en": "Metal and finish",
+          "ru": "Металл и покрытие"
+        },
+        "text": {
+          "en": "The shell is measured on a level bench. Approved repairs are photographed before the paint covers them.",
+          "ru": "Проверяем геометрию на ровном стенде. Согласованные участки снимаем до окраски."
+        }
+      },
+      {
+        "name": {
+          "en": "Handover",
+          "ru": "Выдача"
+        },
+        "metric": {
+          "en": "Road test record",
+          "ru": "Протокол испытаний"
+        },
+        "text": {
+          "en": "After assembly we log temperatures, noises and adjustments from a short road test.",
+          "ru": "После сборки записываем температуры, шумы и регулировки по итогам короткой поездки."
+        }
+      }
+    ]
+  },
+  "guideTitle": {
+    "en": "In the dossier",
+    "ru": "В досье автомобиля"
+  },
+  "guide": [
+    {
+      "q": {
+        "en": "Can original trim stay?",
+        "ru": "Можно оставить оригинальный декор?"
+      },
+      "a": {
+        "en": "We mark salvageable pieces at inspection and store them separately during bodywork.",
+        "ru": "На приёмке отмечаем пригодные детали и храним их отдельно до завершения кузовных работ."
+      }
+    },
+    {
+      "q": {
+        "en": "How is a change approved?",
+        "ru": "Как согласуются изменения?"
+      },
+      "a": {
+        "en": "Each proposed repair gets photos, scope and a written estimate before work begins.",
+        "ru": "К каждому предлагаемому ремонту готовим фото, описание и смету до начала работ."
+      }
+    }
+  ]
+}

@@ -1,0 +1,572 @@
+---
+import SiteMapSvg from "../../components/SiteMapSvg.astro";
+import { languageOf, localizedPath } from "../../i18n/locale";
+import type { SiteExpansion, JournalPost } from "../../data/site-schema";
+
+interface Props {
+  site: SiteExpansion;
+  view: "about" | "team" | "journal" | "journal-detail" | "program" | "contact" | "careers";
+  post?: JournalPost;
+}
+
+const { site, view, post } = Astro.props;
+const lang = languageOf(Astro.url.pathname);
+const ru = lang === "ru";
+const href = (sub = "") => localizedPath(`/${site.slug}/${sub ? sub + "/" : ""}`, lang);
+const postAuthor = post ? site.team.members[post.authorIndex] : site.team.members[0];
+const relatedPosts = post
+  ? site.journal.posts.filter((p) => p.id !== post.id)
+  : [];
+---
+
+{view === "about" && (
+  <>
+    <section class="sp-page-hero">
+      <div class="sp-wrap sp-page-hero--split">
+        <div>
+          <span class="sp-eyebrow">{site.about.eyebrow[lang]}</span>
+          <h1>{site.about.title[lang]}</h1>
+          <p class="sp-page-lead">{site.about.lead[lang]}</p>
+        </div>
+        <div class="sp-hero-media">
+          <img src={site.media.hero} alt={site.brand[lang]} />
+        </div>
+      </div>
+    </section>
+
+    <section class="sp-section" style="padding-bottom:1.5rem;">
+      <div class="sp-wrap">
+        <div class="sp-quote-banner">
+          <blockquote>{site.about.manifesto[lang]}</blockquote>
+        </div>
+      </div>
+    </section>
+
+    <section class="sp-section" style="padding-block:1.5rem;">
+      <div class="sp-wrap">
+        <div class="sp-stats-strip">
+          {site.about.stats.map((st) => (
+            <div>
+              <strong>{st.value[lang]}</strong>
+              <span class="sp-card-meta">{st.label[lang]}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="sp-section">
+      <div class="sp-wrap sp-grid-2">
+        <article class="sp-card sp-card--surface" style="padding:1.8rem;gap:0.75rem;">
+          <span class="sp-eyebrow">{ru ? "Наша миссия" : "Our Mission"}</span>
+          <h2 style="font-size:1.75rem;">{ru ? "Зачем мы это делаем" : "What Guides Every Decision"}</h2>
+          <p style="font-size:1rem;line-height:1.6;">{site.about.mission[lang]}</p>
+        </article>
+        <article class="sp-card sp-card--surface" style="padding:1.8rem;gap:0.75rem;">
+          <span class="sp-eyebrow">{ru ? "Наше видение" : "Our Vision"}</span>
+          <h2 style="font-size:1.75rem;">{ru ? "Куда мы движемся" : "Where We Are Headed"}</h2>
+          <p style="font-size:1rem;line-height:1.6;">{site.about.vision[lang]}</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="sp-section sp-section--tint sp-section--rule">
+      <div class="sp-wrap">
+        <div class="sp-section-head">
+          <h2>{ru ? "Наши ценности" : "Our Core Values"}</h2>
+          <a class="sp-btn sp-btn--outline" href={href("team")}>{site.nav.team[lang]} →</a>
+        </div>
+        <div class="sp-grid-4">
+          {site.about.values.map((v, i) => (
+            <div class="sp-card" style="padding:1.35rem;gap:0.5rem;">
+              <span class="sp-eyebrow">0{i + 1}</span>
+              <h3 style="font-size:1.22rem;">{v.title[lang]}</h3>
+              <p class="sp-card-meta">{v.text[lang]}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="sp-section">
+      <div class="sp-wrap">
+        <div class="sp-section-head">
+          <h2>{ru ? "Ключевые этапы" : "Milestones"}</h2>
+        </div>
+        <div class="sp-grid-3">
+          {site.about.milestones.map((m) => (
+            <div class="sp-card sp-card--surface" style="padding:1.4rem;gap:0.5rem;">
+              <strong style="font-size:1.6rem;color:var(--sp-accent);">{m.year}</strong>
+              <h3 style="font-size:1.25rem;">{m.title[lang]}</h3>
+              <p class="sp-card-meta">{m.text[lang]}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  </>
+)}
+
+{view === "team" && (
+  <>
+    <section class="sp-page-hero">
+      <div class="sp-wrap">
+        <span class="sp-eyebrow">{site.team.eyebrow[lang]}</span>
+        <h1>{site.team.title[lang]}</h1>
+        <p class="sp-page-lead">{site.team.lead[lang]}</p>
+      </div>
+    </section>
+
+    <section class="sp-section">
+      <div class="sp-wrap sp-grid-4">
+        {site.team.members.map((m) => (
+          <article class="sp-card sp-team-card">
+            <div class="sp-card-media">
+              <img src={m.photo} alt={m.name[lang]} loading="lazy" />
+            </div>
+            <div class="sp-card-body">
+              <span class="sp-eyebrow">{m.experience[lang]}</span>
+              <h3>{m.name[lang]}</h3>
+              <p style="font-weight:600;font-size:0.9rem;">{m.role[lang]}</p>
+              <span class="sp-pill" style="align-self:start;">{m.specialty[lang]}</span>
+              <p class="sp-card-meta" style="margin-top:0.25rem;">{m.bio[lang]}</p>
+              <div class="sp-card-foot" style="flex-direction:column;align-items:start;gap:0.2rem;font-size:0.8rem;">
+                <span>{m.email}</span>
+                <span class="sp-card-meta">{m.phone}</span>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="sp-section" style="padding-top:0;">
+      <div class="sp-wrap">
+        <div class="sp-dark-banner">
+          <img src="/media/shared/office-meeting.webp" alt={site.team.cultureTitle[lang]} />
+          <span class="sp-eyebrow" style="color:#fff;opacity:0.85;">{site.brand[lang]}</span>
+          <h2 style="font-size:clamp(1.9rem,3.6vw,3.1rem);margin:0.55rem 0 0.75rem;">
+            {site.team.cultureTitle[lang]}
+          </h2>
+          <p style="max-width:52ch;opacity:0.92;margin-bottom:1.4rem;">{site.team.cultureLead[lang]}</p>
+          <div style="display:flex;gap:0.75rem;flex-wrap:wrap;">
+            <a class="sp-btn sp-btn--light" href={href("careers")}>{site.nav.careers[lang]}</a>
+            <a class="sp-btn" href={href("contact")}>{site.nav.contact[lang]}</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </>
+)}
+
+{view === "journal" && (
+  <>
+    <section class="sp-page-hero">
+      <div class="sp-wrap">
+        <span class="sp-eyebrow">{site.journal.eyebrow[lang]}</span>
+        <h1>{site.journal.title[lang]}</h1>
+        <p class="sp-page-lead">{site.journal.lead[lang]}</p>
+      </div>
+    </section>
+
+    <section class="sp-section" data-tab-filter>
+      <div class="sp-wrap">
+        <div class="sp-toolbar">
+          <div class="sp-pills-row" role="group" aria-label={ru ? "Рубрики журнала" : "Journal categories"}>
+            <button type="button" class="sp-filter-btn" data-tab="all" aria-pressed="true">
+              {ru ? "Все" : "All"}
+            </button>
+            {site.journal.categories.map((cat) => (
+              <button type="button" class="sp-filter-btn" data-tab={cat.id} aria-pressed="false">
+                {cat.label[lang]}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <div class="sp-grid-3">
+          {site.journal.posts.map((p) => (
+            <article class="sp-card sp-card--interactive" data-tab-item={p.category}>
+              <a href={href("journal/" + p.id)} class="sp-card-media">
+                <img src={p.image} alt={p.title[lang]} loading="lazy" />
+                <span class="sp-card-badge">{p.readTime[lang]}</span>
+              </a>
+              <div class="sp-card-body">
+                <span class="sp-card-meta">{p.date[lang]}</span>
+                <h3><a href={href("journal/" + p.id)}>{p.title[lang]}</a></h3>
+                <p style="font-size:0.93rem;opacity:0.86;">{p.excerpt[lang]}</p>
+                <div class="sp-card-foot">
+                  <span>{site.team.members[p.authorIndex].name[lang]}</span>
+                  <a href={href("journal/" + p.id)}>{ru ? "Читать →" : "Read more →"}</a>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  </>
+)}
+
+{view === "journal-detail" && post && (
+  <>
+    <div class="sp-wrap">
+      <nav class="sp-crumb" aria-label={ru ? "Навигация" : "Breadcrumb"}>
+        <a href={href("")}>{site.nav.home[lang]}</a>
+        <span>/</span>
+        <a href={href("journal")}>{site.nav.journal[lang]}</a>
+        <span>/</span>
+        <span aria-current="page">{post.title[lang]}</span>
+      </nav>
+    </div>
+
+    <article class="sp-section" style="padding-top:1.5rem;">
+      <div class="sp-wrap sp-detail-layout">
+        <div class="sp-article-body">
+          <div>
+            <span class="sp-eyebrow">{post.date[lang]} · {post.readTime[lang]}</span>
+            <h1 style="font-size:clamp(2.1rem,4vw,3.5rem);margin:0.65rem 0 0.85rem;">{post.title[lang]}</h1>
+            <p class="sp-page-lead">{post.excerpt[lang]}</p>
+          </div>
+
+          <div class="sp-hero-media">
+            <img src={post.image} alt={post.title[lang]} />
+          </div>
+
+          <div class="sp-takeaways">
+            <span class="sp-eyebrow">{ru ? "Главное коротко" : "Key Takeaways"}</span>
+            <ul class="sp-checklist sp-checklist--single" style="margin-top:0.75rem;">
+              {post.takeaways.map((t) => (
+                <li>
+                  <span class="sp-check-mark" aria-hidden="true">✓</span>
+                  <span>{t[lang]}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {post.sections.map((sec) => (
+            <section>
+              <h2>{sec.heading[lang]}</h2>
+              <p style="font-size:1.04rem;line-height:1.7;">{sec.body[lang]}</p>
+            </section>
+          ))}
+        </div>
+
+        <aside style="display:grid;gap:1.25rem;">
+          <div class="sp-sidebar-box">
+            <span class="sp-eyebrow">{ru ? "Автор статьи" : "Written By"}</span>
+            <div class="sp-advisor-mini">
+              <img src={postAuthor.photo} alt={postAuthor.name[lang]} />
+              <div>
+                <strong>{postAuthor.name[lang]}</strong>
+                <span class="sp-card-meta" style="display:block;">{postAuthor.role[lang]}</span>
+              </div>
+            </div>
+            <p class="sp-card-meta">{postAuthor.bio[lang]}</p>
+            <a class="sp-btn" href={href("request")}>{site.nav.request[lang]}</a>
+          </div>
+
+          <div class="sp-sidebar-box">
+            <span class="sp-eyebrow">{ru ? "Читайте также" : "Related Articles"}</span>
+            {relatedPosts.map((rp) => (
+              <a href={href("journal/" + rp.id)} style="padding-bottom:0.85rem;border-bottom:1px solid var(--sp-edge);">
+                <strong style="display:block;font-size:0.96rem;">{rp.title[lang]}</strong>
+                <span class="sp-card-meta">{rp.date[lang]} · {rp.readTime[lang]}</span>
+              </a>
+            ))}
+          </div>
+        </aside>
+      </div>
+    </article>
+  </>
+)}
+
+{view === "program" && (
+  <>
+    <section class="sp-page-hero">
+      <div class="sp-wrap sp-page-hero--split">
+        <div>
+          <span class="sp-eyebrow">{site.program.eyebrow[lang]}</span>
+          <h1>{site.program.title[lang]}</h1>
+          <p class="sp-page-lead">{site.program.lead[lang]}</p>
+          <div style="margin-top:1.5rem;">
+            <a class="sp-btn" href="#program-form">{site.program.formTitle[lang]} →</a>
+          </div>
+        </div>
+        <div class="sp-hero-media">
+          <img src={site.media.secondary} alt={site.program.title[lang]} />
+        </div>
+      </div>
+    </section>
+
+    <section class="sp-section">
+      <div class="sp-wrap sp-grid-4">
+        {site.program.pillars.map((p, i) => (
+          <div class="sp-card sp-card--surface" style="padding:1.35rem;gap:0.5rem;">
+            <span class="sp-eyebrow">0{i + 1}</span>
+            <h3 style="font-size:1.22rem;">{p.title[lang]}</h3>
+            <p class="sp-card-meta">{p.text[lang]}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section class="sp-section sp-section--tint sp-section--rule">
+      <div class="sp-wrap">
+        <div class="sp-section-head">
+          <h2>{ru ? "Как всё устроено" : "How It Works"}</h2>
+        </div>
+        <div class="sp-grid-3">
+          {site.program.steps.map((st) => (
+            <div class="sp-card" style="padding:1.45rem;gap:0.55rem;">
+              <h3 style="font-size:1.25rem;color:var(--sp-accent);">{st.title[lang]}</h3>
+              <p style="font-size:0.95rem;opacity:0.88;">{st.text[lang]}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section id="program-form" class="sp-section">
+      <div class="sp-wrap sp-grid-2" style="align-items:center;">
+        <div class="stack">
+          <span class="sp-eyebrow">{site.brand[lang]}</span>
+          <h2 style="font-size:clamp(1.9rem,3.3vw,3rem);">{site.program.ctaTitle[lang]}</h2>
+          <p class="sp-page-lead">{site.program.ctaLead[lang]}</p>
+          <a class="sp-btn sp-btn--outline" href={href("catalog")} style="justify-self:start;">
+            {site.nav.catalog[lang]} →
+          </a>
+        </div>
+
+        <div class="sp-sidebar-box">
+          <h3>{site.program.formTitle[lang]}</h3>
+          <form class="sp-form" data-demo-form data-context={site.program.eyebrow[lang]}>
+            <label class="sp-field">
+              {site.program.interestLabel[lang]}
+              <select class="sp-select" name="type" required>
+                <option value="">{ru ? "Выберите формат" : "Choose option"}</option>
+                {site.program.interestOptions.map((opt) => (
+                  <option value={opt[lang]}>{opt[lang]}</option>
+                ))}
+              </select>
+            </label>
+            <div class="sp-form-row">
+              <label class="sp-field">
+                {ru ? "Ваше имя" : "Your Name"}
+                <input class="sp-input" name="name" required placeholder={ru ? "Анна" : "Anna"} />
+              </label>
+              <label class="sp-field">
+                {ru ? "Телефон / Email" : "Phone / Email"}
+                <input class="sp-input" name="contact" required placeholder="+7 (999) 000-00-00" />
+              </label>
+            </div>
+            <button class="sp-btn" type="submit">{ru ? "Запросить обратный звонок" : "Request Callback"}</button>
+            <output class="sp-status" role="status"></output>
+          </form>
+        </div>
+      </div>
+    </section>
+  </>
+)}
+
+{view === "contact" && (
+  <>
+    <section class="sp-page-hero">
+      <div class="sp-wrap">
+        <span class="sp-eyebrow">{site.contact.eyebrow[lang]}</span>
+        <h1>{site.contact.title[lang]}</h1>
+        <p class="sp-page-lead">{site.contact.lead[lang]}</p>
+      </div>
+    </section>
+
+    <section class="sp-section">
+      <div class="sp-wrap sp-grid-2" style="align-items:start;">
+        <div style="display:grid;gap:1rem;">
+          <div class="sp-sidebar-box">
+            <span class="sp-eyebrow">{ru ? "Телефон и мессенджеры" : "Phone / Direct Line"}</span>
+            <strong style="font-size:1.35rem;">{site.contact.phone}</strong>
+            <span class="sp-card-meta">{site.contact.email}</span>
+          </div>
+          <div class="sp-sidebar-box">
+            <span class="sp-eyebrow">{ru ? "Адрес" : "Address"}</span>
+            <strong>{site.contact.address[lang]}</strong>
+            <span class="sp-card-meta">{site.contact.transit[lang]}</span>
+          </div>
+          <div class="sp-sidebar-box">
+            <span class="sp-eyebrow">{ru ? "Часы работы" : "Opening Hours"}</span>
+            <strong>{site.contact.hours[lang]}</strong>
+            <span class="sp-card-meta">{site.contact.district[lang]}</span>
+          </div>
+        </div>
+
+        <div class="sp-sidebar-box" style="background:var(--sp-paper);">
+          <h2 style="font-size:1.6rem;">{ru ? "Напишите нам" : "Send Us a Message"}</h2>
+          <form class="sp-form" data-demo-form data-context={ru ? "Обращение" : "Contact Inquiry"}>
+            <div class="sp-form-row">
+              <label class="sp-field">
+                {ru ? "Ваше имя" : "Your Name"}
+                <input class="sp-input" name="name" required placeholder={ru ? "Иван" : "Ivan"} />
+              </label>
+              <label class="sp-field">
+                {ru ? "Email или телефон" : "Email or Phone"}
+                <input class="sp-input" name="contact" required placeholder="name@example.com" />
+              </label>
+            </div>
+            <label class="sp-field">
+              {ru ? "Тема" : "Subject"}
+              <select class="sp-select" name="type" required>
+                <option value="">{ru ? "Выберите тему" : "Select subject"}</option>
+                {site.contact.subjects.map((sub) => (
+                  <option value={sub[lang]}>{sub[lang]}</option>
+                ))}
+              </select>
+            </label>
+            <label class="sp-field">
+              {ru ? "Сообщение" : "Message"}
+              <textarea class="sp-textarea" name="note" required placeholder={ru ? "Расскажите, чем мы можем помочь..." : "Tell us how we can help..."}></textarea>
+            </label>
+            <button class="sp-btn" type="submit">{ru ? "Отправить сообщение" : "Send Message"}</button>
+            <output class="sp-status" role="status"></output>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <section class="sp-section" style="padding-top:0;">
+      <div class="sp-wrap">
+        <SiteMapSvg site={site} />
+      </div>
+    </section>
+  </>
+)}
+
+{view === "careers" && (
+  <>
+    <section class="sp-page-hero">
+      <div class="sp-wrap sp-page-hero--split">
+        <div>
+          <span class="sp-eyebrow">{site.careers.eyebrow[lang]}</span>
+          <h1>{site.careers.title[lang]}</h1>
+          <p class="sp-page-lead">{site.careers.lead[lang]}</p>
+        </div>
+        <div class="sp-hero-media">
+          <img src="/media/shared/office-meeting.webp" alt={site.careers.title[lang]} />
+        </div>
+      </div>
+    </section>
+
+    <section class="sp-section">
+      <div class="sp-wrap sp-grid-4">
+        {site.careers.perks.map((pk, i) => (
+          <div class="sp-card sp-card--surface" style="padding:1.3rem;gap:0.45rem;">
+            <span class="sp-eyebrow">0{i + 1}</span>
+            <h3 style="font-size:1.18rem;">{pk.title[lang]}</h3>
+            <p class="sp-card-meta">{pk.text[lang]}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section class="sp-section sp-section--tint sp-section--rule" data-tab-filter>
+      <div class="sp-wrap">
+        <div class="sp-section-head">
+          <h2>{ru ? "Открытые вакансии" : "Open Positions"}</h2>
+          <div class="sp-pills-row" role="group" aria-label={ru ? "Отделы" : "Departments"}>
+            <button type="button" class="sp-filter-btn" data-tab="all" aria-pressed="true">
+              {ru ? "Все" : "All"}
+            </button>
+            {site.careers.departments.map((d) => (
+              <button type="button" class="sp-filter-btn" data-tab={d.id} aria-pressed="false">
+                {d.label[lang]}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <div style="display:grid;gap:1rem;">
+          {site.careers.openings.map((job) => (
+            <article class="sp-job-card" data-tab-item={job.department}>
+              <div class="sp-job-head">
+                <div>
+                  <h3 style="font-size:1.35rem;">{job.title[lang]}</h3>
+                  <div class="sp-pills-row" style="margin-top:0.45rem;">
+                    <span class="sp-pill">{job.location[lang]}</span>
+                    <span class="sp-pill">{job.type[lang]}</span>
+                    <span class="sp-pill">{job.level[lang]}</span>
+                    <span class="sp-pill sp-pill--accent">{job.salary[lang]}</span>
+                  </div>
+                </div>
+                <button
+                  type="button"
+                  class="sp-btn"
+                  data-apply-role={job.title[lang]}
+                >
+                  {ru ? "Откликнуться" : "Apply Now"}
+                </button>
+              </div>
+              <p style="font-size:0.95rem;opacity:0.88;">{job.summary[lang]}</p>
+              <ul class="sp-checklist">
+                {job.requirements.map((r) => (
+                  <li>
+                    <span class="sp-check-mark" aria-hidden="true">✓</span>
+                    <span>{r[lang]}</span>
+                  </li>
+                ))}
+              </ul>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section id="apply-form" class="sp-section">
+      <div class="sp-wrap sp-grid-2" style="align-items:start;">
+        <div class="stack">
+          <span class="sp-eyebrow">{ru ? "Отклик и резюме" : "Grow Your Future With Us"}</span>
+          <h2 style="font-size:clamp(1.85rem,3.2vw,2.9rem);">
+            {ru ? "Отправьте резюме или портфолио" : "Send Your CV or Portfolio"}
+          </h2>
+          <p class="sp-page-lead">
+            {ru
+              ? "Даже если нужной роли нет в списке, напишите нам — мы всегда рады сильным специалистам."
+              : "Even if your exact role isn’t listed above, introduce yourself—we read every portfolio personally."}
+          </p>
+        </div>
+
+        <div class="sp-sidebar-box">
+          <form class="sp-form" data-demo-form data-context={ru ? "Отклик на вакансию" : "Career Application"}>
+            <label class="sp-field">
+              {ru ? "Интересующая позиция" : "Position"}
+              <select class="sp-select" name="type" data-role-select required>
+                <option value="">{ru ? "Выберите вакансию" : "Select position"}</option>
+                {site.careers.openings.map((j) => (
+                  <option value={j.title[lang]}>{j.title[lang]}</option>
+                ))}
+                <option value={ru ? "Инициативное резюме" : "General Application"}>
+                  {ru ? "Инициативное резюме" : "General Application"}
+                </option>
+              </select>
+            </label>
+            <div class="sp-form-row">
+              <label class="sp-field">
+                {ru ? "Имя и фамилия" : "Full Name"}
+                <input class="sp-input" name="name" required placeholder={ru ? "Елена Соколова" : "Elena Sokolova"} />
+              </label>
+              <label class="sp-field">
+                {ru ? "Email или Telegram" : "Email or Telegram"}
+                <input class="sp-input" name="contact" required placeholder="elena@example.com" />
+              </label>
+            </div>
+            <label class="sp-field">
+              {ru ? "Ссылка на резюме / портфолио и пару слов о себе" : "Portfolio / CV Link & Short Note"}
+              <textarea class="sp-textarea" name="note" required placeholder={ru ? "Расскажите об опыте и проектах..." : "Share a link and brief note..."}></textarea>
+            </label>
+            <button class="sp-btn" type="submit">{ru ? "Отправить отклик" : "Submit Application"}</button>
+            <output class="sp-status" role="status"></output>
+          </form>
+        </div>
+      </div>
+    </section>
+  </>
+)}

@@ -1,0 +1,283 @@
+* {
+  box-sizing: border-box;
+}
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 1rem;
+}
+body {
+  margin: 0;
+  color: var(--ink, #20231f);
+  background: var(--paper, #f8f8f4);
+  font:
+    16px/1.52 "Inter Variable",
+    Arial,
+    sans-serif;
+}
+main,
+section,
+div,
+article {
+  min-width: 0;
+}
+h1,
+h2,
+h3,
+p,
+figure {
+  margin: 0;
+}
+h1,
+h2,
+h3 {
+  line-height: 1.05;
+  text-wrap: balance;
+}
+h1 {
+  font-size: clamp(3rem, 7.3vw, 7.2rem);
+  letter-spacing: -0.055em;
+}
+h2 {
+  font-size: clamp(2.1rem, 4vw, 4.2rem);
+  letter-spacing: -0.045em;
+}
+h3 {
+  font-size: clamp(1.35rem, 2vw, 2rem);
+  letter-spacing: -0.035em;
+}
+img {
+  display: block;
+  width: 100%;
+  object-fit: cover;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+button,
+input,
+select {
+  font: inherit;
+  color: inherit;
+}
+button,
+select {
+  cursor: pointer;
+}
+button {
+  background: none;
+  border: 0;
+}
+a:hover,
+button:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.23em;
+}
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible {
+  outline: 3px solid #5b83ff;
+  outline-offset: 4px;
+}
+.skip {
+  position: fixed;
+  top: -8rem;
+  left: 1rem;
+  background: white;
+  color: black;
+  z-index: 20;
+  padding: 1rem;
+}
+.skip:focus {
+  top: 1rem;
+}
+.wrap {
+  width: min(1320px, 91%);
+  margin-inline: auto;
+}
+.section {
+  padding-block: clamp(3.5rem, 7vw, 7rem);
+}
+.bar,
+.spread {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.3rem;
+}
+.bar {
+  min-height: 76px;
+  border-bottom: 1px solid var(--line, #bcbeb4);
+}
+.brand {
+  font-weight: 700;
+  font-size: 1.45rem;
+  letter-spacing: -0.055em;
+}
+nav {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+.meta {
+  font:
+    500 0.79rem/1.4 "IBM Plex Mono",
+    monospace;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.lead {
+  max-width: 48ch;
+  font-size: clamp(1.08rem, 1.7vw, 1.4rem);
+  line-height: 1.42;
+}
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 46px;
+  padding: 0.75rem 1.4rem;
+  background: var(--act, #242721);
+  color: var(--onact, #fff);
+  border-radius: var(--radius, 0);
+  font-weight: 600;
+}
+.grid3,
+.pair {
+  display: grid;
+  gap: clamp(1rem, 2vw, 2rem);
+}
+.grid3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+.pair {
+  grid-template-columns: repeat(2, 1fr);
+}
+.kicker {
+  margin-bottom: 1.25rem;
+}
+.head {
+  margin-bottom: 2.4rem;
+}
+.stack > * + * {
+  margin-top: 1.25rem;
+}
+.rule {
+  border-top: 1px solid var(--line, #bcbdba);
+}
+.foot {
+  padding-block: 2rem;
+  border-top: 1px solid var(--line, #bcbdba);
+  flex-wrap: wrap;
+}
+dialog {
+  padding: 0;
+  border: 0;
+  width: min(640px, 92vw);
+  max-height: 88dvh;
+  color: #262825;
+  background: #faf9f5;
+  box-shadow: 0 16px 80px #0004;
+}
+dialog::backdrop {
+  background: #111b;
+}
+dialog img {
+  max-height: 32vh;
+}
+.dialog-body {
+  padding: clamp(1.3rem, 4vw, 2.6rem);
+}
+dialog form {
+  margin-top: 1.4rem;
+}
+[hidden] {
+  display: none !important;
+}
+@media (max-width: 720px) {
+  .wrap {
+    width: 90%;
+  }
+  .bar {
+    min-height: 64px;
+  }
+  .bar nav a:not(:last-child) {
+    display: none;
+  }
+  nav {
+    gap: 0.7rem;
+    font-size: 0.9rem;
+  }
+  .grid3,
+  .pair {
+    grid-template-columns: 1fr;
+  }
+  .head.spread {
+    align-items: start;
+    flex-direction: column;
+  }
+  .foot {
+    font-size: 0.9rem;
+  }
+  .meta {
+    font-size: 0.76rem;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  * {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+.languages {
+  display: inline-flex;
+  align-items: center;
+  flex: none;
+  gap: 2px;
+  border: 1px solid currentColor;
+  border-radius: 20px;
+  padding: 2px;
+  color: inherit;
+}
+.languages a {
+  font:
+    600 12px/1.2 "Inter Variable",
+    Arial,
+    sans-serif;
+  letter-spacing: 0.035em;
+  padding: 6px 8px;
+  border-radius: 12px;
+}
+.languages a[aria-current] {
+  background: var(--ink, #20231f);
+  color: var(--paper, #fff);
+}
+.bar > nav {
+  margin-left: auto;
+}
+.estate-view .languages a[aria-current] {
+  background: white;
+  color: #234137;
+}
+@media (max-width: 720px) {
+  .bar {
+    gap: 0.65rem;
+  }
+  .languages a {
+    padding: 6px;
+  }
+  .arch .bar > nav {
+    margin-left: auto;
+  }
+  .dt .brand {
+    font-size: 1.18rem;
+  }
+  .estate-logo {
+    font-size: 1.16rem;
+  }
+}

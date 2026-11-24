@@ -1,0 +1,179 @@
+{
+  "slug": "lighting",
+  "layout": "showcase",
+  "palette": {
+    "paper": "#f8eadb",
+    "ink": "#472918",
+    "accent": "#91421e"
+  },
+  "brand": {
+    "en": "Umbra Loom",
+    "ru": "Умбра Лум"
+  },
+  "sector": {
+    "en": "Lighting atelier",
+    "ru": "Световая мастерская"
+  },
+  "headline": {
+    "en": "Light, lowered to the table.",
+    "ru": "Свет на уровне стола."
+  },
+  "intro": {
+    "en": "Pendant lighting in small runs. Size a row above a dining table before choosing the finish.",
+    "ru": "Подвесные светильники малых серий. Рассчитайте световой ряд над столом до выбора отделки."
+  },
+  "action": {
+    "en": "Plan a light row",
+    "ru": "Рассчитать подвесы"
+  },
+  "heroAlt": {
+    "en": "Pendant lighting in an interior",
+    "ru": "Подвесной свет в интерьере"
+  },
+  "storyTitle": {
+    "en": "The underside matters",
+    "ru": "Что видно снизу"
+  },
+  "story": {
+    "en": "We test each shade at seated eye level. A recessed source and a finished inner surface keep the fixture comfortable across a long supper.",
+    "ru": "Проверяем плафон на уровне глаз сидящего человека. Утопленный источник и отделка внутренней поверхности помогают сделать свет комфортным за ужином."
+  },
+  "detailAlt": {
+    "en": "A detail of a lamp shade",
+    "ru": "Деталь плафона светильника"
+  },
+  "facts": [
+    {
+      "label": {
+        "en": "Suspension",
+        "ru": "Длина подвеса"
+      },
+      "value": {
+        "en": "1.8 m",
+        "ru": "1,8 м"
+      }
+    },
+    {
+      "label": {
+        "en": "Supply",
+        "ru": "Питание"
+      },
+      "value": {
+        "en": "220–240 V",
+        "ru": "220–240 В"
+      }
+    },
+    {
+      "label": {
+        "en": "Assembly",
+        "ru": "Сборка"
+      },
+      "value": {
+        "en": "By hand",
+        "ru": "Вручную"
+      }
+    }
+  ],
+  "widget": {
+    "type": "calculator",
+    "title": {
+      "en": "Build your light row",
+      "ru": "Соберите световой ряд"
+    },
+    "hint": {
+      "en": "Compare the fixture total for a single line of matching pendants. Installation is priced separately.",
+      "ru": "Сравните стоимость ряда одинаковых подвесов. Монтаж рассчитывается отдельно."
+    },
+    "label": {
+      "en": "Shade",
+      "ru": "Плафон"
+    },
+    "quantity": {
+      "en": "Number of pendants",
+      "ru": "Количество подвесов"
+    },
+    "unit": {
+      "en": "₽",
+      "ru": "₽"
+    },
+    "min": 1,
+    "max": 8,
+    "initial": 3,
+    "options": [
+      {
+        "name": {
+          "en": "Disc",
+          "ru": "Диск"
+        },
+        "metric": {
+          "en": "Ø 28 cm",
+          "ru": "Ø 28 см"
+        },
+        "text": {
+          "en": "A shallow shade for a narrow counter. Allow space between discs so their edges remain distinct.",
+          "ru": "Неглубокий плафон для узкой столешницы. Оставьте зазоры, чтобы силуэты читались отдельно."
+        },
+        "rate": 14500.0,
+        "base": 0.0
+      },
+      {
+        "name": {
+          "en": "Bell",
+          "ru": "Колокол"
+        },
+        "metric": {
+          "en": "Ø 34 cm",
+          "ru": "Ø 34 см"
+        },
+        "text": {
+          "en": "A deeper profile concentrates light on the tabletop and shelters the source from side views.",
+          "ru": "Глубокая форма направляет свет на стол и закрывает источник при взгляде сбоку."
+        },
+        "rate": 18900.0,
+        "base": 0.0
+      },
+      {
+        "name": {
+          "en": "Drum",
+          "ru": "Барабан"
+        },
+        "metric": {
+          "en": "Ø 42 cm",
+          "ru": "Ø 42 см"
+        },
+        "text": {
+          "en": "A broad diffuser suits a larger dining surface. Plan the ceiling points before the final finish.",
+          "ru": "Широкий рассеиватель подойдёт для большого стола. Разметьте выводы до чистовой отделки."
+        },
+        "rate": 22000.0,
+        "base": 0.0
+      }
+    ]
+  },
+  "guideTitle": {
+    "en": "Installation notes",
+    "ru": "Перед монтажом"
+  },
+  "guide": [
+    {
+      "q": {
+        "en": "When is the drop set?",
+        "ru": "Когда выбирают высоту?"
+      },
+      "a": {
+        "en": "We mock up the drop over your table before cutting the cable.",
+        "ru": "До подрезки кабеля примеряем светильник над вашим столом."
+      }
+    },
+    {
+      "q": {
+        "en": "Can the cable be replaced?",
+        "ru": "Можно заменить кабель?"
+      },
+      "a": {
+        "en": "The canopy opens for a qualified electrician to service the cable and suspension.",
+        "ru": "Потолочная чашка открывается, чтобы электрик мог обслужить кабель и подвес."
+      }
+    }
+  ]
+}

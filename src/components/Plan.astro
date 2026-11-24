@@ -1,0 +1,113 @@
+---
+const { rooms } = Astro.props;
+// Metres in the dataset convert to drawing units at a fixed scale per plan.
+const bedCount = rooms - 1;
+const width = [6, 8, 10][bedCount],
+  depth = [5, 6, 7][bedCount];
+const bay = bedCount === 0 ? width : 4,
+  other = bedCount ? (width - bay) / bedCount : 0;
+const scale = 55,
+  w = width * scale,
+  h = depth * scale,
+  living = bay * scale,
+  strip = 1.8 * scale,
+  y = h - strip;
+const beds = Array.from({ length: bedCount }, (_, i) => ({
+  x: living + i * other * scale,
+  w: other * scale,
+}));
+---
+
+<svg
+  class="drawing"
+  viewBox={`-25 -32 ${w + 50} ${h + 62}`}
+  role="img"
+  aria-label={"План квартиры, " + width * depth + " квадратных метров"}
+>
+  <rect width={w} height={h} fill="#f4f1e7" stroke="#35483d" stroke-width="6"
+  ></rect>
+  <!-- Pale furniture silhouettes, with counters along the kitchen wall. -->
+  <g fill="#d7dfd2" stroke="#889b8d" stroke-width="1.5">
+    <rect x="5" y="5" width="30" height={y * 0.72}></rect><rect
+      x="10"
+      y="14"
+      width="20"
+      height="24"
+      rx="3"></rect>
+    <rect x={living * 0.46} y="20" width={living * 0.4} height="36" rx="4"
+    ></rect><path d={`M${living * 0.46 + 5} 45 h${living * 0.4 - 10}`}></path>
+    <ellipse cx={living * 0.33} cy={y * 0.65} rx="24" ry="17"></ellipse>
+    {
+      beds.map((b) => (
+        <g>
+          <>
+            <rect
+              x={b.x + b.w * 0.2}
+              y="10"
+              width={b.w * 0.62}
+              height={y * 0.49}
+              rx="3"
+            />
+            <rect
+              x={b.x + b.w * 0.24}
+              y="16"
+              width={b.w * 0.54}
+              height="20"
+              rx="4"
+            />
+          </>
+        </g>
+      ))
+    }
+    <rect x="8" y={y + 10} width="35" height="70" rx="7"></rect><ellipse
+      cx="62"
+      cy={h - 20}
+      rx="10"
+      ry="14"></ellipse>
+  </g>
+  <g stroke="#35483d" stroke-width="4" fill="none">
+    {beds.map((b) => <path d={`M${b.x} 0 V${y}`} />)}
+    <path d={`M0 ${y} H${living - 62} m38 0 H${living}`}></path>
+    {beds.map((b) => <path d={`M${b.x} ${y} h14 m40 0 H${b.x + b.w}`} />)}
+    <path d={`M98 ${y} v35 m33 0 V${h}`}></path>
+  </g>
+  <g stroke="#8c998c" fill="none" stroke-width="1.2">
+    <path d={`M98 ${y + 68} h-33 a33 33 0 0 1 33 -33`}></path>
+    <path d={`M${living - 62} ${y} v-38 a38 38 0 0 1 38 38`}></path>
+    {beds.map((b) => <path d={`M${b.x + 14} ${y} v-40 a40 40 0 0 1 40 40`} />)}
+  </g>
+  <g
+    fill="#35483d"
+    font-size="12"
+    font-family="Arial,sans-serif"
+    text-anchor="middle"
+  >
+    <text x={living * 0.53} y={y - 17}>Кухня-гостиная</text>{
+      beds.map((b) => (
+        <text x={b.x + b.w / 2} y={y - 16}>
+          Спальня
+        </text>
+      ))
+    }
+    <text x="72" y={y + 27}>С/у</text><text x={(w + 98) / 2} y={y + 54}
+      >Прихожая</text
+    >
+    <text x={w / 2} y="-13">{width},0 м</text><text x={w / 2} y={h + 24}
+      >Вход</text
+    >
+  </g>
+  <path d={`M${w / 2 - 19} ${h} h38`} stroke="#f4f1e7" stroke-width="8"
+  ></path><path
+    d={`M${w / 2 - 19} ${h} v-38 a38 38 0 0 1 38 38`}
+    fill="none"
+    stroke="#829382"></path>
+  {
+    [0, ...beds.map((b) => b.x)].map((x, i) => (
+      <path
+        d={`M${x + (i ? other * scale : living) * 0.27} 0 h${(i ? other * scale : living) * 0.5}`}
+        stroke="#83aeb5"
+        stroke-width="5"
+      />
+    ))
+  }
+</svg>

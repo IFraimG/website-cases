@@ -1,0 +1,167 @@
+{
+  "slug": "hydro",
+  "layout": "horizon",
+  "palette": {
+    "paper": "#e2e9e5",
+    "ink": "#273c36",
+    "accent": "#3b6154"
+  },
+  "brand": {
+    "en": "Basin House",
+    "ru": "Купель"
+  },
+  "sector": {
+    "en": "Private bathhouse",
+    "ru": "Банный дом"
+  },
+  "headline": {
+    "en": "An afternoon by the water.",
+    "ru": "После полудня у воды."
+  },
+  "intro": {
+    "en": "Private bathhouse sessions around a stone pool, a timber sauna and a quiet room to sit between them.",
+    "ru": "Закрытые сеансы в банном доме с каменной купелью, деревянной сауной и тихой комнатой для отдыха."
+  },
+  "action": {
+    "en": "Explore sessions",
+    "ru": "Посмотреть сеансы"
+  },
+  "heroAlt": {
+    "en": "Stone pool in a quiet bathhouse",
+    "ru": "Каменная купель в банном доме"
+  },
+  "storyTitle": {
+    "en": "Timber, stone and a quiet threshold",
+    "ru": "Дерево, камень и тихая комната"
+  },
+  "story": {
+    "en": "The sauna opens onto a dry changing space. Beyond it, the pool room catches reflected daylight on the stone walls. There is a bench by each doorway.",
+    "ru": "Из сауны вы попадаете в сухую раздевалку. Дальше — купель с отражённым дневным светом на каменных стенах. У каждого входа стоит скамья."
+  },
+  "detailAlt": {
+    "en": "Timber-lined sauna interior",
+    "ru": "Интерьер деревянной сауны"
+  },
+  "facts": [
+    {
+      "label": {
+        "en": "Private group",
+        "ru": "Закрытая группа"
+      },
+      "value": {
+        "en": "1–6 guests",
+        "ru": "1–6 гостей"
+      }
+    },
+    {
+      "label": {
+        "en": "Linen",
+        "ru": "Текстиль"
+      },
+      "value": {
+        "en": "Included",
+        "ru": "Включён"
+      }
+    },
+    {
+      "label": {
+        "en": "Turnaround",
+        "ru": "Между сеансами"
+      },
+      "value": {
+        "en": "30 min",
+        "ru": "30 мин"
+      }
+    }
+  ],
+  "widget": {
+    "type": "session",
+    "title": {
+      "en": "Reserve a quiet hour",
+      "ru": "Выберите тихий час"
+    },
+    "hint": {
+      "en": "Try a private booking for 5 December. Select a session and arrival time.",
+      "ru": "Попробуйте демобронирование на 5 декабря. Выберите сеанс и время прибытия."
+    },
+    "label": {
+      "en": "Session",
+      "ru": "Сеанс"
+    },
+    "slots": [
+      "09:00",
+      "13:00",
+      "17:00"
+    ],
+    "options": [
+      {
+        "name": {
+          "en": "Pool hour",
+          "ru": "Час у купели"
+        },
+        "metric": {
+          "en": "60 min · ₽4,800",
+          "ru": "60 мин · 4 800 ₽"
+        },
+        "text": {
+          "en": "Private access to the pool and changing space for up to two guests.",
+          "ru": "Купель и раздевалка в вашем распоряжении для одного или двух гостей."
+        }
+      },
+      {
+        "name": {
+          "en": "Bath circuit",
+          "ru": "Банный круг"
+        },
+        "metric": {
+          "en": "90 min · ₽7,200",
+          "ru": "90 мин · 7 200 ₽"
+        },
+        "text": {
+          "en": "Sauna, pool and resting room for a group of up to four.",
+          "ru": "Сауна, купель и комната отдыха для группы до четырёх человек."
+        }
+      },
+      {
+        "name": {
+          "en": "Whole house",
+          "ru": "Весь дом"
+        },
+        "metric": {
+          "en": "120 min · ₽10,800",
+          "ru": "120 мин · 10 800 ₽"
+        },
+        "text": {
+          "en": "The full house for six guests, with towels and a tea table ready on arrival.",
+          "ru": "Весь дом на шестерых, с полотенцами и чайным столом к приезду."
+        }
+      }
+    ]
+  },
+  "guideTitle": {
+    "en": "At the bathhouse",
+    "ru": "В банном доме"
+  },
+  "guide": [
+    {
+      "q": {
+        "en": "Are towels provided?",
+        "ru": "Полотенца включены?"
+      },
+      "a": {
+        "en": "A towel set and a robe are prepared for every guest in the private group.",
+        "ru": "Для каждого гостя закрытой группы готовим полотенца и халат."
+      }
+    },
+    {
+      "q": {
+        "en": "When should we arrive?",
+        "ru": "Когда приезжать?"
+      },
+      "a": {
+        "en": "Arrive ten minutes before the session for a short tour of the rooms and house rules.",
+        "ru": "Приезжайте за десять минут, чтобы осмотреть комнаты и познакомиться с правилами."
+      }
+    }
+  ]
+}

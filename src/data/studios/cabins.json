@@ -1,0 +1,179 @@
+{
+  "slug": "cabins",
+  "layout": "horizon",
+  "palette": {
+    "paper": "#e8ece4",
+    "ink": "#24382d",
+    "accent": "#31553a"
+  },
+  "brand": {
+    "en": "Stillbank",
+    "ru": "Тихий брод"
+  },
+  "sector": {
+    "en": "Woodland cabins",
+    "ru": "Лесные домики"
+  },
+  "headline": {
+    "en": "Stay where the path ends.",
+    "ru": "Там, где заканчивается тропа."
+  },
+  "intro": {
+    "en": "Three small cabins, a shared trail and a key waiting at the lodge. Plan a slow weekend in the woods.",
+    "ru": "Три домика, общая тропа и ключ в гостевом доме. Спланируйте тихие выходные в лесу."
+  },
+  "action": {
+    "en": "Estimate a stay",
+    "ru": "Рассчитать отдых"
+  },
+  "heroAlt": {
+    "en": "A cabin beside the forest",
+    "ru": "Домик у леса"
+  },
+  "storyTitle": {
+    "en": "Arrive before dusk",
+    "ru": "Приезжайте до сумерек"
+  },
+  "story": {
+    "en": "Leave the car by the lodge. A handcart carries your bags along the gravel track, and each cabin has a porch for muddy boots and raincoats.",
+    "ru": "Оставьте машину у гостевого дома. Тележка поможет довезти вещи по гравийной дорожке. У каждого домика есть крыльцо для сапог и дождевиков."
+  },
+  "detailAlt": {
+    "en": "Woodland cabin details",
+    "ru": "Детали лесного домика"
+  },
+  "facts": [
+    {
+      "label": {
+        "en": "Arrival",
+        "ru": "Заезд"
+      },
+      "value": {
+        "en": "15:00",
+        "ru": "15:00"
+      }
+    },
+    {
+      "label": {
+        "en": "Departure",
+        "ru": "Выезд"
+      },
+      "value": {
+        "en": "11:00",
+        "ru": "11:00"
+      }
+    },
+    {
+      "label": {
+        "en": "Walking loop",
+        "ru": "Круговая тропа"
+      },
+      "value": {
+        "en": "2.4 km",
+        "ru": "2,4 км"
+      }
+    }
+  ],
+  "widget": {
+    "type": "calculator",
+    "title": {
+      "en": "Your cabin break",
+      "ru": "Ваши выходные в лесу"
+    },
+    "hint": {
+      "en": "Compare nightly rates for the same length of stay. Linen and final cleaning are included.",
+      "ru": "Сравните стоимость домиков на одинаковое число ночей. Бельё и уборка включены."
+    },
+    "label": {
+      "en": "Cabin",
+      "ru": "Домик"
+    },
+    "quantity": {
+      "en": "Nights",
+      "ru": "Ночи"
+    },
+    "unit": {
+      "en": "₽",
+      "ru": "₽"
+    },
+    "min": 1,
+    "max": 14,
+    "initial": 2,
+    "options": [
+      {
+        "name": {
+          "en": "Alder",
+          "ru": "Ольха"
+        },
+        "metric": {
+          "en": "2 guests · 24 m²",
+          "ru": "2 гостя · 24 м²"
+        },
+        "text": {
+          "en": "A compact double with a reading bench beside the window.",
+          "ru": "Небольшой домик на двоих со скамьёй для чтения у окна."
+        },
+        "rate": 7400.0,
+        "base": 0.0
+      },
+      {
+        "name": {
+          "en": "Birch",
+          "ru": "Берёза"
+        },
+        "metric": {
+          "en": "3 guests · 34 m²",
+          "ru": "3 гостя · 34 м²"
+        },
+        "text": {
+          "en": "A separate daybed makes space for a third guest.",
+          "ru": "Дополнительная кушетка позволяет разместить третьего гостя."
+        },
+        "rate": 9100.0,
+        "base": 0.0
+      },
+      {
+        "name": {
+          "en": "Pine",
+          "ru": "Сосна"
+        },
+        "metric": {
+          "en": "4 guests · 46 m²",
+          "ru": "4 гостя · 46 м²"
+        },
+        "text": {
+          "en": "Two sleeping rooms open onto a shared kitchen and covered deck.",
+          "ru": "Две спальни выходят в общую кухню с крытой террасой."
+        },
+        "rate": 12200.0,
+        "base": 0.0
+      }
+    ]
+  },
+  "guideTitle": {
+    "en": "Before the trail",
+    "ru": "Перед дорогой"
+  },
+  "guide": [
+    {
+      "q": {
+        "en": "What is in the kitchen?",
+        "ru": "Что есть на кухне?"
+      },
+      "a": {
+        "en": "A two-ring hob, fridge, kettle, pans and tableware for the listed number of guests.",
+        "ru": "Две конфорки, холодильник, чайник, кастрюли и посуда на указанное число гостей."
+      }
+    },
+    {
+      "q": {
+        "en": "How far is the walk?",
+        "ru": "Далеко идти до домиков?"
+      },
+      "a": {
+        "en": "The farthest porch is 350 metres from the parking area on compacted gravel.",
+        "ru": "До самого дальнего крыльца 350 метров от парковки по утрамбованному гравию."
+      }
+    }
+  ]
+}

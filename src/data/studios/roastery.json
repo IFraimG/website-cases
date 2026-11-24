@@ -1,0 +1,179 @@
+{
+  "slug": "roastery",
+  "layout": "bench",
+  "palette": {
+    "paper": "#f1e6c9",
+    "ink": "#38251f",
+    "accent": "#eaa755"
+  },
+  "brand": {
+    "en": "Ground Ledger",
+    "ru": "Журнал зерна"
+  },
+  "sector": {
+    "en": "Small-batch roastery",
+    "ru": "Кофейная обжарочная"
+  },
+  "headline": {
+    "en": "From drum to dripper.",
+    "ru": "Из барабана в воронку."
+  },
+  "intro": {
+    "en": "A roast room with a public brew bar. Work out the dry coffee dose for the amount of water in your kettle.",
+    "ru": "Обжарочная с открытым брю-баром. Рассчитайте закладку зерна под количество воды в чайнике."
+  },
+  "action": {
+    "en": "Calculate a brew",
+    "ru": "Рассчитать рецепт"
+  },
+  "heroAlt": {
+    "en": "Coffee roaster in the roast room",
+    "ru": "Кофейный ростер в цехе"
+  },
+  "storyTitle": {
+    "en": "Taste it two ways",
+    "ru": "Две чашки для сравнения"
+  },
+  "story": {
+    "en": "We cup each batch, then brew it through paper at the bar. The tasting sheet records sweetness, acidity and the grind we used for the second cup.",
+    "ru": "Каждую партию пробуем на каппинге, затем завариваем через бумажный фильтр. В листе фиксируем сладость, кислотность и помол для второй чашки."
+  },
+  "detailAlt": {
+    "en": "Pour-over coffee preparation",
+    "ru": "Приготовление кофе в воронке"
+  },
+  "facts": [
+    {
+      "label": {
+        "en": "Batch size",
+        "ru": "Размер партии"
+      },
+      "value": {
+        "en": "6 kg",
+        "ru": "6 кг"
+      }
+    },
+    {
+      "label": {
+        "en": "Tasting",
+        "ru": "Дегустация"
+      },
+      "value": {
+        "en": "Every roast",
+        "ru": "Каждая обжарка"
+      }
+    },
+    {
+      "label": {
+        "en": "Brew bar",
+        "ru": "Брю-бар"
+      },
+      "value": {
+        "en": "09:00–16:00",
+        "ru": "09:00–16:00"
+      }
+    }
+  ],
+  "widget": {
+    "type": "calculator",
+    "title": {
+      "en": "Brew ratio desk",
+      "ru": "Расчёт заваривания"
+    },
+    "hint": {
+      "en": "Choose a water-to-coffee ratio and enter the water weight. The result is the dry coffee dose.",
+      "ru": "Выберите соотношение воды и кофе и задайте массу воды. Результат покажет закладку сухого зерна."
+    },
+    "label": {
+      "en": "Recipe",
+      "ru": "Рецепт"
+    },
+    "quantity": {
+      "en": "Water, g",
+      "ru": "Вода, г"
+    },
+    "unit": {
+      "en": "g coffee",
+      "ru": "г кофе"
+    },
+    "min": 100,
+    "max": 1000,
+    "initial": 300,
+    "options": [
+      {
+        "name": {
+          "en": "Rich",
+          "ru": "Плотный"
+        },
+        "metric": {
+          "en": "1:12.5",
+          "ru": "1:12,5"
+        },
+        "text": {
+          "en": "A fuller starting point for a short immersion brew. Adjust the grind after tasting.",
+          "ru": "Плотная отправная точка для иммерсии. Скорректируйте помол после дегустации."
+        },
+        "rate": 0.08,
+        "base": 0.0
+      },
+      {
+        "name": {
+          "en": "Balanced",
+          "ru": "Баланс"
+        },
+        "metric": {
+          "en": "1:16",
+          "ru": "1:16"
+        },
+        "text": {
+          "en": "A filter recipe with enough water to follow the cup as it cools.",
+          "ru": "Фильтр-рецепт с достаточным объёмом воды, чтобы наблюдать за вкусом при остывании."
+        },
+        "rate": 0.0625,
+        "base": 0.0
+      },
+      {
+        "name": {
+          "en": "Light",
+          "ru": "Лёгкий"
+        },
+        "metric": {
+          "en": "1:20",
+          "ru": "1:20"
+        },
+        "text": {
+          "en": "A longer dilution for a gentle cup. Keep water weight constant when comparing grinds.",
+          "ru": "Больше воды для лёгкой чашки. При сравнении помола оставляйте массу воды постоянной."
+        },
+        "rate": 0.05,
+        "base": 0.0
+      }
+    ]
+  },
+  "guideTitle": {
+    "en": "Brew bar notebook",
+    "ru": "Блокнот брю-бара"
+  },
+  "guide": [
+    {
+      "q": {
+        "en": "What does the ratio mean?",
+        "ru": "Что означает соотношение?"
+      },
+      "a": {
+        "en": "One gram of coffee to the stated grams of brewing water, weighed before brewing.",
+        "ru": "Один грамм кофе на указанное число граммов воды. Оба значения взвешивают до заваривания."
+      }
+    },
+    {
+      "q": {
+        "en": "How should I store the bag?",
+        "ru": "Как хранить пачку?"
+      },
+      "a": {
+        "en": "Close the valve bag tightly and keep it in a cool cupboard away from direct light.",
+        "ru": "Плотно закройте пакет с клапаном и уберите в прохладный шкаф вдали от света."
+      }
+    }
+  ]
+}

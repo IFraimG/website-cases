@@ -1,0 +1,62 @@
+---
+import { languageOf } from "../i18n/locale";
+import type { SiteExpansion } from "../data/site-schema";
+
+interface Props {
+  site: SiteExpansion;
+}
+
+const { site } = Astro.props;
+const lang = languageOf(Astro.url.pathname);
+const dark = Boolean(site.theme.dark);
+const bg = dark ? "#14191e" : "#ebeae1";
+const park = dark ? "#1f3028" : "#d3decb";
+const water = dark ? "#162938" : "#c7dbe4";
+const block = dark ? "#222932" : "#dfdcca";
+const road = dark ? "#2e3742" : "#ffffff";
+---
+
+<div class="sp-map-card">
+  <svg
+    viewBox="0 0 960 320"
+    role="img"
+    aria-label={site.contact.district[lang]}
+  >
+    <rect width="960" height="320" fill={bg} />
+    <!-- Water / Park context -->
+    <path d="M0 245 Q240 210 470 255 T960 230 L960 320 L0 320 Z" fill={water} opacity="0.7" />
+    <rect x="40" y="28" width="230" height="145" rx="18" fill={park} />
+    <rect x="650" y="34" width="265" height="125" rx="18" fill={park} opacity="0.85" />
+    <!-- Architectural urban blocks -->
+    <rect x="310" y="36" width="120" height="72" rx="6" fill={block} />
+    <rect x="456" y="36" width="150" height="72" rx="6" fill={block} />
+    <rect x="310" y="132" width="102" height="82" rx="6" fill={block} />
+    <rect x="440" y="132" width="168" height="82" rx="6" fill={block} />
+    <rect x="76" y="192" width="180" height="58" rx="6" fill={block} />
+    <rect x="650" y="178" width="145" height="62" rx="6" fill={block} />
+    <!-- Road grid -->
+    <path d="M0 120 H960 M0 226 H960 M290 0 V320 M430 0 V320 M628 0 V320" stroke={road} stroke-width="10" fill="none" />
+    <path d="M0 120 H960 M290 0 V320 M628 0 V320" stroke={site.theme.edge} stroke-width="1.2" stroke-dasharray="6 6" fill="none" />
+    <!-- Location Pulse + Brand Pin -->
+    <circle cx="524" cy="172" r="34" fill={site.theme.accent} opacity="0.18" />
+    <circle cx="524" cy="172" r="18" fill={site.theme.accent} opacity="0.32" />
+    <circle cx="524" cy="172" r="9" fill={site.theme.accent} stroke={road} stroke-width="3" />
+    <!-- Label tag -->
+    <g transform="translate(548 148)">
+      <rect width="238" height="48" rx="8" fill={site.theme.paper} stroke={site.theme.edge} stroke-width="1.5" />
+      <text x="14" y="21" fill={site.theme.ink} font-family="Inter Variable, Arial, sans-serif" font-size="13" font-weight="700">
+        {site.brand[lang]}
+      </text>
+      <text x="14" y="38" fill={site.theme.ink} opacity="0.72" font-family="IBM Plex Mono, monospace" font-size="10">
+        {site.contact.coordinates}
+      </text>
+    </g>
+  </svg>
+  <div class="sp-map-caption">
+    <div>
+      <strong>{site.contact.district[lang]}</strong>
+      <span class="sp-card-meta"> · {site.contact.transit[lang]}</span>
+    </div>
+    <span class="sp-eyebrow">{site.contact.coordinates}</span>
+  </div>
+</div>

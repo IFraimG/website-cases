@@ -1,0 +1,179 @@
+{
+  "slug": "coworking",
+  "layout": "poster",
+  "palette": {
+    "paper": "#ebe5fb",
+    "ink": "#28223e",
+    "accent": "#67459d"
+  },
+  "brand": {
+    "en": "Common Floor",
+    "ru": "Общий этаж"
+  },
+  "sector": {
+    "en": "Creative coworking",
+    "ru": "Творческий коворкинг"
+  },
+  "headline": {
+    "en": "Make room for the team.",
+    "ru": "Место для всей команды."
+  },
+  "intro": {
+    "en": "Day passes for a shared loft with open desks, quiet corners and a project table by the window.",
+    "ru": "Дневные пропуска в лофт с общими столами, тихими углами и проектным столом у окна."
+  },
+  "action": {
+    "en": "Compare day passes",
+    "ru": "Сравнить пропуска"
+  },
+  "heroAlt": {
+    "en": "Creative coworking loft with communal desks",
+    "ru": "Коворкинг в лофте с общими столами"
+  },
+  "storyTitle": {
+    "en": "A place between meetings",
+    "ru": "Между встречами"
+  },
+  "story": {
+    "en": "The reading corner sits away from the call booths. Book a desk for the focused part of the day and use the shared table to spread out drawings together.",
+    "ru": "Уголок для чтения удалён от кабин для звонков. За отдельным столом удобно сосредоточиться, а за общим — разложить чертежи вместе."
+  },
+  "detailAlt": {
+    "en": "Quiet reading corner in the loft",
+    "ru": "Тихий уголок для чтения в лофте"
+  },
+  "facts": [
+    {
+      "label": {
+        "en": "Access",
+        "ru": "Доступ"
+      },
+      "value": {
+        "en": "08:00–21:00",
+        "ru": "08:00–21:00"
+      }
+    },
+    {
+      "label": {
+        "en": "Open desks",
+        "ru": "Рабочие места"
+      },
+      "value": {
+        "en": "24",
+        "ru": "24"
+      }
+    },
+    {
+      "label": {
+        "en": "Call booths",
+        "ru": "Кабины для звонков"
+      },
+      "value": {
+        "en": "3",
+        "ru": "3"
+      }
+    }
+  ],
+  "widget": {
+    "type": "calculator",
+    "title": {
+      "en": "Your team for the day",
+      "ru": "Команда на один день"
+    },
+    "hint": {
+      "en": "Compare day passes for the same headcount. The total covers one working day.",
+      "ru": "Сравните пропуска для одинакового числа человек. Стоимость указана за один рабочий день."
+    },
+    "label": {
+      "en": "Pass type",
+      "ru": "Тип пропуска"
+    },
+    "quantity": {
+      "en": "People",
+      "ru": "Люди"
+    },
+    "unit": {
+      "en": "₽",
+      "ru": "₽"
+    },
+    "min": 1,
+    "max": 8,
+    "initial": 3,
+    "options": [
+      {
+        "name": {
+          "en": "Open desk",
+          "ru": "Общий зал"
+        },
+        "metric": {
+          "en": "Flexible seat",
+          "ru": "Свободное место"
+        },
+        "text": {
+          "en": "Choose a free desk on arrival. Includes Wi-Fi, kitchen and use of the reading area.",
+          "ru": "Выберите свободное место при входе. Включены Wi-Fi, кухня и читальная зона."
+        },
+        "rate": 950.0,
+        "base": 0.0
+      },
+      {
+        "name": {
+          "en": "Quiet desk",
+          "ru": "Тихое место"
+        },
+        "metric": {
+          "en": "Reserved desk",
+          "ru": "Закреплённый стол"
+        },
+        "text": {
+          "en": "A named desk in the quiet zone with a task lamp and monitor.",
+          "ru": "Закреплённый стол в тихой зоне с лампой и монитором."
+        },
+        "rate": 1450.0,
+        "base": 0.0
+      },
+      {
+        "name": {
+          "en": "Project team",
+          "ru": "Проектная группа"
+        },
+        "metric": {
+          "en": "Adjacent seats",
+          "ru": "Соседние места"
+        },
+        "text": {
+          "en": "Seats together with a pinboard for your team and a shared screen.",
+          "ru": "Соседние места с доской для команды и общим экраном."
+        },
+        "rate": 1850.0,
+        "base": 0.0
+      }
+    ]
+  },
+  "guideTitle": {
+    "en": "Using the floor",
+    "ru": "Как устроен этаж"
+  },
+  "guide": [
+    {
+      "q": {
+        "en": "Can we take calls at the desk?",
+        "ru": "Можно звонить за столом?"
+      },
+      "a": {
+        "en": "Use a call booth for longer conversations so the quiet zone stays suitable for focused work.",
+        "ru": "Для долгих разговоров перейдите в кабину, чтобы в тихой зоне можно было сосредоточиться."
+      }
+    },
+    {
+      "q": {
+        "en": "Is a screen available?",
+        "ru": "Есть монитор?"
+      },
+      "a": {
+        "en": "Quiet desks have individual monitors. Project teams share a larger display at the table.",
+        "ru": "В тихой зоне есть индивидуальные мониторы. У проектной команды общий большой экран."
+      }
+    }
+  ]
+}

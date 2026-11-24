@@ -1,0 +1,20 @@
+---
+import { languageOf } from "../i18n/locale";
+import type { Studio } from "../data/studios";
+interface Props {
+  studio: Studio;
+}
+const { studio } = Astro.props;
+const lang = languageOf(Astro.url.pathname);
+---
+
+<section class="studio-story studio-wrap" id="studio">
+  <img
+    src={"/media/" + studio.slug + "/detail.webp"}
+    alt={studio.detailAlt[lang]}
+  /><div>
+    <p class="studio-eyebrow">{studio.brand[lang]}</p><h2>
+      {studio.storyTitle[lang]}
+    </h2><p>{studio.story[lang]}</p>
+  </div>
+</section>

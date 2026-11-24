@@ -1,0 +1,167 @@
+{
+  "slug": "pilates",
+  "layout": "atlas",
+  "palette": {
+    "paper": "#f0e6e5",
+    "ink": "#4b3043",
+    "accent": "#723b5b"
+  },
+  "brand": {
+    "en": "Longform Studio",
+    "ru": "Лонгформ"
+  },
+  "sector": {
+    "en": "Reformer Pilates",
+    "ru": "Пилатес на реформерах"
+  },
+  "headline": {
+    "en": "Move with the carriage.",
+    "ru": "В ритме каретки."
+  },
+  "intro": {
+    "en": "Small reformer sessions with time to learn the springs, footbar and rhythm of the machine.",
+    "ru": "Занятия в небольших группах со временем на знакомство с пружинами, упором и движением каретки."
+  },
+  "action": {
+    "en": "Choose a class",
+    "ru": "Выбрать занятие"
+  },
+  "heroAlt": {
+    "en": "Daylit reformer Pilates studio",
+    "ru": "Светлый зал с реформерами"
+  },
+  "storyTitle": {
+    "en": "A machine set for you",
+    "ru": "Реформер под ваш рост"
+  },
+  "story": {
+    "en": "Before the first sequence, the instructor shows how the carriage travels and sets the footbar for your reach. Each station has space on both sides.",
+    "ru": "До первой связки тренер показывает ход каретки и настраивает упор под ваш рост. По обе стороны каждого тренажёра есть свободное место."
+  },
+  "detailAlt": {
+    "en": "Reformer carriage and spring mechanism",
+    "ru": "Каретка реформера и пружины"
+  },
+  "facts": [
+    {
+      "label": {
+        "en": "Group size",
+        "ru": "Размер группы"
+      },
+      "value": {
+        "en": "4 people",
+        "ru": "4 человека"
+      }
+    },
+    {
+      "label": {
+        "en": "Class length",
+        "ru": "Длительность"
+      },
+      "value": {
+        "en": "50 min",
+        "ru": "50 мин"
+      }
+    },
+    {
+      "label": {
+        "en": "Arrival buffer",
+        "ru": "Время на подготовку"
+      },
+      "value": {
+        "en": "10 min",
+        "ru": "10 мин"
+      }
+    }
+  ],
+  "widget": {
+    "type": "session",
+    "title": {
+      "en": "On the class floor",
+      "ru": "Расписание студии"
+    },
+    "hint": {
+      "en": "Pick a class and a time for the demo studio day on 3 December.",
+      "ru": "Выберите формат и время на демонстрационный день студии 3 декабря."
+    },
+    "label": {
+      "en": "Class",
+      "ru": "Формат"
+    },
+    "slots": [
+      "08:30",
+      "13:00",
+      "18:30"
+    ],
+    "options": [
+      {
+        "name": {
+          "en": "First carriage",
+          "ru": "Знакомство"
+        },
+        "metric": {
+          "en": "Intro · ₽2,400",
+          "ru": "Вводное · 2 400 ₽"
+        },
+        "text": {
+          "en": "A slow introduction to the footbar, straps and spring settings.",
+          "ru": "Спокойное знакомство с упором, ремнями и настройкой пружин."
+        }
+      },
+      {
+        "name": {
+          "en": "Steady flow",
+          "ru": "Ровный поток"
+        },
+        "metric": {
+          "en": "Group · ₽2,800",
+          "ru": "Группа · 2 800 ₽"
+        },
+        "text": {
+          "en": "A continuous sequence for people who already know the basic transitions.",
+          "ru": "Последовательность для тех, кто уже знаком с базовыми переходами."
+        }
+      },
+      {
+        "name": {
+          "en": "One to one",
+          "ru": "Индивидуально"
+        },
+        "metric": {
+          "en": "Private · ₽5,600",
+          "ru": "Лично · 5 600 ₽"
+        },
+        "text": {
+          "en": "One instructor and one carriage, with time to pause between exercises.",
+          "ru": "Один тренер и один реформер, с паузами между упражнениями."
+        }
+      }
+    ]
+  },
+  "guideTitle": {
+    "en": "Studio notes",
+    "ru": "Перед занятием"
+  },
+  "guide": [
+    {
+      "q": {
+        "en": "What should I bring?",
+        "ru": "Что взять с собой?"
+      },
+      "a": {
+        "en": "Grip socks, comfortable clothing and a water bottle. Lockers are next to the changing area.",
+        "ru": "Носки с нескользящей подошвой, удобную одежду и воду. Шкафчики находятся у раздевалки."
+      }
+    },
+    {
+      "q": {
+        "en": "Where do beginners start?",
+        "ru": "С чего начать новичку?"
+      },
+      "a": {
+        "en": "Choose First carriage so the instructor can introduce the equipment before the sequence.",
+        "ru": "Выберите «Знакомство», чтобы тренер показал оборудование до начала связки."
+      }
+    }
+  ]
+}

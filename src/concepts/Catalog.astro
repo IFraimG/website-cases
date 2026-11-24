@@ -1,0 +1,438 @@
+---
+import Base from "../layouts/Base.astro";
+import Language from "../components/Language.astro";
+import { catalog, groups } from "../data/catalog";
+import { getSite, pageCountFor } from "../data/sites";
+import { languageOf, localizedPath } from "../i18n/locale";
+
+const lang = languageOf(Astro.url.pathname),
+  ru = lang === "ru";
+
+const enriched = catalog.map((c) => {
+  const site = getSite(c.slug);
+  const count = pageCountFor(site);
+  return { ...c, site, count };
+});
+
+const totalPages = enriched.reduce((sum, item) => sum + item.count, 0);
+---
+
+<Base
+  title={ru
+    ? "Фолио — коллекция многостраничных веб-концептов"
+    : "Folio — a collection of multi-page web concepts"}
+  theme="folio"
+>
+  <header class="wrap bar">
+    <a class="folio-logo" href="#content"
+      ><i aria-hidden="true"></i>{ru ? "Фолио" : "Folio"}</a
+    ><a class="catalog-link" href="#cases"
+      >{ru ? "Каталог работ" : "Browse projects"}
+      <span>{catalog.length}</span></a
+    ><Language />
+  </header>
+  <main class="wrap" id="content">
+    <section class="portfolio-intro">
+      <div>
+        <p class="meta kicker">
+          <i></i>{
+            ru
+              ? `Веб-дизайн и разработка · ${totalPages} страниц`
+              : `Web design & development · ${totalPages} pages`
+          }
+        </p><h1>
+          {ru ? "Коллекция" : "A collection of"}<br /><em
+            >{ru ? "многостраничных сайтов." : "multi-page sites."}</em>
+        </h1>
+      </div><div class="intro-note">
+        <div class="swatches" aria-hidden="true">
+          {
+            catalog
+              .slice(0, 6)
+              .map((c) => <i style={"background:" + c.color} />)
+          }
+        </div><p>
+          {
+            ru
+              ? `21 полноценный коммерческий сайт по 21 странице каждый (13 типовых разделов + детальные карточки, проекты, статьи и формы). Откройте любой проект или перейдите сразу в нужный раздел.`
+              : `21 full commercial websites with 21 navigable pages each (13 page templates + item details, project plans, articles & forms). Open any site or jump straight into an inner section.`
+          }
+        </p>
+      </div>
+    </section>
+    <section id="cases" class="work-list">
+      <div class="spread work-label">
+        <h2>{ru ? "Работы" : "Projects"}</h2><span
+          class="meta"
+          id="result-count"
+          aria-live="polite"
+          >{ru ? "Показано" : "Showing"}
+          <b>{catalog.length}</b> / {catalog.length}</span>
+      </div>
+      <div
+        class="catalog-filters"
+        role="group"
+        aria-label={ru ? "Тематика" : "Project category"}
+      >
+        <button data-group="all" aria-pressed="true"
+          >{ru ? "Все" : "All"}</button
+        >{
+          Object.entries(groups).map(([key, title]) => (
+            <button data-group={key} aria-pressed="false">
+              {title[lang]}
+            </button>
+          ))
+        }
+      </div>
+      <div class="case-grid">
+        {
+          enriched.map((c) => {
+            const quickLinks = [
+              { sub: "catalog", label: c.site.nav.catalog[lang] },
+              {
+                sub: "catalog/" + c.site.catalog.items[0].id,
+                label: ru ? "Карточка" : "Detail",
+              },
+              { sub: "projects", label: c.site.nav.projects[lang] },
+              { sub: "partners", label: c.site.nav.partners[lang] },
+              { sub: "request", label: c.site.nav.request[lang] },
+              { sub: "about", label: c.site.nav.about[lang] },
+              { sub: "team", label: c.site.nav.team[lang] },
+              { sub: "journal", label: c.site.nav.journal[lang] },
+              { sub: "program", label: c.site.nav.program[lang] },
+              { sub: "contact", label: c.site.nav.contact[lang] },
+              { sub: "careers", label: c.site.nav.careers[lang] },
+            ];
+            return (
+              <article class="case-card" data-category={c.group}>
+                <a
+                  class="case-link"
+                  href={localizedPath("/" + c.slug + "/", lang)}
+                >
+                  <div class="stage" style={"background:" + c.color}>
+                    <div class="window">
+                      <div class="chrome" aria-hidden="true">
+                        <i />
+                        <i />
+                        <i />
+                      </div>
+                      <img
+                        width="960"
+                        height="600"
+                        src={
+                          "/previews/" + (ru ? "ru/" : "") + c.slug + ".webp"
+                        }
+                        alt={
+                          ru
+                            ? "Первый экран — " + c.brand.ru
+                            : c.brand.en + " homepage"
+                        }
+                      />
+                    </div>
+                  </div>
+                  <div class="spread caption">
+                    <h3>{c.brand[lang]}</h3>
+                    <div class="case-badges">
+                      <span class="page-badge">
+                        {ru ? `${c.count} стр.` : `${c.count} pages`}
+                      </span>
+                      <span>{c.sector[lang]}</span>
+                    </div>
+                  </div>
+                  <p>{c.action[lang]}</p>
+                </a>
+                <nav
+                  class="case-sitemap"
+                  aria-label={
+                    ru
+                      ? `Разделы сайта ${c.brand.ru}`
+                      : `${c.brand.en} inner pages`
+                  }
+                >
+                  {quickLinks.map((ql) => (
+                    <a href={localizedPath(`/${c.slug}/${ql.sub}/`, lang)}>
+                      {ql.label}
+                    </a>
+                  ))}
+                </nav>
+              </article>
+            );
+          })
+        }
+      </div>
+    </section>
+  </main>
+  <footer class="wrap foot spread">
+    <strong>{ru ? "Фолио" : "Folio"}</strong><span
+      >{
+        ru
+          ? `Портфолио многостраничных концептов · ${totalPages} страниц`
+          : `Multi-page concept portfolio · ${totalPages} pages`
+      } · 2026</span
+    ><a href="#content">{ru ? "Наверх" : "Back to top"}</a>
+  </footer></Base
+>
+<script>
+  const cards = [...document.querySelectorAll<HTMLElement>("[data-category]")];
+  const filters = [
+    ...document.querySelectorAll<HTMLButtonElement>("[data-group]"),
+  ];
+  for (const filter of filters)
+    filter.addEventListener("click", () => {
+      filters.forEach((el) =>
+        el.setAttribute("aria-pressed", String(el === filter)),
+      );
+      for (const card of cards)
+        card.hidden =
+          filter.dataset.group !== "all" &&
+          card.dataset.category !== filter.dataset.group;
+      document.querySelector("#result-count b")!.textContent = String(
+        cards.filter((card) => !card.hidden).length,
+      );
+    });
+</script>
+<style is:global>
+  .folio {
+    --paper: #f7f7f2;
+    --ink: #20251e;
+    --line: #c6cbbf;
+  }
+  .folio-logo {
+    font-size: 1.7rem;
+    letter-spacing: -0.08em;
+    font-weight: 730;
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+  }
+  .folio-logo i {
+    width: 27px;
+    height: 27px;
+    background: repeating-linear-gradient(
+      90deg,
+      #293022 0 4px,
+      transparent 4px 7px
+    );
+    transform: skew(-15deg);
+  }
+  .catalog-link {
+    font-size: 0.9rem;
+    font-weight: 550;
+    margin-left: auto;
+  }
+  .catalog-link span {
+    display: inline-grid;
+    place-items: center;
+    border-radius: 50%;
+    width: 26px;
+    height: 26px;
+    background: #d6ed8b;
+    margin-left: 0.35rem;
+  }
+  .portfolio-intro {
+    display: grid;
+    grid-template-columns: 1.8fr 1fr;
+    gap: 2rem;
+    align-items: end;
+    padding-block: clamp(3rem, 5vw, 5.5rem);
+  }
+  .portfolio-intro .meta {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+  }
+  .portfolio-intro .meta i {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: #729542;
+  }
+  .portfolio-intro h1 {
+    font-size: clamp(3rem, 6.8vw, 7.2rem);
+    letter-spacing: -0.07em;
+    line-height: 0.98;
+    font-weight: 560;
+  }
+  .portfolio-intro em {
+    font-weight: 400;
+    font-family: "PT Serif", Georgia, serif;
+    color: #4a5b3c;
+    letter-spacing: -0.06em;
+  }
+  .intro-note {
+    max-width: 350px;
+    justify-self: end;
+  }
+  .intro-note p {
+    font-size: 1.04rem;
+  }
+  .swatches {
+    display: flex;
+    margin-bottom: 1.2rem;
+  }
+  .swatches i {
+    width: 21px;
+    height: 21px;
+    border-radius: 50%;
+    border: 2px solid var(--paper);
+    margin-right: -4px;
+  }
+  .work-label {
+    padding: 1.2rem 0;
+    border-top: 1px solid var(--line);
+  }
+  .work-label h2 {
+    font-size: 1.28rem;
+    letter-spacing: -0.045em;
+  }
+  .case-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 3rem 1.85rem;
+  }
+  .case-card {
+    display: flex;
+    flex-direction: column;
+  }
+  .case-link {
+    display: block;
+  }
+  .stage {
+    padding: 6.5% 7% 0;
+    overflow: hidden;
+    border-radius: 3px;
+    aspect-ratio: 1.84;
+  }
+  .window {
+    background: white;
+    box-shadow: 0 6px 25px #25272235;
+    border-radius: 5px 5px 0 0;
+    overflow: hidden;
+    transition: transform 0.25s;
+  }
+  .case-link:hover .window {
+    transform: translateY(-4px);
+  }
+  .chrome {
+    display: flex;
+    gap: 3px;
+    padding: 5px 7px;
+    background: #f0f0ed;
+  }
+  .chrome i {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: #b4b7b2;
+  }
+  .window img {
+    aspect-ratio: 1.6;
+    height: auto;
+  }
+  .caption {
+    margin: 0.85rem 0 0.2rem;
+    flex-wrap: wrap;
+  }
+  .caption h3 {
+    font-weight: 570;
+    font-size: 1.55rem;
+  }
+  .case-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+  }
+  .case-badges span {
+    background: #e9ece2;
+    border-radius: 99px;
+    font-size: 0.78rem;
+    padding: 0.22rem 0.62rem;
+    white-space: nowrap;
+  }
+  .case-badges .page-badge {
+    background: #293220;
+    color: #f7f7f2;
+    font-weight: 600;
+  }
+  .case-link p {
+    color: #566050;
+  }
+  .case-link:hover {
+    text-decoration: none;
+  }
+  .case-link:hover h3 {
+    text-decoration: underline;
+  }
+  .case-sitemap {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    margin-top: 0.8rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid #d9ddd2;
+  }
+  .case-sitemap a {
+    font-size: 0.78rem;
+    padding: 0.24rem 0.58rem;
+    border: 1px solid #c6cbbf;
+    border-radius: 99px;
+    background: #ffffff;
+    color: #2f3829;
+    transition: background 0.15s ease, color 0.15s ease;
+  }
+  .case-sitemap a:hover {
+    background: #293220;
+    color: #ffffff;
+    border-color: #293220;
+    text-decoration: none;
+  }
+  .work-list {
+    padding-bottom: 4.5rem;
+  }
+  .catalog-filters {
+    display: flex;
+    gap: 0.45rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+  }
+  .catalog-filters button {
+    border: 1px solid var(--line);
+    border-radius: 99px;
+    padding: 0.45rem 1rem;
+  }
+  .catalog-filters [aria-pressed="true"] {
+    background: #293220;
+    color: white;
+    border-color: #293220;
+  }
+  @media (max-width: 720px) {
+    .portfolio-intro,
+    .case-grid {
+      grid-template-columns: 1fr;
+    }
+    .portfolio-intro {
+      gap: 1.4rem;
+    }
+    .intro-note {
+      justify-self: start;
+    }
+    .swatches {
+      display: none;
+    }
+    .intro-note p {
+      font-size: 1rem;
+    }
+    .case-grid {
+      gap: 2.2rem;
+    }
+    .folio .foot {
+      gap: 0.65rem;
+    }
+    .folio .catalog-link {
+      font-size: 0.8rem;
+    }
+    .catalog-filters button {
+      padding: 0.45rem 0.75rem;
+    }
+  }
+</style>

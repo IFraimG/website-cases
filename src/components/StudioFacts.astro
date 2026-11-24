@@ -1,0 +1,22 @@
+---
+import { languageOf } from "../i18n/locale";
+import type { Studio } from "../data/studios";
+interface Props {
+  studio: Studio;
+}
+const { studio } = Astro.props;
+const lang = languageOf(Astro.url.pathname);
+---
+
+<dl class="studio-facts">
+  {
+    studio.facts.map((f) => (
+      <div>
+        <>
+          <dt>{f.label[lang]}</dt>
+          <dd>{f.value[lang]}</dd>
+        </>
+      </div>
+    ))
+  }
+</dl>

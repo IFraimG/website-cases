@@ -1,0 +1,162 @@
+{
+  "slug": "cycling",
+  "layout": "bench",
+  "palette": {
+    "paper": "#f5efda",
+    "ink": "#272b23",
+    "accent": "#beed63"
+  },
+  "brand": {
+    "en": "Fixed Point",
+    "ru": "Точка опоры"
+  },
+  "sector": {
+    "en": "Bicycle workshop",
+    "ru": "Веломастерская"
+  },
+  "headline": {
+    "en": "Back in gear.",
+    "ru": "Снова в седле."
+  },
+  "intro": {
+    "en": "Bench repairs for the bikes people ride to work. Start with the symptom, then see what we check first.",
+    "ru": "Ремонт велосипедов для ежедневных поездок. Выберите признак и узнайте, что мастер проверит первым."
+  },
+  "action": {
+    "en": "Find a service",
+    "ru": "Подобрать услугу"
+  },
+  "heroAlt": {
+    "en": "Wheel truing at the repair bench",
+    "ru": "Мастер выправляет колесо на стенде"
+  },
+  "storyTitle": {
+    "en": "Keep the parts that still work",
+    "ru": "Сохраняем исправные детали"
+  },
+  "story": {
+    "en": "We measure wear before adding parts to a job. The pickup sheet lists the adjustment, the replacement if needed and the point to check on your next ride.",
+    "ru": "До заказа деталей измеряем износ. В листе выдачи фиксируем регулировку, замену и то, за чем стоит понаблюдать в следующей поездке."
+  },
+  "detailAlt": {
+    "en": "A mechanic adjusting a drivetrain",
+    "ru": "Механик регулирует трансмиссию"
+  },
+  "facts": [
+    {
+      "label": {
+        "en": "Bench hours",
+        "ru": "Рабочие часы"
+      },
+      "value": {
+        "en": "10:00–19:00",
+        "ru": "10:00–19:00"
+      }
+    },
+    {
+      "label": {
+        "en": "Workstands",
+        "ru": "Стенды"
+      },
+      "value": {
+        "en": "3",
+        "ru": "3"
+      }
+    },
+    {
+      "label": {
+        "en": "Initial check",
+        "ru": "Осмотр"
+      },
+      "value": {
+        "en": "15 min",
+        "ru": "15 мин"
+      }
+    }
+  ],
+  "widget": {
+    "type": "explore",
+    "title": {
+      "en": "What changed on the ride?",
+      "ru": "Что изменилось в поездке?"
+    },
+    "hint": {
+      "en": "Match the symptom to a workshop check. The mechanic confirms the scope at drop-off.",
+      "ru": "Выберите признак для предварительного осмотра. При приёме мастер уточнит объём работ."
+    },
+    "label": {
+      "en": "Symptom",
+      "ru": "Признак"
+    },
+    "options": [
+      {
+        "name": {
+          "en": "Skipping gears",
+          "ru": "Скачут передачи"
+        },
+        "metric": {
+          "en": "Drivetrain check · ₽1,400",
+          "ru": "Проверка привода · 1 400 ₽"
+        },
+        "text": {
+          "en": "We check cable travel, hanger alignment and chain wear before indexing the gears.",
+          "ru": "Перед настройкой передач проверяем ход троса, положение петуха и износ цепи."
+        }
+      },
+      {
+        "name": {
+          "en": "Rubbing wheel",
+          "ru": "Трёт колесо"
+        },
+        "metric": {
+          "en": "Wheel inspection · ₽1,100",
+          "ru": "Проверка колеса · 1 100 ₽"
+        },
+        "text": {
+          "en": "We seat the wheel in the stand and check rim runout, spoke tension and brake clearance.",
+          "ru": "На стенде проверяем биение обода, натяжение спиц и зазор до тормоза."
+        }
+      },
+      {
+        "name": {
+          "en": "Noisy brakes",
+          "ru": "Шумят тормоза"
+        },
+        "metric": {
+          "en": "Brake inspection · ₽1,300",
+          "ru": "Проверка тормозов · 1 300 ₽"
+        },
+        "text": {
+          "en": "We examine pad wear and contact surfaces, then quote for cleaning or replacement.",
+          "ru": "Осматриваем колодки и рабочие поверхности, затем рассчитываем чистку или замену."
+        }
+      }
+    ]
+  },
+  "guideTitle": {
+    "en": "At the workbench",
+    "ru": "У рабочего стенда"
+  },
+  "guide": [
+    {
+      "q": {
+        "en": "Should I wash the bike?",
+        "ru": "Мыть велосипед перед сдачей?"
+      },
+      "a": {
+        "en": "Brush off heavy mud and leave the area around the noise as it is for inspection.",
+        "ru": "Снимите крупную грязь, а место, откуда доносится шум, оставьте для осмотра."
+      }
+    },
+    {
+      "q": {
+        "en": "Can I see the replaced parts?",
+        "ru": "Можно увидеть снятые детали?"
+      },
+      "a": {
+        "en": "Yes. We keep them with your job sheet until pickup.",
+        "ru": "Да. Храним их вместе с заказ-нарядом до выдачи велосипеда."
+      }
+    }
+  ]
+}

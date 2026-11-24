@@ -1,0 +1,11 @@
+---
+import { languageOf, localizedPath } from "../i18n/locale";
+const lang = languageOf(Astro.url.pathname);
+const { brand } = Astro.props;
+---
+
+<footer class="wrap foot spread">
+  <strong>{brand}</strong><a href={localizedPath("/", lang)}
+    >{lang === "en" ? "All portfolio concepts" : "Все концепты портфолио"}</a
+  >
+</footer>

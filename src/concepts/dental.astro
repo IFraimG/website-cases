@@ -1,0 +1,330 @@
+---
+import SiteNav from "../components/SiteNav.astro";
+import SiteExploreStrip from "../components/SiteExploreStrip.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+import Base from "../layouts/Base.astro";
+import { getSite } from "../data/sites";
+const site = getSite("dental");
+const services = [
+  [
+    "Первичная консультация",
+    "45 минут",
+    "2 000 ₽",
+    "Осмотр, обсуждение жалоб и письменный план дальнейших шагов.",
+  ],
+  [
+    "Профессиональная гигиена",
+    "60 минут",
+    "7 500 ₽",
+    "Удаление налёта и индивидуальный подбор средств домашнего ухода.",
+  ],
+  [
+    "Профилактический осмотр",
+    "30 минут",
+    "1 500 ₽",
+    "Контроль состояния зубов, дёсен и ранее установленных реставраций.",
+  ],
+];
+---
+
+<Base legacy title="Тише — семейная стоматология" theme="dent"
+  ><SiteNav site={site} active="home" /><main id="content">
+    <section class="d-hero">
+      <div class="wrap d-arrange">
+        <figure class="vignette one">
+          <img
+            src="/media/dental/clinic.webp"
+            alt="Кабинет клиники с бирюзовым креслом"
+          />
+        </figure><div class="center stack">
+          <span class="meta">Семейная стоматология</span><h1>
+            Здесь можно<br /><em>выдохнуть.</em>
+          </h1><p>
+            Обсудим, что вас беспокоит, объясним каждый шаг и оставим время на
+            вопросы.
+          </p><a class="btn" href="#booking">Выбрать время</a>
+        </div><figure class="vignette two">
+          <img src="/media/dental/doctor-anna.webp" alt="Врач в кабинете" />
+        </figure>
+      </div>
+    </section>
+    <section class="wrap section" id="prices">
+      <div class="head spread">
+        <h2>Услуги и цены</h2><p>Стоимость одного визита</p>
+      </div>{
+        services.map(([n, t, p, d]) => (
+          <article class="service">
+            <>
+              <div>
+                <>
+                  <h3>{n}</h3>
+                  <p>{d}</p>
+                </>
+              </div>
+              <span>{t}</span>
+              <b>{p}</b>
+            </>
+          </article>
+        ))
+      }
+    </section>
+    <section class="team-section section" id="team">
+      <div class="wrap">
+        <h2 class="head">Кто вас встретит</h2><div class="pair">
+          {
+            [
+              [
+                "anna",
+                "Анна Миронова",
+                "Стоматолог-терапевт",
+                "Ведёт первичные консультации и составляет планы лечения.",
+              ],
+              [
+                "vera",
+                "Вера Алёхина",
+                "Стоматолог-гигиенист",
+                "Проводит профессиональную гигиену и помогает подобрать домашний уход.",
+              ],
+            ].map(([file, n, t, d]) => (
+              <article class="doctor">
+                <>
+                  <img src={"/media/dental/doctor-" + file + ".webp"} alt={n} />
+                  <div class="stack">
+                    <>
+                      <small>{t}</small>
+                      <h3>{n}</h3>
+                      <p>{d}</p>
+                    </>
+                  </div>
+                </>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+    <section class="wrap section pair">
+      <h2>На первом приёме</h2><div class="stack">
+        <p class="lead">
+          Начнём с разговора. Расскажите, что привело вас в клинику и каким был
+          прошлый опыт.
+        </p><p>
+          После осмотра врач покажет, какие участки требуют внимания. Вы
+          получите план с этапами и стоимостью, который можно спокойно изучить
+          дома.
+        </p>
+      </div>
+    </section>
+    <section class="booking section" id="booking">
+      <div class="wrap pair">
+        <div class="stack">
+          <h2>Выберите визит</h2><p>
+            26 ноября 2026 года, четверг. Выберите свободное время в
+            деморасписании клиники.
+          </p>
+        </div><form class="book-form">
+          <label
+            >Услуга<select name="service" required
+              ><option value="">Выберите услугу</option>{
+                services.map(([n, , p]) => (
+                  <option value={n}>
+                    {n} · {p}
+                  </option>
+                ))
+              }</select
+            ></label
+          ><label
+            >Время приёма<select required name="time"
+              ><option value="">Выберите время</option>{
+                ["09:30", "11:00", "14:30", "16:00"].map((t) => (
+                  <option>{t}</option>
+                ))
+              }</select
+            ></label
+          ><button class="btn">Подтвердить выбор</button><output role="status"
+          ></output>
+        </form>
+      </div>
+    </section>
+    <SiteExploreStrip site={site} />
+  </main><SiteFooter site={site} /></Base
+>
+<script>
+  const form = document.querySelector<HTMLFormElement>(".book-form")!;
+  const confirmation = form.querySelector("output")!;
+  form.addEventListener("change", () => (confirmation.textContent = ""));
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const data = new FormData(form);
+    confirmation.textContent = document.documentElement.lang === "en"
+      ? "Demo visit confirmed. "+data.get("service")+" · 26 November 2026, "+data.get("time")+"."
+      : "Демозапись подтверждена. " +
+      data.get("service") +
+      " · 26 ноября 2026, " +
+      data.get("time") +
+      ".";
+  });
+</script>
+<style is:global>
+  .dent {
+    --paper: #f9fcfa;
+    --ink: #23443d;
+    --line: #c3d7cf;
+    --act: #235c4d;
+    --radius: 100px;
+  }
+  .dental-mark {
+    font-size: 2.4rem;
+    letter-spacing: -0.09em;
+  }
+  .dental-mark span {
+    display: inline-block;
+    vertical-align: top;
+    font-size: 1.25rem;
+    margin-left: 3px;
+  }
+  .dent .bar {
+    border: 0;
+  }
+  .d-hero {
+    background: #e2efea;
+  }
+  .d-arrange {
+    display: grid;
+    grid-template-columns: 1fr 2.1fr 1fr;
+    align-items: center;
+    gap: 1.5rem;
+    padding-block: 5.5rem;
+  }
+  .center {
+    text-align: center;
+  }
+  .center p {
+    max-width: 36ch;
+    margin-inline: auto;
+  }
+  .dent h1,
+  .dent h2 {
+    font-family: "PT Serif", Georgia, serif;
+    font-weight: 400;
+  }
+  .dent h1 {
+    font-size: clamp(3rem, 5.5vw, 6.1rem);
+  }
+  .dent em {
+    color: #357461;
+  }
+  .vignette img {
+    height: clamp(210px, 23vw, 340px);
+    border-radius: 160px 160px 8px 8px;
+  }
+  .vignette.one {
+    transform: translateY(1.4rem);
+  }
+  .vignette.two {
+    align-self: start;
+    max-width: 210px;
+  }
+  .two img {
+    border-radius: 130px;
+    height: clamp(170px, 18vw, 265px);
+  }
+  .service {
+    display: grid;
+    grid-template-columns: 1fr 140px 110px;
+    gap: 2rem;
+    padding: 1.6rem 0;
+    border-top: 1px solid var(--line);
+    align-items: center;
+  }
+  .service b {
+    text-align: right;
+  }
+  .service p {
+    margin-top: 0.5rem;
+  }
+  .team-section {
+    background: #f0efe9;
+  }
+  .doctor {
+    display: grid;
+    grid-template-columns: 0.85fr 1fr;
+    gap: 1.4rem;
+    align-items: center;
+  }
+  .doctor img {
+    height: 290px;
+    border-radius: 110px 110px 8px 8px;
+  }
+  .doctor h3 {
+    font-weight: 500;
+  }
+  .booking {
+    background: #dcebe3;
+  }
+  .book-form {
+    display: grid;
+    gap: 1rem;
+  }
+  .book-form label {
+    display: grid;
+    gap: 0.35rem;
+    font-weight: 600;
+  }
+  .book-form select {
+    width: 100%;
+    background: #fffc;
+    border: 1px solid #a2baad;
+    padding: 0.85rem 0.9rem;
+    border-radius: 8px;
+  }
+  .book-form output:not(:empty) {
+    padding: 1rem;
+    background: white;
+    border-radius: 8px;
+  }
+  .booking .stack p {
+    max-width: 37ch;
+  }
+  @media (max-width: 720px) {
+    .d-arrange {
+      grid-template-columns: 1fr 1fr;
+      padding-block: 2rem;
+      gap: 1.6rem;
+    }
+    .center {
+      grid-column: 1/-1;
+      grid-row: 1;
+    }
+    .vignette {
+      width: 90%;
+      margin: auto;
+    }
+    .vignette.one {
+      transform: none;
+    }
+    .vignette img,
+    .two img {
+      height: 150px;
+    }
+    .service {
+      grid-template-columns: 1fr auto;
+      gap: 0.6rem;
+    }
+    .service div {
+      grid-column: 1/-1;
+    }
+    .doctor {
+      gap: 1rem;
+    }
+    .doctor img {
+      height: 210px;
+    }
+    .doc small {
+      font-size: 0.8rem;
+    }
+    .dent .team-section .pair {
+      gap: 2rem;
+    }
+  }
+</style>

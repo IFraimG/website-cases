@@ -1,0 +1,198 @@
+---
+import type { Studio } from "../data/studios";
+import { languageOf } from "../i18n/locale";
+interface Props {
+  studio: Studio;
+}
+const { studio } = Astro.props;
+const w = studio.widget;
+const lang = languageOf(Astro.url.pathname);
+const ru = lang === "ru";
+const format = (n: number) =>
+  new Intl.NumberFormat(ru ? "ru-RU" : "en-US", {
+    maximumFractionDigits: 1,
+  }).format(n);
+const unit = w.unit?.[lang] || "";
+const total =
+  (w.initial || 0) * (w.options[0].rate || 0) + (w.options[0].base || 0);
+const result =
+  unit === "₽" && !ru ? unit + format(total) : format(total) + " " + unit;
+---
+
+<section
+  id="tool"
+  class={"tool-section tool-" + w.type}
+  data-workbench
+  data-unit={unit}
+  data-language={lang}
+>
+  <div class="studio-wrap tool-grid">
+    <div class="tool-intro">
+      <p class="studio-eyebrow">{studio.sector[lang]}</p><h2>
+        {w.title[lang]}
+      </h2><p>{w.hint[lang]}</p>
+    </div>
+    <div class="tool-paper">
+      <fieldset class="option-list">
+        <legend>{w.label[lang]}</legend>{
+          w.options.map((option, i) => (
+            <button
+              type="button"
+              data-choice={i}
+              data-rate={option.rate}
+              data-base={option.base}
+              aria-pressed={i === 0 ? "true" : "false"}
+            >
+              {option.name[lang]}
+            </button>
+          ))
+        }
+      </fieldset>
+      <div class="option-response" aria-live="polite">
+        {
+          w.options.map((option, i) => (
+            <article data-answer={i} hidden={i !== 0}>
+              <>
+                <h3>{option.metric[lang]}</h3>
+                <p>{option.text[lang]}</p>
+              </>
+            </article>
+          ))
+        }
+      </div>
+      {
+        w.type === "calculator" && (
+          <div class="calc-fields">
+            <>
+              <label for="quantity">{w.quantity![lang]}</label>
+              <div class="stepper">
+                <>
+                  <button
+                    type="button"
+                    data-step="-1"
+                    aria-label={ru ? "Уменьшить" : "Decrease"}
+                  >
+                    −
+                  </button>
+                  <input
+                    type="number"
+                    id="quantity"
+                    min={w.min}
+                    max={w.max}
+                    step="1"
+                    value={w.initial}
+                    required
+                  />
+                  <button
+                    type="button"
+                    data-step="1"
+                    aria-label={ru ? "Увеличить" : "Increase"}
+                  >
+                    +
+                  </button>
+                </>
+              </div>
+              <div class="estimate">
+                <>
+                  <span>{ru ? "Расчёт" : "Estimate"}</span>
+                  <output for="quantity" id="estimate">
+                    {result}
+                  </output>
+                </>
+              </div>
+            </>
+          </div>
+        )
+      }
+      {
+        w.type === "session" && (
+          <form class="session-form">
+            <>
+              <label for="session-time">
+                {ru ? "Время начала" : "Start time"}
+              </label>
+              <select name="time" id="session-time" required>
+                <option value="">
+                  {ru ? "Выберите время" : "Choose a time"}
+                </option>
+                {w.slots!.map((time) => (
+                  <option>{time}</option>
+                ))}
+              </select>
+              <button class="studio-cta">
+                {ru ? "Подтвердить демозапись" : "Confirm demo session"}
+              </button>
+              <output role="status" />
+            </>
+          </form>
+        )
+      }
+    </div>
+  </div>
+</section>
+<script>
+  for (const tool of document.querySelectorAll<HTMLElement>(
+    "[data-workbench]",
+  )) {
+    const choices = Array.from(
+      tool.querySelectorAll<HTMLButtonElement>("[data-choice]"),
+    );
+    const quantity = tool.querySelector<HTMLInputElement>("#quantity");
+    const total = tool.querySelector<HTMLOutputElement>("#estimate");
+    const form = tool.querySelector<HTMLFormElement>("form");
+    const ru = tool.dataset.language === "ru";
+    let current = choices[0];
+    function update() {
+      if (form) form.querySelector("output")!.textContent = "";
+      if (!quantity || !total) return;
+      if (!quantity.validity.valid) {
+        total.textContent = ru
+          ? "Целое число от " + quantity.min + " до " + quantity.max
+          : "Enter a whole number from " + quantity.min + " to " + quantity.max;
+        return;
+      }
+      const value =
+        quantity.valueAsNumber * Number(current.dataset.rate) +
+        Number(current.dataset.base);
+      const number = new Intl.NumberFormat(ru ? "ru-RU" : "en-US", {
+        maximumFractionDigits: 1,
+      }).format(value);
+      const unit = tool.dataset.unit;
+      total.textContent =
+        !ru && unit === "₽" ? unit + number : number + " " + unit;
+    }
+    choices.forEach((choice) =>
+      choice.addEventListener("click", () => {
+        current = choice;
+        choices.forEach((c) =>
+          c.setAttribute("aria-pressed", String(c === choice)),
+        );
+        tool
+          .querySelectorAll<HTMLElement>("[data-answer]")
+          .forEach(
+            (answer) =>
+              (answer.hidden = answer.dataset.answer !== choice.dataset.choice),
+          );
+        update();
+      }),
+    );
+    quantity?.addEventListener("input", update);
+    tool.querySelectorAll<HTMLElement>("[data-step]").forEach((b) =>
+      b.addEventListener("click", () => {
+        if (Number(b.dataset.step) > 0) quantity!.stepUp();
+        else quantity!.stepDown();
+        update();
+      }),
+    );
+    form?.addEventListener("change", update);
+    form?.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const time = new FormData(form).get("time");
+      form.querySelector("output")!.textContent =
+        (ru ? "Демозапись подтверждена. " : "Demo session confirmed. ") +
+        current.textContent?.trim() +
+        " · " +
+        time;
+    });
+  }
+</script>

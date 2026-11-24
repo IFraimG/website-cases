@@ -1,0 +1,23 @@
+---
+const { id, title, photo, alt, info, description } = Astro.props;
+---
+
+<dialog id={id} aria-labelledby={id + "-title"}>
+  <img src={photo} alt={alt} /><div class="dialog-body stack">
+    <h2 id={id + "-title"}>{title}</h2><strong>{info}</strong><p>
+      {description}
+    </p><form method="dialog"><button class="btn">Закрыть</button></form>
+  </div>
+</dialog>
+<script>
+  document
+    .querySelectorAll<HTMLButtonElement>("[data-dialog]")
+    .forEach((button) => {
+      button.addEventListener("click", () => {
+        document
+          .getElementById(button.dataset.dialog!)
+          ?.closest("dialog")
+          ?.showModal();
+      });
+    });
+</script>

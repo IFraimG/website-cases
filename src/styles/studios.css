@@ -1,0 +1,860 @@
+.studio-shell {
+  background: var(--sheet);
+  color: var(--text);
+  --ink: var(--text);
+  --paper: var(--sheet);
+  --edge: color-mix(in srgb, var(--text) 24%, transparent);
+  --line: var(--edge);
+  --tint: color-mix(in srgb, var(--sheet) 89%, var(--text));
+  --serif: "PT Serif", Georgia, serif;
+  --sans: "Inter Variable", Arial, sans-serif;
+  --mono: "IBM Plex Mono", monospace;
+}
+.studio-wrap {
+  width: min(91%, 1360px);
+  margin-inline: auto;
+}
+.studio-nav {
+  display: flex;
+  align-items: center;
+  gap: 1.7rem;
+  border-bottom: 1px solid var(--edge);
+  min-height: 76px;
+}
+.studio-nav nav {
+  margin-left: auto;
+  font-size: 0.94rem;
+}
+.signature {
+  font-weight: 690;
+  letter-spacing: -0.06em;
+  font-size: 1.55rem;
+  display: inline-flex;
+  gap: 0.6rem;
+  align-items: center;
+}
+.signature i {
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  background: var(--accent);
+}
+.studio-eyebrow,
+.studio-facts dt,
+.tool-paper legend,
+.calc-fields label,
+.session-form label {
+  font: 500 0.8rem/1.5 var(--mono);
+  letter-spacing: 0.065em;
+  text-transform: uppercase;
+}
+.studio-hero {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  align-items: center;
+  grid-template-columns: 1fr 1.15fr;
+  gap: 4vw;
+  padding-block: 3rem;
+}
+.hero-type {
+  position: relative;
+  z-index: 1;
+}
+.studio-hero h1 {
+  font: 500 clamp(3.8rem, 6.4vw, 7.1rem)/0.98 var(--serif);
+  letter-spacing: -0.065em;
+  max-width: 16ch;
+  margin: 0.95rem 0 1.4rem;
+}
+.hero-lead {
+  font-size: clamp(1.06rem, 1.4vw, 1.27rem);
+  max-width: 42ch;
+}
+.studio-cta {
+  display: inline-flex;
+  min-height: 46px;
+  align-items: center;
+  justify-content: center;
+  padding: 0.8rem 1.25rem;
+  background: var(--text);
+  color: var(--sheet);
+  font-weight: 650;
+  border: 1px solid transparent;
+}
+.hero-type .studio-cta {
+  margin-top: 1.6rem;
+}
+.hero-photo {
+  overflow: hidden;
+  height: clamp(380px, 34vw, 540px);
+}
+.hero-photo img,
+.specimen img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.fact-strip {
+  border-block: 1px solid var(--edge);
+}
+.studio-facts {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin: 0;
+  padding: 1.45rem 0;
+}
+.studio-facts > div {
+  border-left: 1px solid var(--edge);
+  padding-left: 2rem;
+}
+.studio-facts > div:first-child {
+  border: 0;
+  padding: 0;
+}
+.studio-facts dt {
+  opacity: 0.82;
+}
+.studio-facts dd {
+  margin: 0.3rem 0 0;
+  font-size: clamp(1.22rem, 2.3vw, 2.4rem);
+  letter-spacing: -0.045em;
+  font-weight: 570;
+}
+.studio-shell h2 {
+  font: 500 clamp(2.2rem, 4vw, 4.5rem)/1.03 var(--serif);
+  letter-spacing: -0.055em;
+}
+.studio-story,
+.studio-guide,
+.tool-section {
+  padding-block: clamp(3.5rem, 6.5vw, 7rem);
+}
+.studio-story,
+.studio-guide,
+.tool-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(2rem, 7vw, 8rem);
+  align-items: center;
+}
+.studio-story img {
+  height: clamp(260px, 30vw, 460px);
+}
+.studio-story h2,
+.tool-intro h2 {
+  margin: 0.8rem 0 1.2rem;
+}
+.studio-story p:not(.studio-eyebrow),
+.tool-intro p:not(.studio-eyebrow) {
+  font-size: 1.13rem;
+  max-width: 52ch;
+}
+.tool-section {
+  background: var(--tint);
+}
+.tool-grid {
+  grid-template-columns: 0.88fr 1.12fr;
+  align-items: start;
+}
+.tool-paper {
+  border: 1px solid var(--edge);
+  background: var(--sheet);
+  padding: clamp(1.2rem, 2.7vw, 2.8rem);
+}
+.option-list {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+.option-list legend,
+.calc-fields label,
+.session-form label {
+  margin-bottom: 0.6rem;
+}
+.option-list button,
+.stepper button,
+.session-form select {
+  border: 1px solid var(--edge);
+  background: transparent;
+  min-height: 42px;
+  padding: 0.5rem 0.85rem;
+}
+.option-list button[aria-pressed="true"] {
+  background: var(--text);
+  color: var(--sheet);
+}
+.option-response {
+  padding-top: 1.5rem;
+}
+.option-response article p {
+  margin: 0.65rem 0 0;
+  max-width: 50ch;
+}
+.option-response h3 {
+  font-size: clamp(1.35rem, 2vw, 2rem);
+}
+.calc-fields,
+.session-form {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.8rem;
+  border-top: 1px solid var(--edge);
+  margin-top: 1.6rem;
+  padding-top: 1rem;
+}
+.calc-fields label,
+.session-form label {
+  margin: 0;
+}
+.stepper {
+  display: flex;
+  align-items: center;
+}
+.stepper input {
+  width: 5rem;
+  text-align: center;
+  min-height: 42px;
+  background: transparent;
+  border: 1px solid var(--edge);
+  color: inherit;
+  font: inherit;
+  appearance: textfield;
+}
+.stepper input::-webkit-inner-spin-button {
+  appearance: none;
+}
+.estimate {
+  width: 100%;
+  display: flex;
+  gap: 0.8rem;
+  align-items: baseline;
+  justify-content: space-between;
+  padding-top: 0.9rem;
+}
+.estimate output {
+  font: 600 clamp(1.25rem, 2vw, 1.9rem)/1.2 var(--sans);
+}
+.session-form output:not(:empty) {
+  width: 100%;
+  padding: 0.75rem;
+  background: var(--tint);
+}
+.session-form select {
+  background: var(--sheet);
+  color: var(--text);
+}
+.studio-guide {
+  border-top: 1px solid var(--edge);
+  align-items: start;
+}
+.studio-guide details {
+  border-bottom: 1px solid var(--edge);
+  padding: 1rem 0;
+}
+.studio-guide summary {
+  font-weight: 620;
+  cursor: pointer;
+}
+.studio-guide p {
+  margin-top: 0.7rem;
+}
+.studio-shell .foot {
+  color: var(--text);
+}
+/* Field layouts leave room for a second, annotated specimen on the cover. */
+.atlas .studio-hero {
+  grid-template-columns: 1fr 1.15fr;
+  gap: 5vw;
+  padding-bottom: 4rem;
+}
+.atlas .hero-photo {
+  width: 87%;
+  margin-left: auto;
+  height: clamp(420px, 36vw, 580px);
+  border-radius: 49% 49% 0 0;
+}
+.specimen {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 49%;
+  width: 16%;
+  background: var(--sheet);
+  padding: 8px;
+  transform: rotate(-4deg);
+  box-shadow: 0 4px 14px #1112;
+}
+.specimen img {
+  aspect-ratio: 1.3;
+}
+.specimen figcaption {
+  font: 500 0.75rem/1.3 var(--mono);
+  margin-top: 0.4rem;
+}
+.atlas .signature i {
+  border-radius: 0 100% 0 100%;
+}
+.atlas .option-list button,
+.atlas .studio-cta {
+  border-radius: 30px;
+}
+/* Product spreads sit on a single uninterrupted photographic plate. */
+.showcase .studio-hero {
+  display: block;
+  padding: 0;
+  margin-block: 1.5rem;
+}
+.showcase .hero-photo {
+  height: clamp(460px, 41vw, 650px);
+}
+.showcase .hero-type {
+  position: absolute;
+  left: 2.5%;
+  bottom: 6%;
+  width: 38%;
+  padding: clamp(1.5rem, 2.8vw, 3rem);
+  background: var(--sheet);
+}
+.showcase .hero-type h1 {
+  font-size: clamp(3rem, 4.7vw, 5rem);
+}
+.showcase .signature i {
+  border: 5px double var(--text);
+  background: none;
+  border-radius: 50%;
+}
+.showcase .studio-story {
+  grid-template-columns: 1.2fr 1fr;
+}
+/* Journal cover puts the photograph between headline and contents. */
+.journal .studio-hero {
+  grid-template-columns: 1.25fr 0.85fr;
+  align-items: center;
+  border-bottom: 5px double var(--edge);
+  padding: 2.2rem 0;
+}
+.journal .hero-type {
+  display: contents;
+}
+.journal .hero-type h1 {
+  grid-column: 1/-1;
+  grid-row: 1;
+  max-width: none;
+  text-align: center;
+  font-size: clamp(3rem, 6.8vw, 8rem);
+  margin: 0 0 0.5rem;
+}
+.journal .hero-photo {
+  grid-column: 1;
+  grid-row: 2/5;
+  height: clamp(310px, 26vw, 415px);
+}
+.journal .studio-hero {
+  row-gap: 0;
+}
+.journal .hero-type .studio-eyebrow {
+  grid-column: 2;
+  align-self: end;
+}
+.journal .hero-lead {
+  grid-column: 2;
+  align-self: center;
+  font: 400 clamp(1.4rem, 2.1vw, 2.35rem)/1.22 var(--serif);
+}
+.journal .hero-type .studio-cta {
+  grid-column: 2;
+  justify-self: start;
+  align-self: start;
+  margin: 0;
+}
+.journal .signature {
+  font-family: var(--serif);
+  font-style: italic;
+}
+.journal .signature i {
+  display: none;
+}
+.journal .fact-strip {
+  border-top: 0;
+}
+.journal .studio-story img {
+  order: 2;
+}
+/* Destination covers place the image edge to edge behind the title. */
+.horizon .studio-hero {
+  width: 100%;
+  min-height: clamp(460px, 44vw, 680px);
+  display: flex;
+  align-items: end;
+  padding: 4vw 5%;
+  color: white;
+}
+.horizon .hero-photo {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+  z-index: -2;
+}
+.horizon .studio-hero:after {
+  content: "";
+  z-index: -1;
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, #061c1afa, transparent 87%),
+    linear-gradient(0deg, #09201777, transparent 50%);
+}
+.horizon .studio-cta {
+  background: var(--sheet);
+  color: var(--text);
+}
+.horizon .signature i {
+  clip-path: polygon(0% 100%, 50% 0%, 100% 100%);
+}
+.horizon .studio-hero h1 {
+  max-width: 14ch;
+}
+.horizon .studio-story img {
+  border-radius: 3px;
+}
+/* Technical covers pair interface-like readouts with the subject. */
+.instrument .studio-hero {
+  border-inline: 1px solid var(--edge);
+  padding: 0;
+  gap: 0;
+  margin-block: 2rem;
+  align-items: stretch;
+  grid-template-columns: 0.96fr 1.04fr;
+}
+.instrument .hero-type {
+  padding: 3.3vw;
+  background: var(--tint);
+  align-self: stretch;
+  display: flex;
+  align-items: start;
+  justify-content: center;
+  flex-direction: column;
+}
+.instrument .hero-photo {
+  height: 100%;
+  min-height: 415px;
+}
+.instrument h1,
+.instrument h2,
+.bench h1,
+.poster h1,
+.poster h2 {
+  font-family: var(--sans);
+  font-weight: 670;
+}
+.instrument .studio-eyebrow,
+.instrument .studio-facts dd {
+  color: var(--accent);
+}
+.instrument .signature i {
+  background: repeating-linear-gradient(
+    90deg,
+    var(--accent) 0 3px,
+    transparent 3px 5px
+  );
+}
+.instrument .studio-cta {
+  background: var(--accent);
+  color: var(--sheet);
+}
+.instrument .studio-facts dd {
+  font-family: var(--mono);
+}
+.instrument .studio-story img {
+  order: 2;
+}
+/* Workshop and poster compositions use large type and hard rules. */
+.bench .studio-hero {
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 0;
+  padding: 0;
+  margin-block: 2rem;
+  background: var(--accent);
+  color: #261f19;
+}
+.bench .hero-photo {
+  grid-column: 1;
+  grid-row: 1;
+  height: clamp(390px, 33vw, 550px);
+}
+.bench .hero-type {
+  grid-column: 2;
+  grid-row: 1;
+  padding: 3vw;
+}
+.bench .hero-type h1 {
+  font-size: clamp(3rem, 5vw, 6rem);
+}
+.bench .signature i {
+  border-radius: 50%;
+  border: 5px solid var(--text);
+  background: var(--accent);
+}
+.bench .studio-facts > div {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.bench .studio-facts dd {
+  font: 600 1.15rem var(--sans);
+}
+.poster .studio-hero {
+  grid-template-columns: 1.1fr 1fr;
+  gap: 1rem;
+  padding-top: 1.6rem;
+}
+.poster .hero-type {
+  display: contents;
+}
+.poster .hero-type h1 {
+  grid-column: 1/-1;
+  grid-row: 1;
+  max-width: none;
+  font-size: clamp(3rem, 6vw, 7rem);
+  margin: 0;
+  letter-spacing: -0.07em;
+}
+.poster .hero-photo {
+  grid-column: 2;
+  grid-row: 2/5;
+  height: clamp(240px, 22vw, 380px);
+}
+.poster .studio-eyebrow {
+  align-self: end;
+}
+.poster .hero-lead {
+  font-size: clamp(1.2rem, 1.8vw, 1.8rem);
+  max-width: 32ch;
+}
+.poster .hero-type .studio-cta {
+  justify-self: start;
+  align-self: start;
+  margin: 0;
+}
+.poster .signature i {
+  transform: skew(-18deg);
+  background: var(--text);
+}
+.poster .tool-paper {
+  box-shadow: 6px 6px 0 var(--text);
+  border: 1px solid var(--text);
+}
+/* Brand-specific scales, silhouettes and crops. */
+.lighting .hero-photo img {
+  object-position: 50% 37%;
+}
+.eyewear .showcase .hero-type {
+  left: auto;
+  right: 2%;
+  bottom: 4%;
+  border-radius: 2px;
+}
+.eyewear .hero-photo img {
+  object-position: 33% center;
+}
+.eyewear .signature {
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  font-size: 1.1rem;
+}
+.eyewear .fact-strip {
+  background: var(--text);
+  color: var(--sheet);
+}
+.eyewear h2 {
+  font-family: var(--sans);
+}
+.pilates .atlas .hero-photo {
+  border-radius: 200px 0 200px 0;
+}
+.pilates .specimen {
+  transform: rotate(5deg);
+  bottom: 3rem;
+}
+.pilates .signature i {
+  border-radius: 50%;
+  box-shadow: 8px 0 0 var(--text);
+  margin-right: 6px;
+}
+.pilates .hero-type h1 {
+  font-style: italic;
+}
+.cabins .hero-type h1 {
+  max-width: 12ch;
+}
+.sailing .horizon .studio-hero {
+  justify-content: flex-end;
+  text-align: right;
+}
+.sailing .hero-type {
+  display: grid;
+  justify-items: end;
+}
+.sailing .horizon .studio-hero:after {
+  background: linear-gradient(270deg, #081b36e0, transparent 90%);
+}
+.sailing .hero-type h1 {
+  font-family: var(--sans);
+  font-weight: 640;
+}
+.hydro .horizon .studio-hero {
+  justify-content: center;
+  text-align: center;
+}
+.hydro .hero-type h1,
+.hydro .hero-lead {
+  margin-inline: auto;
+}
+.hydro .horizon .studio-hero:after {
+  background: linear-gradient(0deg, #0b1b1ce3, #16302a48);
+}
+.hydro .signature i {
+  border-radius: 50%;
+  border: 2px solid currentColor;
+  background: none;
+}
+.ev-charge .instrument .hero-photo {
+  clip-path: polygon(8% 0, 100% 0, 100% 100%, 0 100%);
+}
+.ev-charge .instrument .studio-hero {
+  background: var(--tint);
+}
+.ev-charge .signature {
+  letter-spacing: -0.025em;
+}
+.acoustics .hero-type {
+  grid-column: 2;
+  grid-row: 1;
+}
+.acoustics .hero-photo {
+  grid-column: 1;
+  grid-row: 1;
+}
+.acoustics .hero-type h1 {
+  font-weight: 450;
+}
+.restoration .journal .hero-type h1 {
+  text-align: left;
+  font-style: italic;
+}
+.restoration .hero-photo img {
+  filter: saturate(0.82);
+}
+.restoration .studio-facts dt {
+  font-family: var(--serif);
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 1rem;
+}
+.roastery .bench .studio-hero {
+  grid-template-columns: 0.85fr 1.15fr;
+}
+.roastery .bench .hero-type {
+  grid-column: 1;
+}
+.roastery .bench .hero-photo {
+  grid-column: 2;
+}
+.roastery .hero-type h1 {
+  font-family: var(--serif);
+  font-weight: 400;
+}
+.roastery .signature {
+  font-family: var(--serif);
+}
+.dispatch .hero-type h1 {
+  text-transform: uppercase;
+  font-weight: 810;
+}
+.dispatch .poster .hero-photo {
+  clip-path: polygon(6% 0, 100% 0, 94% 100%, 0 100%);
+}
+.coworking .poster .hero-photo {
+  grid-column: 1;
+}
+.coworking .poster .hero-type :is(.hero-lead, .studio-eyebrow, .studio-cta) {
+  grid-column: 2;
+  margin-left: 2vw;
+}
+.coworking .studio-cta,
+.coworking .hero-photo img {
+  border-radius: 1.2rem;
+}
+@media (max-width: 760px) {
+  .studio-nav {
+    min-height: 65px;
+    gap: 0.65rem;
+  }
+  .studio-nav nav {
+    display: none;
+  }
+  .studio-nav .languages {
+    margin-left: auto;
+  }
+  .signature {
+    font-size: 1.25rem;
+  }
+  .studio-wrap {
+    width: 90%;
+  }
+  .studio-hero,
+  .atlas .studio-hero,
+  .journal .studio-hero,
+  .bench .studio-hero,
+  .poster .studio-hero,
+  .instrument .studio-hero,
+  .roastery .bench .studio-hero {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding-block: 1.8rem;
+  }
+  .studio-hero h1,
+  .showcase .hero-type h1,
+  .journal .hero-type h1,
+  .poster .hero-type h1,
+  .bench .hero-type h1 {
+    font-size: clamp(2.65rem, 10.5vw, 4.5rem);
+    overflow-wrap: break-word;
+  }
+  .hero-lead {
+    font-size: 1.04rem;
+  }
+  .studio-hero .hero-type {
+    display: block;
+  }
+  .studio-hero .hero-type,
+  .studio-hero .hero-photo,
+  .journal .hero-type .studio-cta,
+  .poster .hero-type .studio-cta {
+    grid-column: auto;
+    grid-row: auto;
+  }
+  .studio-hero .hero-photo,
+  .atlas .hero-photo,
+  .journal .hero-photo,
+  .bench .hero-photo,
+  .poster .hero-photo,
+  .instrument .hero-photo {
+    min-height: 0;
+    height: 265px;
+  }
+  .atlas .hero-photo {
+    height: 280px;
+    width: 82%;
+    margin-right: 0;
+  }
+  .specimen {
+    left: 2%;
+    bottom: 1rem;
+    width: 32%;
+  }
+  .showcase .studio-hero {
+    display: flex;
+    flex-direction: column-reverse;
+    padding: 0;
+  }
+  .showcase .studio-hero .hero-type {
+    position: static;
+    width: 100%;
+    padding: 1.3rem 0;
+  }
+  .showcase .hero-photo {
+    width: 100%;
+    height: 280px;
+  }
+  .journal .hero-type h1 {
+    text-align: left;
+    margin-block: 0.8rem;
+  }
+  .journal .hero-lead,
+  .poster .hero-lead {
+    font-size: 1.14rem;
+  }
+  .journal .hero-type .studio-cta,
+  .poster .hero-type .studio-cta {
+    margin-top: 1.2rem;
+  }
+  .horizon .studio-hero {
+    padding: 2rem 5%;
+    min-height: 570px;
+  }
+  .horizon .studio-hero .hero-photo {
+    height: 100%;
+  }
+  .sailing .horizon .studio-hero {
+    align-items: end;
+  }
+  .hydro .horizon .studio-hero {
+    align-items: center;
+  }
+  .instrument .studio-hero,
+  .bench .studio-hero {
+    padding: 0;
+  }
+  .instrument .hero-type,
+  .bench .hero-type {
+    padding: 1.4rem;
+  }
+  .acoustics .studio-hero .hero-photo,
+  .roastery .bench .hero-photo,
+  .roastery .bench .hero-type,
+  .coworking .poster .hero-photo {
+    grid-column: auto;
+  }
+  .coworking .poster .hero-type :is(.hero-lead, .studio-eyebrow, .studio-cta) {
+    margin-left: 0;
+  }
+  .studio-facts {
+    gap: 0.5rem;
+  }
+  .studio-facts > div {
+    padding-left: 0.6rem;
+  }
+  .studio-facts dt {
+    font-size: 0.69rem;
+    letter-spacing: 0;
+  }
+  .studio-facts dd {
+    font-size: 1.05rem;
+  }
+  .bench .studio-facts > div {
+    display: block;
+  }
+  .bench .studio-facts dd {
+    margin-top: 0.3rem;
+    font-size: 1.05rem;
+  }
+  .studio-story,
+  .showcase .studio-story,
+  .studio-guide,
+  .tool-grid {
+    grid-template-columns: 1fr;
+    gap: 1.6rem;
+  }
+  .studio-story img {
+    height: 245px;
+  }
+  .studio-shell h2 {
+    font-size: clamp(2rem, 8.5vw, 3rem);
+  }
+  .tool-paper {
+    padding: 1rem;
+  }
+  .option-list button {
+    padding: 0.5rem 0.65rem;
+  }
+  .session-form .studio-cta {
+    width: 100%;
+  }
+}

@@ -1,0 +1,283 @@
+---
+import SiteNav from "../components/SiteNav.astro";
+import SiteExploreStrip from "../components/SiteExploreStrip.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+import Base from "../layouts/Base.astro";
+import Detail from "../components/Detail.astro";
+import { getSite } from "../data/sites";
+const site = getSite("furniture");
+const items = [
+  {
+    name: "Кресло «Мох»",
+    kind: "Кресла",
+    file: "chair",
+    price: "48 000 ₽",
+    detail:
+      "76 × 82 × 78 см. Компактное кресло для чтения. Упругая спинка поддерживает поясницу, а широкое сиденье даёт место сменить позу.",
+  },
+  {
+    name: "Столик «Круг»",
+    kind: "Столы",
+    file: "table",
+    price: "36 000 ₽",
+    detail:
+      "Ø 72 × 38 см. Журнальный столик с круглой столешницей и опорой из ореха. Низкую модель удобно поставить у дивана. Защитное покрытие рассчитано на регулярную влажную уборку.",
+  },
+  {
+    name: "Диван «Пауза»",
+    kind: "Диваны",
+    file: "sofa",
+    price: "124 000 ₽",
+    detail:
+      "218 × 94 × 76 см. Низкая посадка для отдыха, съёмные подушки и плотная ткань. Модель привозим секциями, чтобы пройти в обычный дверной проём.",
+  },
+];
+const img = (name: string) => "/media/furniture/" + name + ".webp";
+---
+
+<Base legacy title="Ладно — мебель для дома" theme="furn"
+  ><SiteNav site={site} active="home" /><main id="content">
+    <section class="f-hero">
+      <div class="f-intro stack">
+        <span class="meta">Коллекция для дома</span><h1>
+          Вещи, <br />с которыми<br /><em>хорошо.</em>
+        </h1><p>
+          Мебель простых форм для чтения в тишине, долгих ужинов и ленивых
+          выходных.
+        </p><a class="btn" href="#collection">Смотреть коллекцию</a>
+      </div><figure>
+        <img src={img("interior")} alt="Мебель в жилом интерьере" />
+      </figure>
+    </section>
+    <section id="collection" class="wrap section">
+      <div class="spread head">
+        <h2>В коллекции</h2><div class="filters" aria-label="Категории мебели">
+          {
+            ["Все", ...items.map((p) => p.kind)].map((t, i) => (
+              <button aria-pressed={i === 0 ? "true" : "false"} data-filter={t}>
+                {t}
+              </button>
+            ))
+          }
+        </div>
+      </div><div class="grid3">
+        {
+          items.map((p, i) => (
+            <article data-kind={p.kind}>
+              <button class="product" data-dialog={"item-" + i}>
+                <>
+                  <img src={img(p.file)} alt={p.name} />
+                  <span class="label-line">
+                    <>
+                      <strong>{p.name}</strong>
+                      <span>{p.price}</span>
+                    </>
+                  </span>
+                  <span class="more">Подробнее</span>
+                </>
+              </button>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+    <section class="f-story">
+      <img src={img("chair")} alt="Форма кресла из коллекции" /><div
+        class="stack"
+      >
+        <p class="meta">В мастерской</p><h2>Удобство начинается с посадки</h2><p
+        >
+          Прежде чем запустить серию, мы собираем образец в полном размере.
+          Проверяем, где лежат руки, легко ли подняться и как кресло выглядит у
+          стены.
+        </p>
+      </div>
+    </section>
+    <section id="care" class="wrap section f-care">
+      <h2>Как ухаживать</h2><div>
+        <h3>Дерево</h3><p>
+          Протирайте слегка влажной салфеткой и сразу вытирайте насухо. Под
+          горячие блюда используйте подставки.
+        </p><h3>Ткань</h3><p>
+          Раз в неделю проходите мягкой насадкой пылесоса. Пролитую воду
+          промокните чистым полотенцем.
+        </p>
+      </div>
+    </section>
+    <section class="wrap section rule">
+      <div class="pair">
+        <h2>До вашей двери</h2><p class="lead">
+          Перед доставкой сверяем размеры проёмов и лестницы. Мастер распакует
+          предмет, выставит опоры и заберёт упаковку.
+        </p>
+      </div>
+    </section>
+    {
+      items.map((p, i) => (
+        <Detail
+          id={"item-" + i}
+          title={p.name}
+          photo={img(p.file)}
+          alt={p.name}
+          info={p.price}
+          description={p.detail}
+        />
+      ))
+    }
+    <SiteExploreStrip site={site} />
+  </main><SiteFooter site={site} /></Base
+>
+<script>
+  document
+    .querySelectorAll<HTMLButtonElement>("[data-filter]")
+    .forEach((button) => {
+      button.addEventListener("click", () => {
+        document
+          .querySelectorAll("[data-filter]")
+          .forEach((el) =>
+            el.setAttribute("aria-pressed", String(el === button)),
+          );
+        document
+          .querySelectorAll<HTMLElement>("[data-kind]")
+          .forEach(
+            (card) =>
+              (card.hidden =
+                button.dataset.filter !== "Все" &&
+                card.dataset.kind !== button.dataset.filter),
+          );
+      });
+    });
+</script>
+<style is:global>
+  .furn {
+    --paper: #faf9f4;
+    --ink: #392e28;
+    --act: #703e30;
+    --radius: 99px;
+  }
+  .f-logo {
+    font:
+      italic bold 2.8rem/1 "PT Serif",
+      Georgia,
+      serif;
+    letter-spacing: -0.09em;
+  }
+  .furn .bar {
+    border: 0;
+  }
+  .f-hero {
+    display: grid;
+    grid-template-columns: 4fr 6fr;
+    background: #ece5d7;
+  }
+  .f-intro {
+    padding: clamp(2rem, 5vw, 6rem);
+    align-self: center;
+  }
+  .f-intro h1,
+  .furn h2 {
+    font-family: "PT Serif", Georgia, serif;
+    font-weight: 400;
+  }
+  .f-intro h1 {
+    font-size: clamp(3rem, 5.5vw, 6.4rem);
+  }
+  .f-intro h1 em {
+    color: #824c38;
+  }
+  .f-hero figure img {
+    height: 100%;
+    min-height: 480px;
+    max-height: 670px;
+  }
+  .f-intro p {
+    max-width: 32ch;
+  }
+  .filters {
+    display: flex;
+    gap: 0.35rem;
+    flex-wrap: wrap;
+  }
+  .filters button {
+    border: 1px solid #c9c0b3;
+    border-radius: 100px;
+    padding: 0.5rem 1rem;
+  }
+  .filters [aria-pressed="true"] {
+    background: #3d382e;
+    color: white;
+  }
+  .product {
+    width: 100%;
+    padding: 0;
+    text-align: left;
+  }
+  .product img {
+    aspect-ratio: 1/1.05;
+  }
+  .label-line {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.4rem;
+    margin: 1rem 0 0.35rem;
+    flex-wrap: wrap;
+  }
+  .label-line strong {
+    font-size: 1.25rem;
+  }
+  .more {
+    font-size: 0.87rem;
+    text-decoration: underline;
+  }
+  .f-story {
+    background: #e4e8db;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+  }
+  .f-story img {
+    height: 420px;
+  }
+  .f-story div {
+    padding: clamp(2rem, 5vw, 5rem);
+  }
+  .f-care {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  .f-care h3 {
+    margin-bottom: 0.5rem;
+  }
+  .f-care p + h3 {
+    margin-top: 1.6rem;
+  }
+  @media (max-width: 720px) {
+    .f-hero,
+    .f-story,
+    .f-care {
+      grid-template-columns: 1fr;
+    }
+    .f-intro {
+      padding: 2rem 5%;
+    }
+    .f-intro h1 br:first-child {
+      display: none;
+    }
+    .f-intro h1 br:first-child:after {
+      content: " ";
+    }
+    .f-hero figure img {
+      min-height: 0;
+      height: 310px;
+    }
+    .filters button {
+      padding: 0.45rem 0.8rem;
+    }
+    .f-story img {
+      height: 280px;
+    }
+    .f-care {
+      gap: 1.8rem;
+    }
+  }
+</style>

@@ -1,0 +1,99 @@
+---
+import StudioPage from "../concepts/Studio.astro";
+import SiteInnerPage from "../concepts/SiteInnerPage.astro";
+import { studios, type Studio } from "../data/studios";
+import { allSites } from "../data/sites";
+import type {
+  SiteExpansion,
+  CatalogItem,
+  ProjectItem,
+  JournalPost,
+  InnerView,
+} from "../data/site-schema";
+
+type RouteProps =
+  | { kind: "studio-home"; studio: Studio }
+  | {
+      kind: "inner";
+      site: SiteExpansion;
+      view: InnerView;
+      item?: CatalogItem;
+      project?: ProjectItem;
+      post?: JournalPost;
+    };
+
+export function getStaticPaths() {
+  const paths: { params: { conceptPath: string }; props: RouteProps }[] = [];
+
+  // 1. Existing 15 studio homepages (EN + RU)
+  for (const studio of studios) {
+    for (const prefix of ["", "ru/"]) {
+      paths.push({
+        params: { conceptPath: prefix + studio.slug },
+        props: { kind: "studio-home", studio },
+      });
+    }
+  }
+
+  // 2. All multi-page inner routes for ALL 21 sites (EN + RU)
+  const staticViews: InnerView[] = [
+    "catalog",
+    "projects",
+    "partners",
+    "request",
+    "about",
+    "team",
+    "journal",
+    "program",
+    "contact",
+    "careers",
+  ];
+
+  for (const site of allSites) {
+    for (const prefix of ["", "ru/"]) {
+      for (const view of staticViews) {
+        paths.push({
+          params: { conceptPath: `${prefix}${site.slug}/${view}` },
+          props: { kind: "inner", site, view },
+        });
+      }
+      for (const item of site.catalog.items) {
+        paths.push({
+          params: { conceptPath: `${prefix}${site.slug}/catalog/${item.id}` },
+          props: { kind: "inner", site, view: "catalog-detail", item },
+        });
+      }
+      for (const project of site.projects.items) {
+        paths.push({
+          params: { conceptPath: `${prefix}${site.slug}/projects/${project.id}` },
+          props: { kind: "inner", site, view: "project-detail", project },
+        });
+      }
+      for (const post of site.journal.posts) {
+        paths.push({
+          params: { conceptPath: `${prefix}${site.slug}/journal/${post.id}` },
+          props: { kind: "inner", site, view: "journal-detail", post },
+        });
+      }
+    }
+  }
+
+  return paths;
+}
+
+const props = Astro.props as RouteProps;
+---
+
+{
+  props.kind === "studio-home" ? (
+    <StudioPage studio={props.studio} />
+  ) : (
+    <SiteInnerPage
+      site={props.site}
+      view={props.view}
+      item={props.item}
+      project={props.project}
+      post={props.post}
+    />
+  )
+}

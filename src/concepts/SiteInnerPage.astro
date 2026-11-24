@@ -1,0 +1,218 @@
+---
+import Base from "../layouts/Base.astro";
+import SiteNav from "../components/SiteNav.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+import SiteCommercePages from "./pages/SiteCommercePages.astro";
+import SiteCompanyPages from "./pages/SiteCompanyPages.astro";
+import { languageOf } from "../i18n/locale";
+import type {
+  SiteExpansion,
+  CatalogItem,
+  ProjectItem,
+  JournalPost,
+  InnerView,
+} from "../data/site-schema";
+import "../styles/site-pages.css";
+
+interface Props {
+  site: SiteExpansion;
+  view: InnerView;
+  item?: CatalogItem;
+  project?: ProjectItem;
+  post?: JournalPost;
+}
+
+const { site, view, item, project, post } = Astro.props;
+const lang = languageOf(Astro.url.pathname);
+
+const activeNav =
+  view === "catalog-detail"
+    ? "catalog"
+    : view === "project-detail"
+      ? "projects"
+      : view === "journal-detail"
+        ? "journal"
+        : view;
+
+const pageTitleMap: Record<InnerView, string> = {
+  catalog: site.catalog.title[lang],
+  "catalog-detail": item ? item.title[lang] : site.catalog.title[lang],
+  projects: site.projects.title[lang],
+  "project-detail": project ? project.title[lang] : site.projects.title[lang],
+  partners: site.partners.title[lang],
+  request: site.request.title[lang],
+  about: site.about.title[lang],
+  team: site.team.title[lang],
+  journal: site.journal.title[lang],
+  "journal-detail": post ? post.title[lang] : site.journal.title[lang],
+  program: site.program.title[lang],
+  contact: site.contact.title[lang],
+  careers: site.careers.title[lang],
+};
+
+const fullTitle = `${pageTitleMap[view]} — ${site.brand[lang]}`;
+const styleVars = [
+  `--sp-paper:${site.theme.paper}`,
+  `--sp-ink:${site.theme.ink}`,
+  `--sp-accent:${site.theme.accent}`,
+  `--sp-surface:${site.theme.surface}`,
+  `--sp-strong:${site.theme.surfaceStrong}`,
+  `--sp-edge:${site.theme.edge}`,
+  `--sp-btn-bg:${site.theme.btnBg}`,
+  `--sp-btn-fg:${site.theme.btnFg}`,
+  `--sp-radius:${site.theme.radius}`,
+  `--sp-display:${site.theme.displayFont === "serif" ? '"PT Serif", Georgia, serif' : '"Inter Variable", Arial, sans-serif'}`,
+  `--sp-display-weight:${site.theme.displayFont === "serif" ? "400" : "680"}`,
+].join(";");
+
+const isCommerce = [
+  "catalog",
+  "catalog-detail",
+  "projects",
+  "project-detail",
+  "partners",
+  "request",
+].includes(view);
+---
+
+<Base title={fullTitle} description={site.tagline[lang]} theme={`sp-site ${site.slug}`}>
+  <div class="sp-shell" style={styleVars}>
+    <SiteNav site={site} active={activeNav} />
+    <main id="content">
+      {
+        isCommerce ? (
+          <SiteCommercePages
+            site={site}
+            view={view as any}
+            item={item}
+            project={project}
+          />
+        ) : (
+          <SiteCompanyPages site={site} view={view as any} post={post} />
+        )
+      }
+    </main>
+    <SiteFooter site={site} />
+  </div>
+</Base>
+
+<script>
+  // 1. Catalog live search + category + sort
+  for (const root of document.querySelectorAll<HTMLElement>("[data-catalog-filter]")) {
+    const search = root.querySelector<HTMLInputElement>("[data-search]");
+    const sort = root.querySelector<HTMLSelectElement>("[data-sort]");
+    const grid = root.querySelector<HTMLElement>("[data-cards-grid]");
+    const countEl = root.querySelector<HTMLElement>("[data-count] b");
+    const emptyEl = root.querySelector<HTMLElement>("[data-empty]");
+    const buttons = [...root.querySelectorAll<HTMLButtonElement>("[data-cat]")];
+    const cards = [...root.querySelectorAll<HTMLElement>("[data-item-card]")];
+    let activeCat = "all";
+
+    const apply = () => {
+      const q = (search?.value || "").trim().toLowerCase();
+      let visible = 0;
+      for (const card of cards) {
+        const matchCat = activeCat === "all" || card.dataset.category === activeCat;
+        const matchQ = !q || (card.dataset.text || "").includes(q);
+        card.hidden = !(matchCat && matchQ);
+        if (!card.hidden) visible++;
+      }
+      if (grid && sort) {
+        const mode = sort.value;
+        const ordered = [...cards].sort((a, b) => {
+          if (mode === "asc") return Number(a.dataset.price) - Number(b.dataset.price);
+          if (mode === "desc") return Number(b.dataset.price) - Number(a.dataset.price);
+          return Number(a.dataset.index) - Number(b.dataset.index);
+        });
+        ordered.forEach((c) => grid.appendChild(c));
+      }
+      if (countEl) countEl.textContent = String(visible);
+      if (emptyEl) emptyEl.hidden = visible > 0;
+    };
+
+    buttons.forEach((b) =>
+      b.addEventListener("click", () => {
+        activeCat = b.dataset.cat || "all";
+        buttons.forEach((x) => x.setAttribute("aria-pressed", String(x === b)));
+        apply();
+      }),
+    );
+    search?.addEventListener("input", apply);
+    sort?.addEventListener("change", apply);
+    root.querySelector("[data-reset]")?.addEventListener("click", () => {
+      activeCat = "all";
+      if (search) search.value = "";
+      if (sort) sort.value = "featured";
+      buttons.forEach((x) =>
+        x.setAttribute("aria-pressed", String(x.dataset.cat === "all")),
+      );
+      apply();
+    });
+  }
+
+  // 2. Simple category tab filters (Projects, Journal, Careers)
+  for (const box of document.querySelectorAll<HTMLElement>("[data-tab-filter]")) {
+    const tabs = [...box.querySelectorAll<HTMLButtonElement>("[data-tab]")];
+    const items = [...box.querySelectorAll<HTMLElement>("[data-tab-item]")];
+    tabs.forEach((tab) =>
+      tab.addEventListener("click", () => {
+        const key = tab.dataset.tab || "all";
+        tabs.forEach((t) => t.setAttribute("aria-pressed", String(t === tab)));
+        items.forEach((el) => {
+          el.hidden = key !== "all" && el.dataset.tabItem !== key;
+        });
+      }),
+    );
+  }
+
+  // 3. Detail gallery thumbnail switcher
+  for (const gal of document.querySelectorAll<HTMLElement>("[data-gallery]")) {
+    const hero = gal.querySelector<HTMLImageElement>("[data-gallery-hero]");
+    const thumbs = [...gal.querySelectorAll<HTMLButtonElement>("[data-thumb]")];
+    thumbs.forEach((btn) =>
+      btn.addEventListener("click", () => {
+        if (hero && btn.dataset.thumb) hero.src = btn.dataset.thumb;
+        thumbs.forEach((t) => t.setAttribute("aria-pressed", String(t === btn)));
+      }),
+    );
+  }
+
+  // 4. Project schedule download feedback
+  document.querySelectorAll<HTMLButtonElement>("[data-spec-download]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const out = btn.closest("section")?.querySelector<HTMLOutputElement>("[data-spec-output]");
+      if (out) out.textContent = btn.dataset.msg || "";
+    });
+  });
+
+  // 5. Careers "Apply Now" role pre-select & scroll
+  document.querySelectorAll<HTMLButtonElement>("[data-apply-role]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const select = document.querySelector<HTMLSelectElement>("[data-role-select]");
+      if (select && btn.dataset.applyRole) select.value = btn.dataset.applyRole;
+      document.querySelector("#apply-form")?.scrollIntoView({ behavior: "smooth" });
+    });
+  });
+
+  // 6. Interactive demo forms with localized confirmation receipt
+  const ru = document.documentElement.lang === "ru";
+  for (const form of document.querySelectorAll<HTMLFormElement>("[data-demo-form]")) {
+    const out = form.querySelector<HTMLOutputElement>("output");
+    form.addEventListener("input", () => {
+      if (out) out.textContent = "";
+    });
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const data = new FormData(form);
+      const name = String(data.get("name") || "").trim();
+      const type = String(data.get("type") || form.dataset.context || "").trim();
+      const ref = "REF-" + Math.floor(1000 + Math.random() * 9000);
+      if (out) {
+        out.textContent = ru
+          ? `Демозаявка ${ref} принята (${type}). Спасибо, ${name || "гость"} — специалист свяжется в рабочее время.`
+          : `Demo request ${ref} confirmed (${type}). Thank you, ${name || "guest"} — our specialist will follow up shortly.`;
+      }
+      form.reset();
+    });
+  }
+</script>

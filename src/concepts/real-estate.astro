@@ -1,0 +1,299 @@
+---
+import SiteNav from "../components/SiteNav.astro";
+import SiteExploreStrip from "../components/SiteExploreStrip.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+import Base from "../layouts/Base.astro";
+import Plan from "../components/Plan.astro";
+import { getSite } from "../data/sites";
+const site = getSite("real-estate");
+const flats = [
+  [
+    "Студия",
+    "30",
+    "Открытая кухня-гостиная с местом для сна. Окно выходит во двор.",
+    "2–5",
+  ],
+  [
+    "Одна спальня",
+    "48",
+    "Изолированная спальня и кухня-гостиная с двумя отдельными входами из прихожей.",
+    "2–7",
+  ],
+  [
+    "Две спальни",
+    "70",
+    "Две спальни вдоль светлого фасада. Вход в каждую комнату из общей прихожей.",
+    "3–7",
+  ],
+];
+---
+
+<Base legacy title="Садовая линия — жилой квартал у парка" theme="estate"
+  ><main id="content">
+    <div class="estate-view">
+      <img
+        src="/media/real-estate/panorama.webp"
+        alt="Панорама жилых домов вдоль зелёной зоны"
+      /><SiteNav site={site} active="home" overlay /><section class="wrap estate-hero">
+        <p class="meta">Жилой квартал у парка</p><h1>
+          Садовая<br /><em>линия</em>
+        </h1><a class="btn" href="#plans">Подобрать планировку</a>
+      </section>
+    </div>
+    <section class="stats wrap" aria-label="Характеристики квартала">
+      {
+        [
+          ["3", "жилых корпуса"],
+          ["7–12", "этажей"],
+          ["30–70 м²", "площадь квартир"],
+          ["4 мин", "до входа в парк"],
+        ].map(([n, d]) => (
+          <div>
+            <>
+              <b>{n}</b>
+              <span>{d}</span>
+            </>
+          </div>
+        ))
+      }
+    </section>
+    <section class="wrap section pair about-estate">
+      <span class="meta">О квартале</span><div class="stack">
+        <h2>Дом с продолжением в саду</h2><p class="lead">
+          Три корпуса окружают общий двор. Машины остаются с внешней стороны, а
+          от подъезда к парку ведёт пешеходная дорожка.
+        </p>
+      </div>
+    </section>
+    <section id="district" class="district section">
+      <div class="wrap">
+        <h2 class="head">Прогулка по району</h2><div class="area-gallery">
+          {
+            [
+              [
+                "courtyard",
+                "Внутренний двор",
+                "Скамейки в тени и короткая дорожка между корпусами.",
+              ],
+              [
+                "park",
+                "Парковая аллея",
+                "Зелёный маршрут для утренней пробежки и вечернего круга с собакой.",
+              ],
+            ].map(([f, n, t]) => (
+              <figure>
+                <>
+                  <img src={"/media/real-estate/" + f + ".webp"} alt={n} />
+                  <figcaption>
+                    <>
+                      <h3>{n}</h3>
+                      <p>{t}</p>
+                    </>
+                  </figcaption>
+                </>
+              </figure>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+    <section class="wrap section" id="plans">
+      <h2 class="head">Выберите квартиру</h2><div class="plan-switch">
+        {
+          flats.map(([n], i) => (
+            <button data-plan={i} aria-pressed={String(i === 0)}>
+              {n}
+            </button>
+          ))
+        }
+      </div>{
+        flats.map(([n, area, d, floors], i) => (
+          <article class="plan-card" data-flat={i} hidden={i !== 0}>
+            <>
+              <Plan rooms={i + 1} />
+              <div class="stack">
+                <>
+                  <span class="meta">Корпус «Липа»</span>
+                  <h3>{n}</h3>
+                  <b>{area} м²</b>
+                  <p>{d}</p>
+                  <p>Этажи {floors} · Потолки 2,9 м</p>
+                </>
+              </div>
+            </>
+          </article>
+        ))
+      }
+    </section>
+    <section class="wrap section rule pair">
+      <h2>Вход на уровне земли</h2><p class="lead">
+        От дорожки до лифта можно пройти с коляской без ступеней. У входа
+        предусмотрена общая колясочная, а для велосипедов — стойки во дворе.
+      </p>
+    </section>
+    <SiteExploreStrip site={site} />
+  </main><SiteFooter site={site} /></Base
+>
+<script>
+  document
+    .querySelectorAll<HTMLButtonElement>("[data-plan]")
+    .forEach((button) =>
+      button.addEventListener("click", () => {
+        document
+          .querySelectorAll("[data-plan]")
+          .forEach((b) => b.setAttribute("aria-pressed", String(b === button)));
+        document
+          .querySelectorAll<HTMLElement>("[data-flat]")
+          .forEach((p) => (p.hidden = p.dataset.flat !== button.dataset.plan));
+      }),
+    );
+</script>
+<style is:global>
+  .estate {
+    --paper: #f5f3ec;
+    --ink: #233c34;
+    --line: #c1c9bb;
+    --act: #f3efdf;
+    --onact: #233c34;
+  }
+  .estate-view {
+    position: relative;
+    isolation: isolate;
+    color: white;
+    background: #28483d;
+  }
+  .estate-view > img,
+  .estate-view:after {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -2;
+  }
+  .estate-view:after {
+    content: "";
+    z-index: -1;
+    background: linear-gradient(180deg, #132b2e75, #102b2438 34%, #0b221cf0);
+  }
+  .estate-view .bar {
+    border-color: #fff7;
+  }
+  .estate-logo {
+    font-size: 1.45rem;
+    font-family: "PT Serif", Georgia, serif;
+  }
+  .estate-hero {
+    min-height: clamp(480px, 44vw, 660px);
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: end;
+    padding: 3rem 0;
+  }
+  .estate h1,
+  .estate h2,
+  .estate h3,
+  .stats b {
+    font-family: "PT Serif", Georgia, serif;
+    font-weight: 400;
+  }
+  .estate-hero h1 {
+    font-size: clamp(4.6rem, 8vw, 8rem);
+    line-height: 0.92;
+    margin: 1rem 0 2rem;
+  }
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border-bottom: 1px solid var(--line);
+    padding-block: 2.1rem;
+  }
+  .stats > div {
+    padding-left: 2rem;
+    border-left: 1px solid var(--line);
+  }
+  .stats > div:first-child {
+    border: 0;
+    padding: 0;
+  }
+  .stats b,
+  .stats span {
+    display: block;
+  }
+  .stats b {
+    font-size: clamp(2rem, 3.4vw, 4rem);
+  }
+  .district {
+    background: #dfe7dc;
+  }
+  .area-gallery {
+    display: grid;
+    grid-template-columns: 1fr 1.65fr;
+    gap: 2rem;
+  }
+  .area-gallery img {
+    height: clamp(240px, 27vw, 390px);
+  }
+  .area-gallery figcaption {
+    margin: 1rem 0;
+  }
+  .area-gallery p {
+    margin-top: 0.55rem;
+  }
+  .plan-switch {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+  .plan-switch button {
+    padding: 0.6rem 1rem;
+    border: 1px solid #97a798;
+    border-radius: 2px;
+  }
+  .plan-switch [aria-pressed="true"] {
+    background: #284936;
+    color: white;
+  }
+  .plan-card {
+    background: #e7eadd;
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    padding: clamp(1rem, 3vw, 3rem);
+    gap: 4vw;
+    align-items: center;
+  }
+  .drawing {
+    width: 100%;
+    max-height: 365px;
+  }
+  .plan-card b {
+    font-size: 2rem;
+  }
+  @media (max-width: 720px) {
+    .stats {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.2rem;
+    }
+    .stats > div {
+      border: 0;
+      padding: 0;
+    }
+    .estate-hero {
+      min-height: 490px;
+    }
+    .area-gallery,
+    .plan-card {
+      grid-template-columns: 1fr;
+    }
+    .plan-switch button {
+      padding: 0.55rem 0.75rem;
+    }
+    .area-gallery {
+      gap: 1rem;
+    }
+    .area-gallery img {
+      height: 250px;
+    }
+  }
+</style>

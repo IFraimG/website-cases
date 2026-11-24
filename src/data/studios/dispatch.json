@@ -1,0 +1,179 @@
+{
+  "slug": "dispatch",
+  "layout": "poster",
+  "palette": {
+    "paper": "#ffdd55",
+    "ink": "#1d2528",
+    "accent": "#35466c"
+  },
+  "brand": {
+    "en": "Switchback",
+    "ru": "Свитчбэк"
+  },
+  "sector": {
+    "en": "Urban cycle courier",
+    "ru": "Городская велодоставка"
+  },
+  "headline": {
+    "en": "Across town by bicycle.",
+    "ru": "Через город на велосипеде."
+  },
+  "intro": {
+    "en": "Direct deliveries for studios, print shops and neighbourhood businesses. Price a single trip by distance.",
+    "ru": "Прямые доставки для студий, типографий и локальных магазинов. Рассчитайте поездку по расстоянию."
+  },
+  "action": {
+    "en": "Price a delivery",
+    "ru": "Рассчитать доставку"
+  },
+  "heroAlt": {
+    "en": "Cycle courier riding through a city street",
+    "ru": "Велокурьер на городской улице"
+  },
+  "storyTitle": {
+    "en": "One parcel, one handover",
+    "ru": "Одна посылка, одна передача"
+  },
+  "story": {
+    "en": "The rider collects directly from your counter. A delivery note travels with the parcel and the recipient checks the contents at the door.",
+    "ru": "Курьер забирает посылку прямо со стойки. Накладная едет вместе с заказом, а получатель проверяет содержимое у двери."
+  },
+  "detailAlt": {
+    "en": "Cycle courier with a delivery backpack",
+    "ru": "Велокурьер с рюкзаком для доставки"
+  },
+  "facts": [
+    {
+      "label": {
+        "en": "Service radius",
+        "ru": "Радиус работы"
+      },
+      "value": {
+        "en": "15 km",
+        "ru": "15 км"
+      }
+    },
+    {
+      "label": {
+        "en": "Rider shift",
+        "ru": "Смена"
+      },
+      "value": {
+        "en": "08:00–20:00",
+        "ru": "08:00–20:00"
+      }
+    },
+    {
+      "label": {
+        "en": "Maximum parcel",
+        "ru": "Максимальный вес"
+      },
+      "value": {
+        "en": "8 kg",
+        "ru": "8 кг"
+      }
+    }
+  ],
+  "widget": {
+    "type": "calculator",
+    "title": {
+      "en": "Trip estimate",
+      "ru": "Расчёт поездки"
+    },
+    "hint": {
+      "en": "The total includes collection plus a distance charge. Choose the parcel size first.",
+      "ru": "Сумма включает забор и плату за расстояние. Сначала выберите размер отправления."
+    },
+    "label": {
+      "en": "Parcel",
+      "ru": "Отправление"
+    },
+    "quantity": {
+      "en": "One-way distance, km",
+      "ru": "Расстояние в одну сторону, км"
+    },
+    "unit": {
+      "en": "₽",
+      "ru": "₽"
+    },
+    "min": 1,
+    "max": 15,
+    "initial": 5,
+    "options": [
+      {
+        "name": {
+          "en": "Envelope",
+          "ru": "Конверт"
+        },
+        "metric": {
+          "en": "Up to 500 g",
+          "ru": "До 500 г"
+        },
+        "text": {
+          "en": "Flat documents in a sealed sleeve. Collection ₽200 plus ₽25 per kilometre.",
+          "ru": "Документы в закрытом пакете. Забор 200 ₽ и 25 ₽ за километр."
+        },
+        "rate": 25.0,
+        "base": 200.0
+      },
+      {
+        "name": {
+          "en": "Small box",
+          "ru": "Малая коробка"
+        },
+        "metric": {
+          "en": "Up to 3 kg",
+          "ru": "До 3 кг"
+        },
+        "text": {
+          "en": "A sealed box up to 30 cm long. Collection ₽280 plus ₽35 per kilometre.",
+          "ru": "Закрытая коробка до 30 см в длину. Забор 280 ₽ и 35 ₽ за километр."
+        },
+        "rate": 35.0,
+        "base": 280.0
+      },
+      {
+        "name": {
+          "en": "Cargo bag",
+          "ru": "Грузовая сумка"
+        },
+        "metric": {
+          "en": "Up to 8 kg",
+          "ru": "До 8 кг"
+        },
+        "text": {
+          "en": "Bulky samples for the rack bag. Collection ₽420 plus ₽45 per kilometre.",
+          "ru": "Объёмные образцы для багажной сумки. Забор 420 ₽ и 45 ₽ за километр."
+        },
+        "rate": 45.0,
+        "base": 420.0
+      }
+    ]
+  },
+  "guideTitle": {
+    "en": "Packing desk",
+    "ru": "Перед отправкой"
+  },
+  "guide": [
+    {
+      "q": {
+        "en": "How do I pack prints?",
+        "ru": "Как упаковать тираж?"
+      },
+      "a": {
+        "en": "Use a rigid backing board and a moisture-resistant outer sleeve.",
+        "ru": "Добавьте жёсткую подложку и влагостойкий внешний пакет."
+      }
+    },
+    {
+      "q": {
+        "en": "Can I send several stops?",
+        "ru": "Можно заказать несколько адресов?"
+      },
+      "a": {
+        "en": "This calculator covers one pickup and one drop. Price each subsequent leg separately.",
+        "ru": "Калькулятор учитывает один забор и одну выдачу. Каждый следующий отрезок рассчитывается отдельно."
+      }
+    }
+  ]
+}

@@ -1,0 +1,56 @@
+---
+import "@fontsource-variable/inter/wght.css";
+import "@fontsource/pt-serif/cyrillic-400.css";
+import "@fontsource/pt-serif/cyrillic-400-italic.css";
+import "@fontsource/pt-serif/latin-400.css";
+import "@fontsource/ibm-plex-mono/cyrillic-500.css";
+import "@fontsource/ibm-plex-mono/latin-500.css";
+import "../styles/base.css";
+import {
+  assetPath,
+  basePrefix,
+  languageOf,
+  localizedPath,
+  prefixAssetMarkup,
+} from "../i18n/locale";
+import { english, englishMarkup } from "../i18n/legacy";
+const { title, theme, description = title, legacy = false } = Astro.props;
+const lang = languageOf(Astro.url.pathname);
+const translate = legacy && lang === "en";
+const needsHtmlTransform = translate || Boolean(basePrefix());
+let rendered = "";
+if (needsHtmlTransform) {
+  rendered = await Astro.slots.render("default");
+  if (translate) rendered = englishMarkup(rendered);
+  rendered = prefixAssetMarkup(rendered);
+}
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content={translate ? english(description) : description}
+    />
+    {
+      (["en", "ru", "x-default"] as const).map((key) => (
+        <link
+          rel="alternate"
+          hreflang={key}
+          href={localizedPath(Astro.url.pathname, key === "ru" ? "ru" : "en")}
+        />
+      ))
+    }
+    <link rel="icon" type="image/svg+xml" href={assetPath("/mark.svg")} />
+    <title>{translate ? english(title) : title}</title>
+  </head>
+  <body class={theme}>
+    <a class="skip" href="#content"
+      >{lang === "ru" ? "Перейти к содержанию" : "Skip to content"}</a
+    >
+    {needsHtmlTransform ? <Fragment set:html={rendered} /> : <slot />}
+  </body>
+</html>

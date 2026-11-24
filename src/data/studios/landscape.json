@@ -1,0 +1,162 @@
+{
+  "slug": "landscape",
+  "layout": "atlas",
+  "palette": {
+    "paper": "#eef0df",
+    "ink": "#243728",
+    "accent": "#385d36"
+  },
+  "brand": {
+    "en": "Fernfold",
+    "ru": "Фернфолд"
+  },
+  "sector": {
+    "en": "Planting design",
+    "ru": "Ландшафтная мастерская"
+  },
+  "headline": {
+    "en": "A garden with a longer season.",
+    "ru": "Сад, который живёт весь сезон."
+  },
+  "intro": {
+    "en": "Layered planting plans for small courtyards and gardens, drawn around the light you actually have.",
+    "ru": "Подбираем ярусы посадок для двориков и садов с учётом света на участке."
+  },
+  "action": {
+    "en": "Find a planting palette",
+    "ru": "Подобрать растения"
+  },
+  "heroAlt": {
+    "en": "Garden planting with layered foliage",
+    "ru": "Ярусные посадки в саду"
+  },
+  "storyTitle": {
+    "en": "Begin with an afternoon in the garden",
+    "ru": "Сначала проведём день в саду"
+  },
+  "story": {
+    "en": "We mark the moving shade, note where water lingers and measure the paths. Your planting plan includes mature spreads, so the beds have room to grow.",
+    "ru": "Отмечаем движение тени, измеряем дорожки и находим места застоя воды. На схеме показываем размеры взрослых растений, чтобы посадкам хватило пространства."
+  },
+  "detailAlt": {
+    "en": "A closer look at garden planting",
+    "ru": "Детали садовых посадок"
+  },
+  "facts": [
+    {
+      "label": {
+        "en": "Plan scale",
+        "ru": "Масштаб плана"
+      },
+      "value": {
+        "en": "1:50",
+        "ru": "1:50"
+      }
+    },
+    {
+      "label": {
+        "en": "First survey",
+        "ru": "Первый выезд"
+      },
+      "value": {
+        "en": "90 min",
+        "ru": "90 мин"
+      }
+    },
+    {
+      "label": {
+        "en": "Aftercare",
+        "ru": "Сопровождение"
+      },
+      "value": {
+        "en": "1 season",
+        "ru": "1 сезон"
+      }
+    }
+  ],
+  "widget": {
+    "type": "explore",
+    "title": {
+      "en": "Read the light",
+      "ru": "Карта света"
+    },
+    "hint": {
+      "en": "Choose the conditions in your border to explore a sample planting plan.",
+      "ru": "Выберите освещение цветника и посмотрите пример посадки."
+    },
+    "label": {
+      "en": "Light exposure",
+      "ru": "Освещение"
+    },
+    "options": [
+      {
+        "name": {
+          "en": "Full sun",
+          "ru": "Солнце"
+        },
+        "metric": {
+          "en": "Sage · yarrow · feather grass",
+          "ru": "Шалфей · тысячелистник · ковыль"
+        },
+        "text": {
+          "en": "A gravel mulch and repeated grasses give a dry border structure through autumn.",
+          "ru": "Гравийная мульча и повторяющиеся группы злаков сохраняют рисунок сухого цветника до осени."
+        }
+      },
+      {
+        "name": {
+          "en": "Part shade",
+          "ru": "Полутень"
+        },
+        "metric": {
+          "en": "Astrantia · sedge · geranium",
+          "ru": "Астранция · осока · герань"
+        },
+        "text": {
+          "en": "A loose middle layer catches morning light while the ground cover closes gaps near the path.",
+          "ru": "Средний ярус ловит утренний свет, а почвопокровные растения закрывают землю у дорожки."
+        }
+      },
+      {
+        "name": {
+          "en": "Deep shade",
+          "ru": "Тень"
+        },
+        "metric": {
+          "en": "Fern · hosta · epimedium",
+          "ru": "Папоротник · хоста · горянка"
+        },
+        "text": {
+          "en": "Contrasting leaf shapes make a quiet border under a mature canopy. We check root competition on site.",
+          "ru": "Разная форма листьев оживляет цветник под кронами. На участке проверим, сколько места оставляют корни деревьев."
+        }
+      }
+    ]
+  },
+  "guideTitle": {
+    "en": "In the field notebook",
+    "ru": "В полевом блокноте"
+  },
+  "guide": [
+    {
+      "q": {
+        "en": "What do I receive?",
+        "ru": "Что входит в проект?"
+      },
+      "a": {
+        "en": "A scaled planting drawing, a species list with quantities and a seasonal care sheet.",
+        "ru": "План посадки в масштабе, ведомость растений и сезонная памятка по уходу."
+      }
+    },
+    {
+      "q": {
+        "en": "Can we keep an existing tree?",
+        "ru": "Можно сохранить старое дерево?"
+      },
+      "a": {
+        "en": "Yes. We survey its crown and root zone before positioning beds or paths.",
+        "ru": "Да. До размещения дорожек и клумб измеряем крону и оцениваем прикорневую зону."
+      }
+    }
+  ]
+}

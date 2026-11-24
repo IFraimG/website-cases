@@ -1,0 +1,109 @@
+---
+import Base from "../layouts/Base.astro";
+import SiteNav from "../components/SiteNav.astro";
+import SiteExploreStrip from "../components/SiteExploreStrip.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+import Facts from "../components/StudioFacts.astro";
+import Chooser from "../components/Chooser.astro";
+import Story from "../components/StudioStory.astro";
+import { languageOf } from "../i18n/locale";
+import type { Studio } from "../data/studios";
+import { getSite } from "../data/sites";
+import "../styles/studios.css";
+
+interface Props {
+  studio: Studio;
+}
+
+const { studio: s } = Astro.props;
+const site = getSite(s.slug);
+const lang = languageOf(Astro.url.pathname);
+const ru = lang === "ru";
+const storyFirst = ["journal", "horizon", "showcase"].includes(s.layout);
+---
+
+<Base
+  title={s.brand[lang] + " — " + s.sector[lang]}
+  description={s.intro[lang]}
+  theme={"studio-site " + s.slug}
+>
+  <div
+    class={"studio-shell " + s.layout}
+    style={"--sheet:" +
+      s.palette.paper +
+      ";--text:" +
+      s.palette.ink +
+      ";--accent:" +
+      s.palette.accent}
+  >
+    <SiteNav site={site} active="home" />
+    <main id="content">
+      <section class="studio-hero studio-wrap" aria-labelledby="headline">
+        <div class="hero-type">
+          <p class="studio-eyebrow">{s.sector[lang]}</p><h1 id="headline">
+            {s.headline[lang]}
+          </h1><p class="hero-lead">{s.intro[lang]}</p><a
+            class="studio-cta"
+            href="#tool">{s.action[lang]}</a>
+        </div>
+        <div class="hero-photo">
+          <img
+            src={"/media/" + s.slug + "/hero.webp"}
+            alt={s.heroAlt[lang]}
+            fetchpriority="high"
+          />
+        </div>
+        {
+          s.layout === "atlas" && (
+            <figure class="specimen">
+              <>
+                <img
+                  src={"/media/" + s.slug + "/detail.webp"}
+                  alt={s.detailAlt[lang]}
+                />
+                <figcaption>
+                  {s.facts[0].label[lang]} · {s.facts[0].value[lang]}
+                </figcaption>
+              </>
+            </figure>
+          )
+        }
+      </section>
+      <section
+        class="fact-strip"
+        aria-label={ru ? "Характеристики" : "At a glance"}
+      >
+        <div class="studio-wrap"><Facts studio={s} /></div>
+      </section>
+      {
+        storyFirst ? (
+          <>
+            <Story studio={s} />
+            <Chooser studio={s} />
+          </>
+        ) : (
+          <>
+            <Chooser studio={s} />
+            <Story studio={s} />
+          </>
+        )
+      }
+      <section class="studio-guide studio-wrap">
+        <h2>{s.guideTitle[lang]}</h2><div>
+          {
+            s.guide.map((g, i) => (
+              <details open={i === 0}>
+                <>
+                  <summary>{g.q[lang]}</summary>
+                  <p>{g.a[lang]}</p>
+                </>
+              </details>
+            ))
+          }
+        </div>
+      </section>
+      <SiteExploreStrip site={site} />
+    </main>
+    <SiteFooter site={site} />
+  </div>
+</Base>

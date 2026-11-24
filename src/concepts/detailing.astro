@@ -1,0 +1,285 @@
+---
+import SiteNav from "../components/SiteNav.astro";
+import SiteExploreStrip from "../components/SiteExploreStrip.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+import Base from "../layouts/Base.astro";
+import { getSite } from "../data/sites";
+const site = getSite("detailing");
+const packages = [
+  [
+    "Контур",
+    "9 500 ₽",
+    "4 часа",
+    "Двухфазная мойка, очистка дисков и защитный воск.",
+  ],
+  [
+    "Глянец",
+    "28 000 ₽",
+    "1 день",
+    "Глубокая очистка кузова, одношаговая полировка и финишный состав.",
+  ],
+  [
+    "Броня",
+    "54 000 ₽",
+    "2 дня",
+    "Коррекция лака, обезжиривание и два слоя керамического покрытия.",
+  ],
+];
+---
+
+<Base legacy title="Блик Цех — студия детейлинга" theme="dt"
+  ><SiteNav site={site} active="home" />
+  <main id="content">
+    <div class="dt-top">
+      <section class="dt-hero wrap">
+        <img
+          class="car"
+          src="/media/detailing/hero.webp"
+          alt="Автомобиль крупным планом"
+        /><div class="dt-title">
+          <b class="meta">Студия детейлинга</b><h1>
+            ЧИСТЫЙ<br /><i>БЛЕСК.</i>
+          </h1><a class="btn" href="#result">Сравнить покрытие</a>
+        </div>
+      </section>
+    </div>
+    <section id="result" class="section wrap">
+      <div class="spread head">
+        <h2>До / после</h2><p>Передвиньте разделитель, чтобы сравнить лак.</p>
+      </div><div class="compare">
+        <img
+          src="/media/detailing/after.webp"
+          alt="Поверхность после обработки"
+        /><img
+          class="before"
+          src="/media/detailing/before.webp"
+          alt="Тот же ракурс до обработки"
+        /><div class="divider"><b>‹ ›</b></div><span class="tag left">До</span
+        ><span class="tag right">После</span><input
+          aria-label="Доля изображения до обработки"
+          type="range"
+          min="0"
+          max="100"
+          value="50"
+        />
+      </div>
+    </section>
+    <section class="section wrap rule" id="packs">
+      <div class="head">
+        <p class="meta kicker">Услуги студии</p><h2>Выберите глубину ухода</h2>
+      </div><div class="grid3">
+        {
+          packages.map(([n, p, t, d]) => (
+            <article class="pack stack">
+              <>
+                <span class="meta">{t}</span>
+                <h3>{n}</h3>
+                <p>{d}</p>
+                <b>{p}</b>
+              </>
+            </article>
+          ))
+        }
+      </div><p class="fine">
+        Цены указаны для седана среднего класса с заводским лаком.
+      </p>
+    </section>
+    <section class="section wrap rule methods">
+      <h2>Под контрольным светом</h2><div class="stack">
+        <p class="lead">
+          Замеряем толщину покрытия и подсвечиваем кузов под разными углами.
+          Глубину коррекции выбираем после пробного прохода.
+        </p><p>
+          При выдаче показываем результат на тех же панелях и при том же
+          освещении.
+        </p>
+      </div>
+    </section>
+    <section class="wrap section rule">
+      <h2 class="head">После студии</h2><details open>
+        <summary>Когда можно мыть автомобиль?</summary><p>
+          Для воска и керамики сроки отличаются. Мастер укажет первую дату мойки
+          в карте ухода с учётом выбранного состава.
+        </p>
+      </details><details>
+        <summary>Как сохранить глянец?</summary><p>
+          Сначала смывайте дорожную пыль водой. Используйте чистую рукавицу и
+          отдельное полотенце для дисков.
+        </p>
+      </details>
+    </section>
+    <SiteExploreStrip site={site} />
+  </main><SiteFooter site={site} /></Base
+>
+<script>
+  const slider = document.querySelector<HTMLInputElement>(".compare input")!;
+  slider.addEventListener("input", () =>
+    slider.parentElement!.style.setProperty("--cut", slider.value + "%"),
+  );
+</script>
+<style is:global>
+  .dt {
+    --paper: #111314;
+    --ink: #f5f5ee;
+    --line: #3f4441;
+    --act: #c8fc51;
+    --onact: #131610;
+  }
+  .dt .brand {
+    font-style: italic;
+    letter-spacing: -0.07em;
+  }
+  .dt .brand span,
+  .dt-hero i,
+  .dt .meta {
+    color: #c8fc51;
+  }
+  .dt-top {
+    background: #080b0b;
+  }
+  .dt-hero {
+    position: relative;
+    isolation: isolate;
+    min-height: clamp(500px, 48vw, 690px);
+    display: flex;
+    align-items: center;
+  }
+  .car {
+    width: 82%;
+    height: 100%;
+    position: absolute;
+    inset: 0 0 0 auto;
+    z-index: -2;
+  }
+  .dt-hero:before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(
+      90deg,
+      #080b0b 3%,
+      #080b0bda 24%,
+      transparent 67%
+    );
+  }
+  .dt-hero h1 {
+    font-family: Arial, sans-serif;
+    font-weight: 950;
+    font-size: clamp(4rem, 8.5vw, 9rem);
+    line-height: 0.89;
+    letter-spacing: -0.07em;
+    margin: 1.4rem 0 2.2rem;
+  }
+  .compare {
+    position: relative;
+    --cut: 50%;
+    height: clamp(260px, 43vw, 580px);
+    overflow: hidden;
+  }
+  .compare img {
+    position: absolute;
+    inset: 0;
+    height: 100%;
+  }
+  .before {
+    clip-path: inset(0 calc(100% - var(--cut)) 0 0);
+  }
+  .divider {
+    position: absolute;
+    left: var(--cut);
+    height: 100%;
+    width: 2px;
+    background: #c8fc51;
+    display: grid;
+    align-items: center;
+  }
+  .divider b {
+    position: relative;
+    left: -22px;
+    width: 46px;
+    line-height: 46px;
+    text-align: center;
+    background: #c8fc51;
+    color: #121611;
+    border-radius: 50%;
+  }
+  .compare input {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    margin: 0;
+    cursor: ew-resize;
+  }
+  .compare:focus-within {
+    outline: 3px solid #c8fc51;
+  }
+  .tag {
+    position: absolute;
+    bottom: 1rem;
+    background: #101414c9;
+    padding: 0.3rem 0.8rem;
+  }
+  .left {
+    left: 1rem;
+  }
+  .right {
+    right: 1rem;
+  }
+  .pack {
+    padding: 2rem;
+    background: #202423;
+    border-top: 2px solid #67705f;
+  }
+  .pack:nth-child(2) {
+    border-color: #c8fc51;
+  }
+  .pack b {
+    display: block;
+    font-size: 2.25rem;
+  }
+  .fine {
+    margin-top: 1rem;
+    color: #bac2ba;
+  }
+  .methods {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+  .dt details {
+    border-bottom: 1px solid #454846;
+    padding: 1rem 0;
+  }
+  .dt summary {
+    cursor: pointer;
+    font-weight: bold;
+  }
+  .dt details p {
+    padding-top: 0.75rem;
+    max-width: 65ch;
+  }
+  @media (max-width: 720px) {
+    .dt-hero {
+      align-items: end;
+      padding-bottom: 1.6rem;
+      min-height: 550px;
+    }
+    .car {
+      width: 100%;
+      height: 70%;
+      object-position: center;
+    }
+    .dt-hero:before {
+      background: linear-gradient(0deg, #080b0b 8%, transparent 78%);
+    }
+    .methods {
+      grid-template-columns: 1fr;
+    }
+    .pack {
+      padding: 1.4rem;
+    }
+  }
+</style>

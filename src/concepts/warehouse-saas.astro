@@ -1,0 +1,429 @@
+---
+import SiteNav from "../components/SiteNav.astro";
+import SiteExploreStrip from "../components/SiteExploreStrip.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+import Base from "../layouts/Base.astro";
+import { getSite } from "../data/sites";
+const site = getSite("warehouse-saas");
+const orders = [
+  ["РН-0842", "Маркет Север", "24", "Сборка"],
+  ["РН-0841", "Дом формы", "16", "Упакован"],
+  ["РН-0840", "Точка 12", "38", "Отгружен"],
+];
+const days = [
+  ["Пн", 42, 35],
+  ["Вт", 54, 46],
+  ["Ср", 73, 65],
+  ["Чт", 60, 55],
+  ["Пт", 88, 79],
+  ["Сб", 68, 57],
+  ["Вс", 47, 38],
+];
+---
+
+<Base legacy title="Ячейка — управление складом" theme="saas"
+  ><SiteNav site={site} active="home" />
+  <main id="content">
+    <section class="s-hero">
+      <div class="wrap">
+        <div class="s-pitch">
+          <h1>Весь склад<br />на одном экране.</h1><div class="stack">
+            <p class="lead">
+              Адресное хранение, задания сборщикам и отгрузки в одной системе.
+            </p><a href="#scenarios" class="btn">Разобрать сценарии</a>
+          </div>
+        </div>
+        <div class="dashboard">
+          <aside>
+            <strong>▦ Ячейка</strong><span class="selected">Обзор смены</span
+            ><span>Остатки</span><span>Заказы</span><span>Приёмка</span><small
+              >Склад «Восток»</small>
+          </aside><div class="workspace">
+            <div class="spread dash-title">
+              <h3>Обзор смены</h3><span>12 октября · 14:30</span>
+            </div><div class="metrics">
+              {
+                [
+                  ["Заказов", "128"],
+                  ["В сборке", "24"],
+                  ["Готово к выдаче", "36"],
+                ].map(([k, v]) => (
+                  <div>
+                    <>
+                      <span>{k}</span>
+                      <b>{v}</b>
+                    </>
+                  </div>
+                ))
+              }
+            </div><div class="panels">
+              <div class="chart">
+                <strong>Движение товара</strong><p>
+                  Приход / расход, палеты
+                </p><div class="bars">
+                  {
+                    days.map(([d, a, b]) => (
+                      <div>
+                        <>
+                          <div class="columns" role="img" aria-label={d + ": приход " + a + ", расход " + b + " палет"}>
+                            <>
+                              <i style={"height:" + a + "%"} />
+                              <i style={"height:" + b + "%"} />
+                            </>
+                          </div>
+                          <small>{d}</small>
+                        </>
+                      </div>
+                    ))
+                  }
+                </div>
+              </div><div class="ship">
+                <strong>Последние заказы</strong>{
+                  orders.map(([id, n, q, s]) => (
+                    <div>
+                      <>
+                        <span>
+                          <>
+                            <b>{id}</b>
+                            <small>
+                              {n} · {q} шт.
+                            </small>
+                          </>
+                        </span>
+                        <em>{s}</em>
+                      </>
+                    </div>
+                  ))
+                }
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="scenarios" class="section wrap">
+      <h2 class="head">От ворот до отгрузки</h2><div class="grid3">
+        {
+          [
+            [
+              "Приёмка",
+              "Кладовщик сканирует штрихкод и сверяет количество с поставкой. Система предлагает свободную ячейку.",
+            ],
+            [
+              "Комплектация",
+              "Сборщик получает маршрут по рядам. Сканирование каждой позиции помогает проверить состав заказа.",
+            ],
+            [
+              "Выдача",
+              "Упаковщик видит собранные места и подтверждает передачу. Остатки и статус заказа обновляются вместе.",
+            ],
+          ].map(([n, d]) => (
+            <article class="scenario stack">
+              <>
+                <h3>{n}</h3>
+                <p>{d}</p>
+              </>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+    <section class="roles section">
+      <div class="wrap pair">
+        <h2>У каждого своя смена</h2><div class="stack">
+          <p>
+            <b>Руководителю</b> — сводка по нагрузке и незавершённым заказам перед
+            пересменкой.
+          </p><p>
+            <b>Сборщику</b> — одно задание за раз с адресом стеллажа и количеством
+            товара.
+          </p>
+        </div>
+      </div>
+    </section>
+    <section id="pricing" class="wrap section">
+      <div class="head spread">
+        <h2>Стоимость</h2><div class="billing">
+          {
+            ["Месяц", "Год"].map((n, i) => (
+              <button data-period={i} aria-pressed={String(i === 0)}>
+                {n}
+              </button>
+            ))
+          }
+        </div>
+      </div><div class="pair">
+        {
+          [
+            ["Участок", "1 склад · 5 сотрудников", "4 900", "49 000"],
+            ["Сеть", "3 склада · 20 сотрудников", "12 900", "129 000"],
+          ].map(([n, d, m, y]) => (
+            <article class="rate stack">
+              <>
+                <h3>{n}</h3>
+                <p>{d}</p>
+                <b data-month={m} data-year={y}>
+                  {m} ₽ / месяц
+                </b>
+              </>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+    <section class="wrap section rule">
+      <div class="pair">
+        <h2>Первый день на складе</h2><p class="lead">
+          Загрузите справочник товаров, задайте ряды и ячейки, затем проведите
+          тестовую приёмку одной коробки. Сверьте остаток и передайте первую
+          заявку сборщику.
+        </p>
+      </div>
+    </section>
+    <SiteExploreStrip site={site} />
+  </main><SiteFooter site={site} /></Base
+>
+<script>
+  document
+    .querySelectorAll<HTMLButtonElement>("[data-period]")
+    .forEach((button) =>
+      button.addEventListener("click", () => {
+        const yearly = button.dataset.period === "1";
+        document
+          .querySelectorAll("[data-period]")
+          .forEach((b) => b.setAttribute("aria-pressed", String(b === button)));
+        document
+          .querySelectorAll<HTMLElement>("[data-month]")
+          .forEach(
+            (p) =>
+              (p.textContent = document.documentElement.lang === "en" ? "₽" + Number((yearly ? p.dataset.year! : p.dataset.month!).replaceAll(" ", "")).toLocaleString("en-US") + (yearly ? " / year" : " / month") : yearly
+                ? p.dataset.year + " ₽ / год"
+                : p.dataset.month + " ₽ / месяц"),
+          );
+      }),
+    );
+</script>
+<style is:global>
+  .saas {
+    --paper: #fbfcff;
+    --ink: #172543;
+    --line: #d3dbea;
+    --act: #325cda;
+    --radius: 7px;
+  }
+  .cube {
+    font-style: normal;
+    background: #325cda;
+    color: white;
+    border-radius: 6px;
+    padding: 0.1em 0.28em;
+  }
+  .saas .bar {
+    border: 0;
+  }
+  .s-hero {
+    background-color: #edf2ff;
+    background-image: radial-gradient(#b7c6eb 1px, transparent 1px);
+    background-size: 19px 19px;
+    padding: 3.4rem 0;
+  }
+  .s-pitch {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    align-items: end;
+    gap: 5%;
+    margin-bottom: 2.7rem;
+  }
+  .s-pitch h1 {
+    font-size: clamp(3.2rem, 5.9vw, 6rem);
+  }
+  .dashboard {
+    border-radius: 14px;
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: 170px 1fr;
+    box-shadow: 0 12px 40px #253c7320;
+    border: 1px solid #c8d4e5;
+    background: #fff;
+  }
+  .dashboard aside {
+    background: #192a48;
+    color: #d9e0ef;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    padding: 1.4rem 0.8rem;
+  }
+  .dashboard aside strong {
+    font-size: 1.3rem;
+    color: white;
+    margin: 0 0.5rem 1.25rem;
+  }
+  .dashboard aside span {
+    padding: 0.45rem 0.65rem;
+    font-size: 0.9rem;
+  }
+  .selected {
+    background: #334665;
+    border-radius: 5px;
+  }
+  .dashboard aside small {
+    margin: auto 0.6rem 0;
+  }
+  .workspace {
+    padding: clamp(1rem, 2.2vw, 2.2rem);
+  }
+  .dash-title span,
+  .chart p,
+  .metrics span,
+  .ship small {
+    font-size: 0.84rem;
+    color: #52637c;
+  }
+  .metrics {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.8rem;
+    margin: 1.3rem 0;
+  }
+  .metrics > div,
+  .chart,
+  .ship {
+    border: 1px solid #dbe2ed;
+    border-radius: 7px;
+    padding: 1rem;
+  }
+  .metrics b,
+  .ship small {
+    display: block;
+  }
+  .metrics b {
+    font-size: 2rem;
+    letter-spacing: -0.06em;
+  }
+  .panels {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+  .bars,
+  .columns {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 3px;
+  }
+  .bars {
+    margin-top: 0.6rem;
+  }
+  .bars > div {
+    flex: 1;
+    text-align: center;
+  }
+  .columns {
+    height: 76px;
+    justify-content: center;
+  }
+  .columns i {
+    background: #4973dd;
+    width: 30%;
+    border-radius: 2px 2px 0 0;
+  }
+  .columns i + i {
+    background: #abc3fa;
+  }
+  .bars small {
+    font-size: 0.76rem;
+  }
+  .ship > div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #e6eaf1;
+    margin-top: 0.5rem;
+    padding-top: 0.45rem;
+    font-size: 0.8rem;
+  }
+  .ship em {
+    font-style: normal;
+    color: #215f4b;
+    background: #e5f3ea;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+  }
+  .scenario {
+    border-top: 3px solid #4672da;
+    padding-top: 1.4rem;
+  }
+  .roles {
+    background: #172b4b;
+    color: white;
+  }
+  .billing {
+    background: #e9edf6;
+    padding: 4px;
+    border-radius: 9px;
+  }
+  .billing button {
+    padding: 0.55rem 1.5rem;
+    border-radius: 6px;
+  }
+  .billing [aria-pressed="true"] {
+    background: white;
+    box-shadow: 0 1px 4px #15264825;
+  }
+  .rate {
+    padding: 2rem;
+    border: 1px solid #ced7ea;
+    border-radius: 12px;
+  }
+  .rate b {
+    font-size: clamp(1.6rem, 3vw, 3rem);
+  }
+  @media (max-width: 760px) {
+    .s-pitch,
+    .panels {
+      grid-template-columns: 1fr;
+    }
+    .s-pitch {
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    .s-hero {
+      padding: 2rem 0;
+    }
+    .dashboard {
+      grid-template-columns: 1fr;
+    }
+    .dashboard aside {
+      display: none;
+    }
+    .metrics {
+      gap: 0.35rem;
+    }
+    .metrics > div {
+      padding: 0.5rem;
+    }
+    .metrics span {
+      display: block;
+      min-height: 3em;
+      font-size: 0.75rem;
+    }
+    .dash-title {
+      align-items: start;
+      gap: 0.5rem;
+    }
+    .dash-title span {
+      font-size: 0.73rem;
+    }
+    .workspace {
+      padding: 0.8rem;
+    }
+    .ship {
+      display: none;
+    }
+    .s-pitch h1 {
+      font-size: clamp(2.9rem, 9vw, 4.3rem);
+    }
+  }
+</style>

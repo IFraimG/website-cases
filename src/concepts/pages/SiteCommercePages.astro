@@ -1,0 +1,626 @@
+---
+import { languageOf, localizedPath } from "../../i18n/locale";
+import type { SiteExpansion, CatalogItem, ProjectItem } from "../../data/site-schema";
+
+interface Props {
+  site: SiteExpansion;
+  view: "catalog" | "catalog-detail" | "projects" | "project-detail" | "partners" | "request";
+  item?: CatalogItem;
+  project?: ProjectItem;
+}
+
+const { site, view, item, project } = Astro.props;
+const lang = languageOf(Astro.url.pathname);
+const ru = lang === "ru";
+const href = (sub = "") => localizedPath(`/${site.slug}/${sub ? sub + "/" : ""}`, lang);
+const advisor = item ? site.team.members[item.advisorIndex] : site.team.members[0];
+const relatedItems = item
+  ? site.catalog.items.filter((x) => x.id !== item.id).slice(0, 3)
+  : [];
+---
+
+{view === "catalog" && (
+  <>
+    <section class="sp-page-hero">
+      <div class="sp-wrap">
+        <span class="sp-eyebrow">{site.catalog.eyebrow[lang]}</span>
+        <h1>{site.catalog.title[lang]}</h1>
+        <p class="sp-page-lead">{site.catalog.lead[lang]}</p>
+      </div>
+    </section>
+
+    <section class="sp-section" data-catalog-filter>
+      <div class="sp-wrap sp-catalog-layout">
+        <aside class="sp-filter-panel" aria-label={ru ? "Фильтры" : "Filters"}>
+          <div class="sp-filter-group">
+            <label class="sp-filter-label" for="cat-search">{ru ? "Поиск" : "Search"}</label>
+            <input
+              id="cat-search"
+              type="search"
+              class="sp-input"
+              data-search
+              placeholder={site.catalog.searchPlaceholder[lang]}
+            />
+          </div>
+
+          <div class="sp-filter-group">
+            <span class="sp-filter-label">{ru ? "Категория" : "Category"}</span>
+            <div class="sp-pills-row">
+              <button type="button" class="sp-filter-btn" data-cat="all" aria-pressed="true">
+                {ru ? "Все" : "All"}
+              </button>
+              {site.catalog.categories.map((cat) => (
+                <button type="button" class="sp-filter-btn" data-cat={cat.id} aria-pressed="false">
+                  {cat.label[lang]}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <div class="sp-filter-group">
+            <label class="sp-filter-label" for="cat-sort">{ru ? "Сортировка" : "Sort by"}</label>
+            <select id="cat-sort" class="sp-select" data-sort>
+              <option value="featured">{ru ? "Рекомендуемые" : "Featured"}</option>
+              <option value="asc">{ru ? "Сначала доступнее" : "Price: Low to High"}</option>
+              <option value="desc">{ru ? "Сначала выше" : "Price: High to Low"}</option>
+            </select>
+          </div>
+
+          <button type="button" class="sp-btn sp-btn--outline" data-reset>
+            {ru ? "Сбросить фильтры" : "Reset filters"}
+          </button>
+        </aside>
+
+        <div>
+          <div class="sp-toolbar">
+            <span class="sp-card-meta" data-count aria-live="polite">
+              {ru ? "Показано" : "Showing"} <b>{site.catalog.items.length}</b> / {site.catalog.items.length}
+            </span>
+            <a class="sp-btn" href={href("request")}>{site.nav.request[lang]} →</a>
+          </div>
+
+          <div class="sp-grid-2" data-cards-grid>
+            {site.catalog.items.map((it, idx) => (
+              <article
+                class="sp-card sp-card--interactive"
+                data-item-card
+                data-category={it.category}
+                data-price={it.priceNum}
+                data-index={idx}
+                data-text={(it.title[lang] + " " + it.subtitle[lang] + " " + it.summary[lang] + " " + it.location[lang]).toLowerCase()}
+              >
+                <a href={href("catalog/" + it.id)} class="sp-card-media">
+                  <img src={it.image} alt={it.title[lang]} loading="lazy" />
+                  <span class="sp-card-badge">{it.badge[lang]}</span>
+                </a>
+                <div class="sp-card-body">
+                  <span class="sp-card-meta">{it.location[lang]}</span>
+                  <h3>
+                    <a href={href("catalog/" + it.id)}>{it.title[lang]}</a>
+                  </h3>
+                  <p style="font-size:0.93rem;opacity:0.86;">{it.summary[lang]}</p>
+                  <div class="sp-pills-row" style="margin-top:0.25rem;">
+                    {it.specs.slice(0, 3).map((sp) => (
+                      <span class="sp-pill">{sp.label[lang]}: {sp.value[lang]}</span>
+                    ))}
+                  </div>
+                  <div class="sp-card-foot">
+                    <span class="sp-card-price">{it.price[lang]}</span>
+                    <a href={href("catalog/" + it.id)}>
+                      {ru ? "Подробнее →" : "View details →"}
+                    </a>
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+          <p data-empty hidden style="padding:2rem;text-align:center;border:1px dashed var(--sp-edge);border-radius:var(--sp-radius);">
+            {ru ? "По вашему запросу ничего не найдено. Попробуйте сбросить фильтры." : "No matching options found. Try clearing your filters."}
+          </p>
+        </div>
+      </div>
+    </section>
+  </>
+)}
+
+{view === "catalog-detail" && item && (
+  <>
+    <div class="sp-wrap">
+      <nav class="sp-crumb" aria-label={ru ? "Навигация" : "Breadcrumb"}>
+        <a href={href("")}>{site.nav.home[lang]}</a>
+        <span>/</span>
+        <a href={href("catalog")}>{site.nav.catalog[lang]}</a>
+        <span>/</span>
+        <span aria-current="page">{item.title[lang]}</span>
+      </nav>
+    </div>
+
+    <section class="sp-section" style="padding-top:1.5rem;">
+      <div class="sp-wrap sp-detail-layout">
+        <div>
+          <div data-gallery>
+            <div class="sp-gallery-main">
+              <img src={item.gallery[0]} alt={item.title[lang]} data-gallery-hero />
+            </div>
+            <div class="sp-gallery-thumbs">
+              {item.gallery.map((src, i) => (
+                <button
+                  type="button"
+                  class="sp-thumb-btn"
+                  data-thumb={src}
+                  aria-pressed={i === 0 ? "true" : "false"}
+                  aria-label={(ru ? "Фото " : "Photo ") + (i + 1)}
+                >
+                  <img src={src} alt={item.title[lang]} />
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <div style="margin-top:1.75rem;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:1rem;">
+            <div>
+              <span class="sp-pill sp-pill--accent">{item.badge[lang]}</span>
+              <h1 style="font-size:clamp(2rem,3.6vw,3.3rem);margin:0.65rem 0 0.3rem;">{item.title[lang]}</h1>
+              <p class="sp-card-meta">{item.subtitle[lang]} · {item.location[lang]}</p>
+            </div>
+            <div class="sp-card-price" style="font-size:clamp(1.6rem,2.4vw,2.2rem);">{item.price[lang]}</div>
+          </div>
+
+          <dl class="sp-specs-bar">
+            {item.specs.map((sp) => (
+              <div>
+                <dt>{sp.label[lang]}</dt>
+                <dd>{sp.value[lang]}</dd>
+              </div>
+            ))}
+          </dl>
+
+          <div class="stack">
+            <h2>{ru ? "Обзор и детали" : "Overview & Details"}</h2>
+            <p style="font-size:1.05rem;line-height:1.65;">{item.overview[lang]}</p>
+          </div>
+
+          <div style="margin-top:2.2rem;">
+            <h2 style="font-size:clamp(1.45rem,2.2vw,2rem);">{ru ? "Ключевые особенности" : "Key Features & Included"}</h2>
+            <ul class="sp-checklist">
+              {item.features.map((f) => (
+                <li>
+                  <span class="sp-check-mark" aria-hidden="true">✓</span>
+                  <span>{f[lang]}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        <aside style="display:grid;gap:1.25rem;">
+          <div class="sp-sidebar-box">
+            <span class="sp-eyebrow">{ru ? "Ваш специалист" : "Dedicated Specialist"}</span>
+            <div class="sp-advisor-mini">
+              <img src={advisor.photo} alt={advisor.name[lang]} />
+              <div>
+                <strong style="display:block;font-size:1.04rem;">{advisor.name[lang]}</strong>
+                <span class="sp-card-meta">{advisor.role[lang]}</span>
+              </div>
+            </div>
+            <p style="font-size:0.9rem;opacity:0.86;">{advisor.phone} · {advisor.email}</p>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.55rem;">
+              <a class="sp-btn" href={href("contact")}>{ru ? "Связаться" : "Call / Chat"}</a>
+              <a class="sp-btn sp-btn--outline" href={href("team")}>{site.nav.team[lang]}</a>
+            </div>
+          </div>
+
+          <div class="sp-sidebar-box">
+            <h3 style="font-size:1.35rem;">{ru ? "Запросить расчёт и детали" : "Request Information"}</h3>
+            <form class="sp-form" data-demo-form data-context={item.title[lang]}>
+              <label class="sp-field">
+                {ru ? "Ваше имя" : "Your Name"}
+                <input class="sp-input" name="name" required placeholder={ru ? "Алексей" : "Alex"} />
+              </label>
+              <label class="sp-field">
+                {ru ? "Телефон или Telegram" : "Phone or Messenger"}
+                <input class="sp-input" name="contact" required placeholder="+7 (999) 000-00-00" />
+              </label>
+              <label class="sp-field">
+                {ru ? "Комментарий" : "Notes"}
+                <textarea class="sp-textarea" name="note" placeholder={ru ? "Уточните сроки, опции или удобное время..." : "Share timing, preferences, or questions..."}></textarea>
+              </label>
+              <button class="sp-btn" type="submit">{ru ? "Отправить запрос" : "Send Inquiry"}</button>
+              <output class="sp-status" role="status"></output>
+            </form>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="sp-section sp-section--tint sp-section--rule">
+      <div class="sp-wrap">
+        <div class="sp-section-head">
+          <h2>{ru ? "Другие варианты" : "More From " + site.brand[lang]}</h2>
+          <a class="sp-btn sp-btn--outline" href={href("catalog")}>{ru ? "Весь каталог" : "View all"}</a>
+        </div>
+        <div class="sp-grid-3">
+          {relatedItems.map((rel) => (
+            <article class="sp-card sp-card--interactive">
+              <a href={href("catalog/" + rel.id)} class="sp-card-media">
+                <img src={rel.image} alt={rel.title[lang]} loading="lazy" />
+                <span class="sp-card-badge">{rel.badge[lang]}</span>
+              </a>
+              <div class="sp-card-body">
+                <h3><a href={href("catalog/" + rel.id)}>{rel.title[lang]}</a></h3>
+                <p class="sp-card-meta">{rel.subtitle[lang]}</p>
+                <div class="sp-card-foot">
+                  <span class="sp-card-price">{rel.price[lang]}</span>
+                  <a href={href("catalog/" + rel.id)}>{ru ? "Открыть →" : "Open →"}</a>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  </>
+)}
+
+{view === "projects" && (
+  <>
+    <section class="sp-page-hero">
+      <div class="sp-wrap">
+        <span class="sp-eyebrow">{site.projects.eyebrow[lang]}</span>
+        <h1>{site.projects.title[lang]}</h1>
+        <p class="sp-page-lead">{site.projects.lead[lang]}</p>
+      </div>
+    </section>
+
+    <section class="sp-section" data-tab-filter>
+      <div class="sp-wrap">
+        <div class="sp-toolbar">
+          <div class="sp-pills-row" role="group" aria-label={ru ? "Категории проектов" : "Project categories"}>
+            <button type="button" class="sp-filter-btn" data-tab="all" aria-pressed="true">
+              {ru ? "Все" : "All"}
+            </button>
+            {site.projects.categories.map((cat) => (
+              <button type="button" class="sp-filter-btn" data-tab={cat.id} aria-pressed="false">
+                {cat.label[lang]}
+              </button>
+            ))}
+          </div>
+          <a class="sp-btn" href={href("request")}>{site.nav.request[lang]}</a>
+        </div>
+
+        <div class="sp-grid-3">
+          {site.projects.items.map((pr) => (
+            <article class="sp-card sp-card--interactive" data-tab-item={pr.category}>
+              <a href={href("projects/" + pr.id)} class="sp-card-media">
+                <img src={pr.image} alt={pr.title[lang]} loading="lazy" />
+                <span class="sp-card-badge">{pr.status[lang]}</span>
+              </a>
+              <div class="sp-card-body">
+                <span class="sp-card-meta">{pr.location[lang]} · {pr.year}</span>
+                <h3><a href={href("projects/" + pr.id)}>{pr.title[lang]}</a></h3>
+                <p style="font-size:0.93rem;opacity:0.86;">{pr.summary[lang]}</p>
+                <div class="sp-card-foot">
+                  <span style="color:var(--sp-accent);">{pr.metric[lang]}</span>
+                  <a href={href("projects/" + pr.id)}>{ru ? "Изучить →" : "Explore →"}</a>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="sp-section">
+      <div class="sp-wrap">
+        <div class="sp-dark-banner">
+          <img src={site.media.hero} alt={site.brand[lang]} />
+          <span class="sp-eyebrow" style="color:#fff;opacity:0.85;">{site.brand[lang]}</span>
+          <h2 style="font-size:clamp(1.9rem,3.4vw,3rem);margin:0.6rem 0 0.8rem;max-width:20ch;">
+            {ru ? "Хотите разобрать вашу задачу на примере реальных кейсов?" : "Want to plan your next project with our specialists?"}
+          </h2>
+          <p style="max-width:48ch;opacity:0.9;margin-bottom:1.4rem;">{site.tagline[lang]}</p>
+          <a class="sp-btn sp-btn--light" href={href("request")}>{site.nav.request[lang]} →</a>
+        </div>
+      </div>
+    </section>
+  </>
+)}
+
+{view === "project-detail" && project && (
+  <>
+    <div class="sp-wrap">
+      <nav class="sp-crumb" aria-label={ru ? "Навигация" : "Breadcrumb"}>
+        <a href={href("")}>{site.nav.home[lang]}</a>
+        <span>/</span>
+        <a href={href("projects")}>{site.nav.projects[lang]}</a>
+        <span>/</span>
+        <span aria-current="page">{project.title[lang]}</span>
+      </nav>
+    </div>
+
+    <section class="sp-page-hero">
+      <div class="sp-wrap sp-page-hero--split">
+        <div>
+          <span class="sp-pill sp-pill--accent">{project.status[lang]}</span>
+          <h1>{project.title[lang]}</h1>
+          <p class="sp-page-lead">{project.summary[lang]}</p>
+          <p class="sp-card-meta" style="margin-top:0.85rem;">{project.location[lang]} · {project.metric[lang]}</p>
+          <div style="display:flex;flex-wrap:wrap;gap:0.75rem;margin-top:1.5rem;">
+            <a class="sp-btn" href="#schedule">{project.planTitle[lang]}</a>
+            <a class="sp-btn sp-btn--outline" href={href("request")}>{site.nav.request[lang]}</a>
+          </div>
+        </div>
+        <div class="sp-hero-media">
+          <img src={project.image} alt={project.title[lang]} />
+        </div>
+      </div>
+    </section>
+
+    <section class="sp-section" style="padding-block:2rem;">
+      <div class="sp-wrap">
+        <div class="sp-stats-strip">
+          {project.highlights.map((h) => (
+            <div>
+              <strong>{h.value[lang]}</strong>
+              <span class="sp-card-meta">{h.label[lang]}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="sp-section" style="padding-top:1.5rem;">
+      <div class="sp-wrap sp-grid-2">
+        <div class="stack">
+          <span class="sp-eyebrow">{ru ? "Контекст и подход" : "About the Project"}</span>
+          <h2>{ru ? "Детали реализации" : "Scope & Craftsmanship"}</h2>
+          <p style="font-size:1.05rem;line-height:1.65;">{project.overview[lang]}</p>
+        </div>
+        <div>
+          <span class="sp-eyebrow">{ru ? "Состав и форматы" : "Key Formats & Deliverables"}</span>
+          <div class="sp-grid-2" style="margin-top:0.9rem;">
+            {project.formats.map((f) => (
+              <div class="sp-card sp-card--surface" style="padding:1.1rem;">
+                <strong style="font-size:1.02rem;">{f.title[lang]}</strong>
+                <p class="sp-card-meta" style="margin-top:0.35rem;">{f.detail[lang]}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="schedule" class="sp-section sp-section--tint sp-section--rule">
+      <div class="sp-wrap">
+        <div class="sp-section-head">
+          <div>
+            <span class="sp-eyebrow">{ru ? "Этапы и график" : "Structured Plan"}</span>
+            <h2 style="margin-top:0.4rem;">{project.planTitle[lang]}</h2>
+            <p class="sp-page-lead" style="margin-top:0.5rem;">{project.planSubtitle[lang]}</p>
+          </div>
+          <button
+            type="button"
+            class="sp-btn"
+            data-spec-download
+            data-msg={ru
+              ? `Спецификация «${project.title.ru}» сформирована для ознакомления (демо). Свяжитесь с нами для индивидуального расчёта.`
+              : `Spec summary for "${project.title.en}" prepared (demo). Contact our team for a tailored schedule.`}
+          >
+            {ru ? "Получить сводку этапов" : "Download Plan Summary"}
+          </button>
+        </div>
+
+        <output class="sp-status" role="status" data-spec-output style="display:block;margin-bottom:1.25rem;"></output>
+
+        <div class="sp-table-wrap">
+          <table class="sp-table">
+            <thead>
+              <tr>
+                <th>{ru ? "Этап" : "Stage"}</th>
+                <th>{ru ? "Срок" : "Timing"}</th>
+                <th>{ru ? "Доля / Показатель" : "Allocation"}</th>
+                <th>{ru ? "Примечание" : "Notes"}</th>
+              </tr>
+            </thead>
+            <tbody>
+              {project.planRows.map((row) => (
+                <tr>
+                  <td><strong>{row.stage[lang]}</strong></td>
+                  <td>{row.timing[lang]}</td>
+                  <td><span class="sp-pill">{row.share[lang]}</span></td>
+                  <td>{row.note[lang]}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </>
+)}
+
+{view === "partners" && (
+  <>
+    <section class="sp-page-hero">
+      <div class="sp-wrap sp-page-hero--split">
+        <div>
+          <span class="sp-eyebrow">{site.partners.eyebrow[lang]}</span>
+          <h1>{site.partners.title[lang]}</h1>
+          <p class="sp-page-lead">{site.partners.lead[lang]}</p>
+          <div style="margin-top:1.5rem;display:flex;gap:0.75rem;flex-wrap:wrap;">
+            <a class="sp-btn" href={href("request")}>{site.partners.ctaLabel[lang]}</a>
+            <a class="sp-btn sp-btn--outline" href={href("contact")}>{site.nav.contact[lang]}</a>
+          </div>
+        </div>
+        <div class="sp-hero-media">
+          <img src={site.media.studio} alt={site.partners.title[lang]} />
+        </div>
+      </div>
+    </section>
+
+    <section class="sp-section">
+      <div class="sp-wrap">
+        <div class="sp-grid-4">
+          {site.partners.pillars.map((p, i) => (
+            <div class="sp-card sp-card--surface" style="padding:1.3rem;gap:0.5rem;">
+              <span class="sp-eyebrow">0{i + 1}</span>
+              <h3 style="font-size:1.2rem;">{p.title[lang]}</h3>
+              <p class="sp-card-meta">{p.text[lang]}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="sp-section sp-section--tint sp-section--rule">
+      <div class="sp-wrap">
+        <div class="sp-section-head">
+          <h2>{ru ? "Направления сотрудничества" : "Featured Opportunities"}</h2>
+        </div>
+        <div class="sp-grid-3">
+          {site.partners.opportunities.map((opp) => (
+            <article class="sp-card">
+              <div class="sp-card-media">
+                <img src={opp.image} alt={opp.title[lang]} loading="lazy" />
+                <span class="sp-card-badge">{opp.metric[lang]}</span>
+              </div>
+              <div class="sp-card-body">
+                <h3>{opp.title[lang]}</h3>
+                <p style="font-size:0.93rem;opacity:0.86;">{opp.text[lang]}</p>
+                <div class="sp-card-foot">
+                  <span>{site.brand[lang]}</span>
+                  <a href={href("request")}>{ru ? "Обсудить →" : "Discuss →"}</a>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="sp-section">
+      <div class="sp-wrap sp-grid-2" style="align-items:center;">
+        <div class="sp-sidebar-box">
+          <div class="sp-advisor-mini">
+            <img src={site.team.members[0].photo} alt={site.team.members[0].name[lang]} />
+            <div>
+              <strong>{site.team.members[0].name[lang]}</strong>
+              <span class="sp-card-meta" style="display:block;">{site.team.members[0].role[lang]}</span>
+            </div>
+          </div>
+          <p style="font-family:var(--sp-display);font-size:1.35rem;line-height:1.35;">
+            “{site.partners.advisorQuote[lang]}”
+          </p>
+          <a class="sp-btn" href={href("contact")}>{site.partners.ctaLabel[lang]}</a>
+        </div>
+
+        <div class="stack">
+          <h2>{site.partners.whyTitle[lang]}</h2>
+          <ul class="sp-checklist sp-checklist--single">
+            {site.partners.whyPoints.map((wp) => (
+              <li>
+                <span class="sp-check-mark" aria-hidden="true">✓</span>
+                <div>
+                  <strong>{wp.title[lang]}</strong>
+                  <p class="sp-card-meta" style="margin-top:0.2rem;">{wp.text[lang]}</p>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </section>
+  </>
+)}
+
+{view === "request" && (
+  <>
+    <section class="sp-page-hero">
+      <div class="sp-wrap">
+        <span class="sp-eyebrow">{site.request.eyebrow[lang]}</span>
+        <h1>{site.request.title[lang]}</h1>
+        <p class="sp-page-lead">{site.request.lead[lang]}</p>
+        <div class="sp-pills-row" style="margin-top:1.35rem;">
+          {site.request.trustBadges.map((b) => (
+            <span class="sp-pill">✓ {b[lang]}</span>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="sp-section">
+      <div class="sp-wrap sp-detail-layout">
+        <div class="sp-sidebar-box" style="background:var(--sp-paper);">
+          <h2 style="font-size:1.7rem;">{site.request.formTitle[lang]}</h2>
+          <form class="sp-form" data-demo-form data-context={site.request.formTitle[lang]}>
+            <label class="sp-field">
+              {site.request.typeLabel[lang]}
+              <select class="sp-select" name="type" required>
+                <option value="">{ru ? "Выберите вариант" : "Select an option"}</option>
+                {site.request.typeOptions.map((opt) => (
+                  <option value={opt[lang]}>{opt[lang]}</option>
+                ))}
+              </select>
+            </label>
+
+            <label class="sp-field">
+              {site.request.scopeLabel[lang]}
+              <input class="sp-input" name="scope" required placeholder={site.request.scopePlaceholder[lang]} />
+            </label>
+
+            <label class="sp-field">
+              {site.request.budgetLabel[lang]}
+              <input class="sp-input" name="budget" placeholder={site.request.budgetPlaceholder[lang]} />
+            </label>
+
+            <div class="sp-form-row">
+              <label class="sp-field">
+                {ru ? "Ваше имя" : "Full Name"}
+                <input class="sp-input" name="name" required placeholder={ru ? "Мария Иванова" : "Maria Ivanova"} />
+              </label>
+              <label class="sp-field">
+                {ru ? "Телефон или Email" : "Phone or Email"}
+                <input class="sp-input" name="contact" required placeholder="+7 (999) 123-45-67" />
+              </label>
+            </div>
+
+            <label class="sp-field">
+              {ru ? "Дополнительные детали" : "Additional Details"}
+              <textarea class="sp-textarea" name="note" placeholder={ru ? "Любые пожелания, вопросы или ссылки..." : "Any details, dates, or preferences..."}></textarea>
+            </label>
+
+            <button class="sp-btn" type="submit">{site.request.submitLabel[lang]}</button>
+            <output class="sp-status" role="status"></output>
+          </form>
+        </div>
+
+        <aside style="display:grid;gap:1.25rem;">
+          <div class="sp-sidebar-box">
+            <h3>{site.request.whyTitle[lang]}</h3>
+            <ul class="sp-checklist sp-checklist--single">
+              {site.request.whyPoints.map((pt) => (
+                <li>
+                  <span class="sp-check-mark" aria-hidden="true">✓</span>
+                  <span>{pt[lang]}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div class="sp-sidebar-box">
+            <span class="sp-eyebrow">{site.request.helpTitle[lang]}</span>
+            <p style="font-size:0.94rem;">{site.request.helpNote[lang]}</p>
+            <div class="sp-advisor-mini">
+              <img src={site.team.members[1].photo} alt={site.team.members[1].name[lang]} />
+              <div>
+                <strong>{site.team.members[1].name[lang]}</strong>
+                <span class="sp-card-meta" style="display:block;">{site.contact.phone}</span>
+              </div>
+            </div>
+            <a class="sp-btn sp-btn--outline" href={href("contact")}>{site.nav.contact[lang]}</a>
+          </div>
+        </aside>
+      </div>
+    </section>
+  </>
+)}

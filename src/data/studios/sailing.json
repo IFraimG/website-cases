@@ -1,0 +1,167 @@
+{
+  "slug": "sailing",
+  "layout": "horizon",
+  "palette": {
+    "paper": "#ebf3f7",
+    "ink": "#102f50",
+    "accent": "#19527c"
+  },
+  "brand": {
+    "en": "Beam Reach",
+    "ru": "Галфвинд"
+  },
+  "sector": {
+    "en": "Dinghy and keelboat school",
+    "ru": "Школа парусного спорта"
+  },
+  "headline": {
+    "en": "Learn with the wind.",
+    "ru": "Учитесь у ветра."
+  },
+  "intro": {
+    "en": "Small crews, a sheltered starting harbour and time at the helm on every outing.",
+    "ru": "Малый экипаж, защищённая гавань и время у руля на каждом выходе."
+  },
+  "action": {
+    "en": "Choose a lesson",
+    "ru": "Выбрать занятие"
+  },
+  "heroAlt": {
+    "en": "A crew sailing under a full sail",
+    "ru": "Экипаж яхты под парусом"
+  },
+  "storyTitle": {
+    "en": "Meet at the rigging bench",
+    "ru": "Встречаемся у такелажного стола"
+  },
+  "story": {
+    "en": "We start on shore with the route and crew roles. On board, each learner changes stations so the helm and sail trim make sense together.",
+    "ru": "На берегу разбираем маршрут и роли. На борту участники меняются местами, чтобы связать работу руля с настройкой парусов."
+  },
+  "detailAlt": {
+    "en": "Lines and fittings on a sailing boat",
+    "ru": "Снасти и крепления на яхте"
+  },
+  "facts": [
+    {
+      "label": {
+        "en": "Crew size",
+        "ru": "Экипаж"
+      },
+      "value": {
+        "en": "Up to 4",
+        "ru": "До 4 человек"
+      }
+    },
+    {
+      "label": {
+        "en": "Base",
+        "ru": "База"
+      },
+      "value": {
+        "en": "East harbour",
+        "ru": "Восточная гавань"
+      }
+    },
+    {
+      "label": {
+        "en": "Equipment",
+        "ru": "Снаряжение"
+      },
+      "value": {
+        "en": "Included",
+        "ru": "Включено"
+      }
+    }
+  ],
+  "widget": {
+    "type": "session",
+    "title": {
+      "en": "Find your sailing lesson",
+      "ru": "Выберите выход на воду"
+    },
+    "hint": {
+      "en": "Choose a session and a demo departure on 12 June. The confirmation stays on this page.",
+      "ru": "Выберите занятие и время демонстрационного выхода 12 июня. Подтверждение появится на странице."
+    },
+    "label": {
+      "en": "Lesson",
+      "ru": "Занятие"
+    },
+    "slots": [
+      "09:00",
+      "12:00",
+      "15:30"
+    ],
+    "options": [
+      {
+        "name": {
+          "en": "First helm",
+          "ru": "Первый руль"
+        },
+        "metric": {
+          "en": "90 min · ₽4,500",
+          "ru": "90 мин · 4 500 ₽"
+        },
+        "text": {
+          "en": "Meet the boat, steer a steady course and swap roles with your partner.",
+          "ru": "Познакомьтесь с яхтой, удерживайте курс и поменяйтесь ролями с напарником."
+        }
+      },
+      {
+        "name": {
+          "en": "Sail trim",
+          "ru": "Настройка парусов"
+        },
+        "metric": {
+          "en": "2 hours · ₽6,200",
+          "ru": "2 часа · 6 200 ₽"
+        },
+        "text": {
+          "en": "Work on sail shape and sheet tension across a short practice course.",
+          "ru": "Отрабатывайте форму паруса и натяжение шкотов на короткой дистанции."
+        }
+      },
+      {
+        "name": {
+          "en": "Harbour turns",
+          "ru": "Манёвры в гавани"
+        },
+        "metric": {
+          "en": "2 hours · ₽6,800",
+          "ru": "2 часа · 6 800 ₽"
+        },
+        "text": {
+          "en": "Practise a controlled approach to a berth with an instructor and small crew.",
+          "ru": "Отработайте подход к месту стоянки вместе с инструктором и экипажем."
+        }
+      }
+    ]
+  },
+  "guideTitle": {
+    "en": "Before casting off",
+    "ru": "До выхода в море"
+  },
+  "guide": [
+    {
+      "q": {
+        "en": "What should I wear?",
+        "ru": "Что надеть?"
+      },
+      "a": {
+        "en": "Bring soft-soled shoes, a windproof layer and dry clothes for the trip home.",
+        "ru": "Возьмите обувь с мягкой подошвой, ветровку и сухую одежду на обратную дорогу."
+      }
+    },
+    {
+      "q": {
+        "en": "What if the wind changes?",
+        "ru": "Что при смене погоды?"
+      },
+      "a": {
+        "en": "The instructor reviews the forecast before departure and can move the session ashore or reschedule.",
+        "ru": "Перед выходом инструктор проверит прогноз и при необходимости перенесёт занятие на берег или на другой день."
+      }
+    }
+  ]
+}
